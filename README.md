@@ -1,5 +1,5 @@
 # django_school
-Для запуска проекта в dev-mode:
-клонировать репозиторий
-в консоль написать pip install -r requirements.txt
-и потом вставить строку python manage.py runserver
+Для запуска проекта в dev-mode:<br>
+<b>клонировать репозиторий</b>br>
+в консоль написать <b>pip install -r requirements.txt</b><br>
+и потом вставить строку <b>python manage.py runserver</b>
