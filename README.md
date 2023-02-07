@@ -68,3 +68,5 @@
 <li>И не забудьте в файле lyceum/.env поменять значение <b>DEBUG</b> на <b>False</b>, если не хотите запускать проект в DEBUG-режиме.</li>
 <li>Секретные данные(SECURITY_KEY) и некоторые стандартные находятся в файле lyceum/.env. Если вам нужно их поменять - меняйте в этом файле, а Django всё учтёт!
 </ul>
+<h1>Статус пайплайна:</h1>
+<img src="https://github.com/code-n-cry/django_school/actions/workflows/python-package.yml/badge.svg">
