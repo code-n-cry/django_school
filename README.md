@@ -1,5 +1,7 @@
+
 <h1>Статус пайплайна:</h1>
-[![Python linting status](https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml/badge.svg)](https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml)
+
+[![Python linting](https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml/badge.svg)](https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml)
 <h1>Руководство по запуску</h1>
 Для включения в dev-режиме:
 <ul>
