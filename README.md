@@ -1,7 +1,9 @@
-# <b>Руководство по запуску</b>
+<h1>Статус пайплайна:</h1>
+<img src="https://github.com/code-n-cry/django_school/actions/workflows/python-package.yml/badge.svg">
+<h1>Руководство по запуску</h1>
 Для включения в dev-режиме:
 <ul>
-<li>Клонировать репозиторий с помощью git.<br>Для этого в консоль вводим команды:<br><blockquote><b>git init</b></blockquote>Которая инициализирует git-репозиторий в открытой папке<br><blockquote>git clone https://github.com/code-n-cry/django_school.git</blockquote>Которая <b>скопирует папку с кодом</b> из Github</li>
+<li>Клонировать репозиторий с помощью git.<br>Для этого в консоль вводим команду:<br><blockquote>git clone https://github.com/code-n-cry/django_school.git</blockquote>Которая <b>скопирует папку с кодом</b> из Github</li>
 <li>Перейти в папку django-school</li>
 <li>Создать venv(код в консоли для этого):
 <table>
@@ -68,5 +70,3 @@
 <li>И не забудьте в файле lyceum/.env поменять значение <b>DEBUG</b> на <b>False</b>, если не хотите запускать проект в DEBUG-режиме.</li>
 <li>Секретные данные(SECURITY_KEY) и некоторые стандартные находятся в файле lyceum/.env. Если вам нужно их поменять - меняйте в этом файле, а Django всё учтёт!
 </ul>
-<h1>Статус пайплайна:</h1>
-<img src="https://github.com/code-n-cry/django_school/actions/workflows/python-package.yml/badge.svg">
