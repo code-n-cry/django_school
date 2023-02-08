@@ -12,19 +12,13 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     DEBUG=(bool, True),
     SECRET_KEY=(str, 'some-fake-key'),
-    ALLOWED_HOSTS=(list, ['*']),
-    TIME_ZONE=(str, 'UTC'),
-    LANGUAGE_CODE=(str, 'en-us'),
-    STATIC_URL=(str, '/static/'),
-    USE_I18N=(bool, True),
-    USE_L10N=(bool, True),
-    USE_TZ=(bool, True),
-    DB_NAME=(str, 'db.sqlite3')
+    ALLOWED_HOSTS=(list, ['*'])
 )
 environ.Env.read_env(BASE_DIR / '.env')
 
@@ -91,7 +85,7 @@ WSGI_APPLICATION = 'lyceum.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / env('DB_NAME'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -118,21 +112,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = env('LANGUAGE_CODE')
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = env('TIME_ZONE')
+TIME_ZONE = 'UTC
 
-USE_I18N = env('USE_I18N')
+USE_I18N = True
 
-USE_L10N = env('USE_L10N')
+USE_L10N = True
 
-USE_TZ = env('USE_TZ')
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = env('STATIC_URL')
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
