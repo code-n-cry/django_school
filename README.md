@@ -1,5 +1,5 @@
 <h1>Статус пайплайна:</h1>
-<img src="https://github.com/code-n-cry/django_school/actions/workflows/python-package.yml/badge.svg">
+<img src="https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml/badge.svg">
 <h1>Руководство по запуску</h1>
 Для включения в dev-режиме:
 <ul>
