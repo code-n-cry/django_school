@@ -10,7 +10,7 @@ class StaticUrlTests(TestCase):
         self.assertEqual(right_response_1.status_code, 200)
         self.assertEqual(right_response_2.status_code, 200)
         self.assertEqual(error_response_1.status_code, 404)
-        self.assertEqual(error_response_2.status_code, 404)  
+        self.assertEqual(error_response_2.status_code, 404)
 
     def test_catalog_re_endpoint(self):
         right_response_1 = Client().get('/catalog/re/1/')
@@ -21,7 +21,7 @@ class StaticUrlTests(TestCase):
         self.assertEqual(right_response_2.status_code, 200)
         self.assertEqual(error_response_1.status_code, 404)
         self.assertEqual(error_response_2.status_code, 404)
-    
+
     def test_catalog_converter_endpoint(self):
         right_response_1 = Client().get('/catalog/converter/1/')
         right_response_2 = Client().get('/catalog/converter/10000/')
