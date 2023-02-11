@@ -17,14 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     DEBUG=(bool, True),
     SECRET_KEY=(str, 'some-fake-key'),
-    ALLOWED_HOSTS=(list, ['*']),
-    TIME_ZONE=(str, 'UTC'),
-    LANGUAGE_CODE=(str, 'en-us'),
-    STATIC_URL=(str, '/static/'),
-    USE_I18N=(bool, True),
-    USE_L10N=(bool, True),
-    USE_TZ=(bool, True),
-    DB_NAME=(str, 'db.sqlite3')
+    ALLOWED_HOSTS=(list, ['127.0.0.1']),
 )
 environ.Env.read_env(BASE_DIR / '.env')
 
