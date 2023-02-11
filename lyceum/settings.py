@@ -12,12 +12,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
-    DEBUG=(bool, True),
-    SECRET_KEY=(str, 'some-fake-key'),
-    ALLOWED_HOSTS=(list, ['127.0.0.1']),
+    DEBUG=(bool, True), SECRET_KEY=(str, 'some-fake-key'), ALLOWED_HOSTS=(list, ['*'])
 )
 environ.Env.read_env(BASE_DIR / '.env')
 
@@ -45,6 +44,7 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'about.apps.AboutConfig',
     'catalog.apps.CatalogConfig',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'lyceum.urls'
@@ -84,10 +85,11 @@ WSGI_APPLICATION = 'lyceum.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / env('DB_NAME'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
+INTERNAL_IPS = ['127.0.0.1']
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -111,21 +113,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = env('LANGUAGE_CODE')
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = env('TIME_ZONE')
+TIME_ZONE = 'UTC'
 
-USE_I18N = env('USE_I18N')
+USE_I18N = True
 
-USE_L10N = env('USE_L10N')
+USE_L10N = True
 
-USE_TZ = env('USE_TZ')
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = env('STATIC_URL')
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
