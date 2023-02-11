@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'about.apps.AboutConfig',
     'catalog.apps.CatalogConfig',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'lyceum.urls'
@@ -87,6 +89,7 @@ DATABASES = {
     }
 }
 
+INTERNAL_IPS = ['127.0.0.1']
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
