@@ -28,3 +28,6 @@ if settings.DEBUG:
     import debug_toolbar
 
     urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
+
+if not settings.REVERSE:
+    settings.MIDDLEWARE.remove('lyceum.middleware.middlewares.SimpleMiddleware')
