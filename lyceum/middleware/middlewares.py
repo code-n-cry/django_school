@@ -4,6 +4,7 @@ import os
 class SimpleMiddleware:
     """Simple middleware that reverses every 10th get response.
     To disable set enviroment variable REVERSE='0'"""
+
     def __init__(self, get_response):
         self.get_response = get_response
         self.response_count = 0
