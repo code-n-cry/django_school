@@ -20,7 +20,7 @@ env = environ.Env(
     DEBUG=(bool, True), SECRET_KEY=(str, 'some-fake-key'), ALLOWED_HOSTS=(list, ['*'])
 )
 environ.Env.read_env(BASE_DIR / '.env')
-
+os.environ['REVERSE'] = '1'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -32,7 +32,7 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
-
+REVERSE = bool(int(os.getenv('REVERSE', '1')))
 # Application definition
 
 INSTALLED_APPS = [
@@ -130,7 +130,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-REVERSE = os.getenv('REVERSE', '1')
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

@@ -1,4 +1,7 @@
 from django.test import TestCase, Client
+from django.http import HttpResponse
+from lyceum.middleware.middlewares import SimpleMiddleware
+import os
 
 
 class StaticUrlTests(TestCase):
@@ -31,3 +34,15 @@ class StaticUrlTests(TestCase):
         self.assertEqual(right_response_2.status_code, 200)
         self.assertEqual(error_response_1.status_code, 404)
         self.assertEqual(error_response_2.status_code, 404)
+
+    def test_my_middleware(self):
+        os.environ['REVERSE'] = '1'
+        my_middleware = SimpleMiddleware(HttpResponse)
+        my_middleware.response_count = 9
+        changed_response = my_middleware(Client().get('/catalog/'))
+        self.assertEqual(changed_response.content.decode('utf-8'), '<body>косипС вотнемелэ</body>')
+        os.environ['REVERSE'] = '0'
+        my_middleware = SimpleMiddleware(HttpResponse)
+        my_middleware.response_count = 9
+        changed_response = my_middleware(Client().get('/catalog/'))
+        self.assertEqual(changed_response.content.decode('utf-8'), '<body>Список элементов</body>')
