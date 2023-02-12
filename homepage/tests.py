@@ -21,7 +21,7 @@ class StaticUrlTests(TestCase):
         changed_response = my_middleware(Client().get('/'))
         self.assertEqual(
             changed_response.content.decode('utf-8'),
-            '<body>яанвалГ ацинартс o_O</body>'
+            '<body>яанвалГ ацинартс o_O</body>',
         )
         os.environ['REVERSE'] = '0'
         my_middleware = SimpleMiddleware(HttpResponse)
@@ -29,5 +29,5 @@ class StaticUrlTests(TestCase):
         changed_response = my_middleware(Client().get('/'))
         self.assertEqual(
             changed_response.content.decode('utf-8'),
-            '<body>Главная страница O_o</body>'
+            '<body>Главная страница O_o</body>',
         )
