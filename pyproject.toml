@@ -2,7 +2,9 @@
 target-version = ['py39']
 extend-exclude = '''
     (
-    ^/catalog/test.py
-    | ^/lyceum/settings.py
-    )
+    /catalog/tests.py
+    | /lyceum/settings.py
+    | /about/urls.py
+    | /about/tests.py
+    | /lyceum/middleware/tests.py)
 '''
