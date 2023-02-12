@@ -6,4 +6,4 @@ def item_list(request):
 
 
 def item_detail(request, number: int):
-    return HttpResponse(f'<body>Элемент {number}: красивый, нужный.</body>')
+    return HttpResponse(f'<body>Элемент {number}: - красивый, нужный.</body>')
