@@ -10,14 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
-import environ
 import os
+from pathlib import Path
+
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
-    DEBUG=(bool, True), SECRET_KEY=(str, 'some-fake-key'), ALLOWED_HOSTS=(list, ['*'])
+    DEBUG=(bool, True),
+    SECRET_KEY=(str, 'some-fake-key'),
+    ALLOWED_HOSTS=(list, ['*'])
 )
 environ.Env.read_env(BASE_DIR / '.env')
 os.environ['REVERSE'] = '1'
@@ -42,10 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'homepage.apps.HomepageConfig',
+    'debug_toolbar',
     'about.apps.AboutConfig',
     'catalog.apps.CatalogConfig',
-    'debug_toolbar',
+    'homepage.apps.HomepageConfig',
 ]
 
 MIDDLEWARE = [
@@ -98,16 +101,20 @@ INTERNAL_IPS = ['127.0.0.1']
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+                '.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+        '.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation'
+        '.NumericPasswordValidator',
     },
 ]
 
