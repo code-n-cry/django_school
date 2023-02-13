@@ -9,13 +9,14 @@ from lyceum.middleware.middlewares import SimpleMiddleware
 class StaticUrlTests(TestCase):
     def test_my_middleware(self):
         my_middleware = SimpleMiddleware(HttpResponse)
+        client = Client()
 
         with self.subTest('Middleware is turned on, works on all endpoints'):
             os.environ['REVERSE'] = '1'
             endpoints = [
-                Client().get('/about/'),
-                Client().get('/catalog/'),
-                Client().get('/'),
+                client.get('/about/'),
+                client.get('/catalog/'),
+                client.get('/'),
             ]
             right_contents = [
                 '<body>бО мотэ еткеорп ьтировог ёще огечен (</body>',
@@ -33,9 +34,9 @@ class StaticUrlTests(TestCase):
         with self.subTest('Middleware is turned off, about/ endpoint'):
             os.environ['REVERSE'] = '0'
             endpoints = [
-                Client().get('/about/'),
-                Client().get('/catalog/'),
-                Client().get('/'),
+                client.get('/about/'),
+                client.get('/catalog/'),
+                client.get('/'),
             ]
             right_contents = [
                 '<body>Об этом проекте говорить ещё нечего (</body>',
