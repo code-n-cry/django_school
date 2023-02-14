@@ -32,5 +32,4 @@ if settings.DEBUG:
 
 if not settings.REVERSE:
     settings.MIDDLEWARE.remove(
-        'lyceum.middleware.middlewares.SimpleMiddleware'
-        )
+        'lyceum.middleware.middlewares.SimpleMiddleware')
