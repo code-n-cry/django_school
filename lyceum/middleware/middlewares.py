@@ -6,11 +6,12 @@ import lyceum.settings
 class ContentReverseMiddleware:
     """Simple middleware that reverses every 10th get response.
     To disable set enviroment variable REVERSE='0'"""
+    enable = lyceum.settings.REVERSE_EVERY_10
 
     def __init__(self, get_response):
         self.get_response = get_response
         self.response_count = 0
-
+   
     def reverse_russian_text(self, text: str):
         changed_text = []
         is_word = False
@@ -33,7 +34,7 @@ class ContentReverseMiddleware:
     def __call__(self, request):
         response = self.get_response(request)
         self.response_count += 1
-        if lyceum.settings.REVERSE_EVERY_10:
+        if ContentReverseMiddleware.enable:
             if self.response_count % 10 == 0:
                 str_response_content = response.content.decode('utf-8')
                 response.content = self.reverse_russian_text(

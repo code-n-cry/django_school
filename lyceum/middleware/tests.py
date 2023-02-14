@@ -1,6 +1,6 @@
 from django.http import HttpResponse
-from django.test import Client, TestCase, override_settings
-from lyceum.settings import REVERSE_EVERY_10
+from django.test import Client, TestCase
+
 from lyceum.middleware.middlewares import ContentReverseMiddleware
 
 
@@ -28,6 +28,7 @@ class StaticUrlTests(TestCase):
                 )
 
     def test_middleware_turned_on(self):
+        ContentReverseMiddleware.enable = True
         client = Client()
         urls = [
             '/about/',
@@ -49,9 +50,9 @@ class StaticUrlTests(TestCase):
                     msg=url
                 )
 
-    @override_settings(REVERSE_EVERY_10=False)
     def test_middleware_turned_off(self):
-        """client = Client()
+        ContentReverseMiddleware.enable = False
+        client = Client()
         urls = [
             '/about/',
             '/catalog/',
@@ -70,5 +71,4 @@ class StaticUrlTests(TestCase):
                     response.content.decode('utf-8'),
                     unchanged_contents[ind],
                     msg=url
-                )"""
-        self.assertEqual(REVERSE_EVERY_10, False)
+                )
