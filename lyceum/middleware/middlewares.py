@@ -11,7 +11,7 @@ class ContentReverseMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
         self.response_count = 0
-   
+
     def reverse_russian_text(self, text: str):
         changed_text = []
         is_word = False
