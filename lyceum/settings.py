@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     DEBUG=(bool, True),
     SECRET_KEY=(str, 'some-fake-key'),
-    ALLOWED_HOSTS=(list, ['*'])
+    ALLOWED_HOSTS=(list, ['*']),
 )
 environ.Env.read_env(BASE_DIR / '.env')
 os.environ['REVERSE'] = '1'
@@ -102,11 +102,11 @@ INTERNAL_IPS = ['127.0.0.1']
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation'
-                '.UserAttributeSimilarityValidator',
+        '.UserAttributeSimilarityValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation'
-                '.MinimumLengthValidator',
+        '.MinimumLengthValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation'

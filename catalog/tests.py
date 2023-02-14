@@ -7,15 +7,11 @@ class StaticUrlTests(TestCase):
     def test_catalog_endpoint(self):
         client = Client()
 
-        with self.subTest(
-            'Catalog endpoint is accessible'
-        ):
+        with self.subTest('Catalog endpoint is accessible'):
             right_response = Client().get('/catalog/')
             self.assertEqual(right_response.status_code, HTTPStatus.OK)
 
-        with self.subTest(
-            'Catalog/<int>/ with correct data'
-        ):
+        with self.subTest('Catalog/<int>/ with correct data'):
             right_responses = [
                 client.get('/catalog/1/'),
                 client.get('/catalog/2000/'),
@@ -65,9 +61,7 @@ class StaticUrlTests(TestCase):
     def test_catalog_re_endpoint(self):
         client = Client()
 
-        with self.subTest(
-            'Catalog/re/<int>/ with correct data'
-        ):
+        with self.subTest('Catalog/re/<int>/ with correct data'):
             right_responses = [
                 client.get('/catalog/re/1/'),
                 client.get('/catalog/re/2000/'),
@@ -117,9 +111,7 @@ class StaticUrlTests(TestCase):
     def test_catalog_converter_endpoint(self):
         client = Client()
 
-        with self.subTest(
-            'Catalog/converter/<int>/ with correct data'
-        ):
+        with self.subTest('Catalog/converter/<int>/ with correct data'):
             right_responses = [
                 client.get('/catalog/converter/1/'),
                 client.get('/catalog/converter/2000/'),

@@ -28,7 +28,7 @@ class StaticUrlTests(TestCase):
                 changed_response = my_middleware(endpoints[url_index])
                 self.assertEqual(
                     changed_response.content.decode('utf-8'),
-                    right_contents[url_index]
+                    right_contents[url_index],
                 )
 
         with self.subTest('Middleware is turned off, about/ endpoint'):
@@ -48,5 +48,5 @@ class StaticUrlTests(TestCase):
                 unchanged_response = my_middleware(endpoints[url_index])
                 self.assertEqual(
                     unchanged_response.content.decode('utf-8'),
-                    right_contents[url_index]
+                    right_contents[url_index],
                 )
