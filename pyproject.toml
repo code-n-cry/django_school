@@ -1,11 +1,3 @@
 [tool.black]
 line-length = 79
 target-version = ['py39']
-extend-exclude = '''
-    (
-    /catalog/tests.py
-    | /lyceum/settings.py
-    | /about/urls.py
-    | /about/tests.py
-    | /lyceum/middleware/tests.py)
-'''
