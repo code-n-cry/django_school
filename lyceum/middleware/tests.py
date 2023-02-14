@@ -18,7 +18,7 @@ class StaticUrlTests(TestCase):
                 '?12косипС.вотнемелэ зар,авд:ирт!(ерытеч)',
                 'леваП-йишчул,ротнем!и!ревюьвер',
                 'алинаД...ен тешип_енм**сюьши:(',
-                'амаМmylaумарramuалымmama'
+                'амаМmylaумарramuалымmama',
             ]
             for ind, string in enumerate(strings):
                 self.assertEqual(
@@ -47,7 +47,7 @@ class StaticUrlTests(TestCase):
                 self.assertEqual(
                     response.content.decode('utf-8'),
                     changed_contents[ind],
-                    msg=url
+                    msg=url,
                 )
 
     def test_middleware_turned_off(self):
@@ -70,5 +70,5 @@ class StaticUrlTests(TestCase):
                 self.assertEqual(
                     response.content.decode('utf-8'),
                     unchanged_contents[ind],
-                    msg=url
+                    msg=url,
                 )

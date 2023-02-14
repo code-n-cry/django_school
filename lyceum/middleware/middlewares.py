@@ -6,6 +6,7 @@ import lyceum.settings
 class ContentReverseMiddleware:
     """Simple middleware that reverses every 10th get response.
     To disable set enviroment variable REVERSE='0'"""
+    
     enable = lyceum.settings.REVERSE_EVERY_10
 
     def __init__(self, get_response):
