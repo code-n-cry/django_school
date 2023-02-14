@@ -16,7 +16,7 @@ class SimpleMiddleware:
             if self.response_count % 10 == 0:
                 str_response_content = response.content.decode('utf-8')
                 russian_response_content = str_response_content[
-                    6 : len(str_response_content) - 7
+                    6:len(str_response_content) - 7
                 ].split()
                 russian_response_content = ' '.join(
                     [word[::-1] for word in russian_response_content]

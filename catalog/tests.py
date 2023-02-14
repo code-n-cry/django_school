@@ -140,7 +140,8 @@ class StaticUrlTests(TestCase):
                 self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
         with self.subTest(
-            'Catalog/converter/<int>/ endpoint not work with non-int, non-positive'
+            'Catalog/converter/<int>/ endpoint not work with non-int,'
+            'non-positive'
         ):
             wrong_responses = [
                 client.get('/catalog/converter/-1/'),
