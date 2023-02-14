@@ -1,7 +1,9 @@
-import os
+import re
+
+import lyceum.settings
 
 
-class SimpleMiddleware:
+class ContentReverseMiddleware:
     """Simple middleware that reverses every 10th get response.
     To disable set enviroment variable REVERSE='0'"""
 
@@ -9,22 +11,32 @@ class SimpleMiddleware:
         self.get_response = get_response
         self.response_count = 0
 
+    def reverse_russian_text(self, text: str):
+        changed_text = []
+        is_word = False
+        start_ind = 0
+        for ind, letter in enumerate(text):
+            if re.match(r'[а-яА-ЯёЁ]', letter):
+                is_word = True
+            if not re.match(r'[а-яА-ЯёЁ]', letter) and not is_word:
+                start_ind = ind + 1
+                changed_text.append(letter)
+            if not re.match(r'[а-яА-ЯёЁ]', letter) and is_word:
+                changed_text += list(text[start_ind:ind][::-1] + letter)
+                is_word = False
+                start_ind = ind + 1
+        changed_text = ''.join(changed_text)
+        if len(changed_text) != text:
+            changed_text += text[start_ind:][::-1]
+        return changed_text
+
     def __call__(self, request):
         response = self.get_response(request)
-        if bool(int(os.environ['REVERSE'])):
-            self.response_count += 1
+        self.response_count += 1
+        if lyceum.settings.REVERSE_EVERY_10:
             if self.response_count % 10 == 0:
                 str_response_content = response.content.decode('utf-8')
-                russian_response_content = str_response_content[
-                    6 : len(str_response_content) - 7
-                ].split()
-                russian_response_content = ' '.join(
-                    [word[::-1] for word in russian_response_content]
+                response.content = self.reverse_russian_text(
+                    str_response_content
                 )
-                new_response_content = (
-                    str_response_content[0:6]
-                    + russian_response_content
-                    + str_response_content[-7:]
-                )
-                response.content = new_response_content
         return response

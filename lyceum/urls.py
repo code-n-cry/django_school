@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from . import settings
+from lyceum import settings
 
 urlpatterns = [
     path('', include('homepage.urls')),
@@ -29,8 +29,3 @@ if settings.DEBUG:
     import debug_toolbar
 
     urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
-
-if not settings.REVERSE:
-    settings.MIDDLEWARE.remove(
-        'lyceum.middleware.middlewares.SimpleMiddleware'
-    )
