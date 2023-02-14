@@ -21,7 +21,8 @@ class StaticUrlTests(TestCase):
             ]
             for url in urls:
                 self.assertEqual(
-                    client.get(url).status_code, HTTPStatus.OK, msg=url)
+                    client.get(url).status_code, HTTPStatus.OK, msg=url
+                )
 
         with self.subTest(
             'Catalog/<int>/ endpoint not work with literal data'
@@ -33,8 +34,9 @@ class StaticUrlTests(TestCase):
                 '/catalog/1ab1/',
             ]
             for url in urls:
-                self.assertEqual(client.get(url).status_code,
-                                 HTTPStatus.NOT_FOUND, msg=url)
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
         with self.subTest(
             'Catalog/<int>/ endpoint not work with negative and float digit'
@@ -46,8 +48,9 @@ class StaticUrlTests(TestCase):
                 '/catalog/0.1/',
             ]
             for url in urls:
-                self.assertEqual(client.get(url).status_code,
-                                 HTTPStatus.NOT_FOUND, msg=url)
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
         with self.subTest(
             'Catalog/<int>/ endpoint not work with special characters'
@@ -59,8 +62,9 @@ class StaticUrlTests(TestCase):
                 '/catalog/1$/',
             ]
             for url in urls:
-                self.assertEqual(client.get(url).status_code,
-                                 HTTPStatus.NOT_FOUND, msg=url)
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
     def test_catalog_re_endpoint(self):
         client = Client()
@@ -72,7 +76,8 @@ class StaticUrlTests(TestCase):
             ]
             for url in urls:
                 self.assertEqual(
-                    client.get(url).status_code, HTTPStatus.OK, msg=url)
+                    client.get(url).status_code, HTTPStatus.OK, msg=url
+                )
 
         with self.subTest(
             'Catalog/re/<int>/ endpoint not work with literal data'
@@ -84,8 +89,9 @@ class StaticUrlTests(TestCase):
                 '/catalog/re/1ab1/',
             ]
             for url in urls:
-                self.assertEqual(client.get(url).status_code,
-                                 HTTPStatus.NOT_FOUND, msg=url)
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
         with self.subTest(
             'Catalog/re/<int>/ endpoint not work with non-int, non-positive'
@@ -100,8 +106,9 @@ class StaticUrlTests(TestCase):
                 '/catalog/re/01/',
             ]
             for url in urls:
-                self.assertEqual(client.get(url).status_code,
-                                 HTTPStatus.NOT_FOUND, msg=url)
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
         with self.subTest(
             'Catalog/re/<int>/ endpoint not work with special characters'
@@ -113,8 +120,9 @@ class StaticUrlTests(TestCase):
                 '/catalog/re/1$/',
             ]
             for url in urls:
-                self.assertEqual(client.get(url).status_code,
-                                 HTTPStatus.NOT_FOUND, msg=url)
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
     def test_catalog_converter_endpoint(self):
         client = Client()
@@ -126,7 +134,8 @@ class StaticUrlTests(TestCase):
             ]
             for url in urls:
                 self.assertEqual(
-                    client.get(url).status_code, HTTPStatus.OK, msg=url)
+                    client.get(url).status_code, HTTPStatus.OK, msg=url
+                )
 
         with self.subTest(
             'Catalog/converter/<int>/ endpoint not work with literal data'
@@ -138,8 +147,9 @@ class StaticUrlTests(TestCase):
                 '/catalog/converter/1ab1/',
             ]
             for url in urls:
-                self.assertEqual(client.get(url).status_code,
-                                 HTTPStatus.NOT_FOUND, msg=url)
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
         with self.subTest(
             'Catalog/converter/<int>/ endpoint not work with non-int,'
@@ -155,8 +165,9 @@ class StaticUrlTests(TestCase):
                 '/catalog/converter/01/',
             ]
             for url in urls:
-                self.assertEqual(client.get(url).status_code,
-                                 HTTPStatus.NOT_FOUND, msg=url)
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
         with self.subTest(
             'Catalog/<int>/ endpoint not work with special characters'
@@ -168,5 +179,6 @@ class StaticUrlTests(TestCase):
                 '/catalog/converter/1$/',
             ]
             for url in urls:
-                self.assertEqual(client.get(url).status_code,
-                                 HTTPStatus.NOT_FOUND, msg=url)
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )

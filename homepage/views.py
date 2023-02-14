@@ -9,4 +9,5 @@ def home(request):
 
 def coffee(request):
     return HttpResponse(
-        'Я чайник', content_type='text/plain', status=HTTPStatus.IM_A_TEAPOT)
+        'Я чайник', content_type='text/plain', status=HTTPStatus.IM_A_TEAPOT
+    )
