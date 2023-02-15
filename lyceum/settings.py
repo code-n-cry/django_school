@@ -21,7 +21,7 @@ env = environ.Env(
     DEBUG=(bool, True),
     SECRET_KEY=(str, 'some-fake-key'),
     ALLOWED_HOSTS=(list, ['*']),
-    REVERSE_EVERY_10=(bool, False),
+    REVERSE_RU_EVERY_10=(bool, False),
 )
 environ.Env.read_env(BASE_DIR / '.env')
 
@@ -38,7 +38,7 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
-REVERSE_EVERY_10 = env('REVERSE_EVERY_10')
+REVERSE_RU_EVERY_10 = env('REVERSE_RU_EVERY_10')
 
 # Application definition
 
