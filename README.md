@@ -1,6 +1,6 @@
-<h1>ER-диаграмма:
+<h1>ER-диаграмма:</h1>
 
-(image.png)
+<img src="https://github.com/code-n-cry/django_school/blob/main/image.png">
 
 <h1>Статус пайплайна:</h1>
 
