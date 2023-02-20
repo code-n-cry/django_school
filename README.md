@@ -82,3 +82,51 @@
 <h2>Данные администратора:</h2><br>
 Пользователь: <b>admin</b><br>
 Пароль: <b>admin1234</b>
+<h2>Запуск БД</h2>
+<ol>
+<li>Начальная миграция
+<table>
+<tr>
+<th>Linux/MacOS</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>python3 manage.py migrate</td>
+<td>python manage.py migrate</td>
+</tr>
+</table>
+</li>
+<li>Добавление в миграцию данных catalog
+<table>
+<tr>
+<th>Linux/MacOS</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>python3 manage.py makemigrations</td>
+<td>python manage.py makemigrations</td>
+</tr>
+</table>
+</li>
+<li>Добавление моделей catalog в БД
+<table>
+<tr>
+<th>Linux/MacOS</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>python3 manage.py migrate catalog</td>
+<td>python manage.py migrate catalog</td>
+</tr>
+</table>
+<li>Загрузка фикстур(начальных данных) приложения каталог
+<table>
+<tr>
+<th>Linux/MacOS</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>python manage.py loaddata fixture.json --app catalog</td>
+<td>python3 manage.py loaddata fixture.json --app catalog</td>
+</tr>
+</table>
