@@ -36,6 +36,8 @@ class ValidateSameWriting:
     def __call__(self, value):
         unique_names = self.cls.objects.all()
         for obj in unique_names:
+            if obj.name == value:
+                return
             if (
                 difflib.SequenceMatcher(
                     a=obj.name.lower(), b=value.lower()
@@ -44,7 +46,6 @@ class ValidateSameWriting:
             ):
                 raise django.core.exceptions.ValidationError(self.message)
         else:
-            print('WORKED')
             new_name = self.cls.objects.create(name=value)
             new_name.save()
             return
