@@ -14,14 +14,6 @@ class CategoriesUniqueNames(core.models.AbstractProtectionModel):
 
 
 class Category(core.models.AbstractModel):
-    name = django.db.models.TextField(
-        verbose_name='название',
-        help_text='Добавьте название товара',
-        max_length=150,
-        validators=[
-            catalog.validators.ValidateSameWriting(CategoriesUniqueNames)
-        ],
-    )
     slug = django.db.models.CharField(
         'символьный код для url',
         help_text='Напишите код для url(только лат. буквы, цифры и `-`, `_`)',
@@ -49,12 +41,6 @@ class Category(core.models.AbstractModel):
 
 
 class Tag(core.models.AbstractModel):
-    name = django.db.models.TextField(
-        verbose_name='название',
-        help_text='Добавьте название товара',
-        max_length=150,
-        validators=[catalog.validators.ValidateSameWriting(TagsUniqueNames)],
-    )
     slug = django.db.models.CharField(
         'символьный код для url',
         help_text='Напишите код для url(только лат. буквы, цифры и `-`, `_`)',
