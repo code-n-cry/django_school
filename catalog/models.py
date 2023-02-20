@@ -1,7 +1,8 @@
-import catalog.validators
-import core.models
 import django.core.validators
 import django.db.models
+
+import catalog.validators
+import core.models
 
 
 class TagsUniqueNames(core.models.AbstractProtectionModel):

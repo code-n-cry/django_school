@@ -1,9 +1,10 @@
 from http import HTTPStatus
 
-import catalog.models
 import django.core.exceptions
 import django.db.utils
 from django.test import Client, TestCase
+
+import catalog.models
 
 
 class StaticUrlTests(TestCase):
