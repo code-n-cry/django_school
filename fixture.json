@@ -139,3 +139,144 @@
     }
 }
 ]
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Бытовая техника",
+        "is_published": true,
+        "slug": "appliances",
+        "weight": 66
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Люди",
+        "is_published": false,
+        "slug": "people",
+        "weight": 118
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 1,
+    "fields": {
+        "name": "Полезно",
+        "is_published": true,
+        "slug": "useful"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 2,
+    "fields": {
+        "name": "Рекомендовано пользователями",
+        "is_published": true,
+        "slug": "people_recommend"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 3,
+    "fields": {
+        "name": "Красивое",
+        "is_published": true,
+        "slug": "beautiful"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 4,
+    "fields": {
+        "name": "Отечественное",
+        "is_published": true,
+        "slug": "made_in_russia"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 5,
+    "fields": {
+        "name": "Бесполезно",
+        "is_published": true,
+        "slug": "useless"
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 1,
+    "fields": {
+        "name": "Стиральная машина \"Мощь потока Хуанхэ\"",
+        "is_published": true,
+        "text": "Превосходно стирает вещи, обувь, кроссовки, головные платки, пищу, руки. Партия рекомендует. За хороший отзыв +2 миска рис.",
+        "catalog_category": 1,
+        "tags": [
+            1,
+            2,
+            3
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 2,
+    "fields": {
+        "name": "Ночник \"Красота Китайского красного Солнца\"",
+        "is_published": true,
+        "text": "Роскошно освещает комнату ночью полностью. Проблем больше нет, а с ними и сна!!:)",
+        "catalog_category": 1,
+        "tags": [
+            3,
+            5
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 3,
+    "fields": {
+        "name": "Кофеварка \"Чайник\"",
+        "is_published": true,
+        "text": "Антикварная кофеварка времён Первой Мировой Войны \"Teapot\". Чай заваривает превосходно, кофе не пробовали :(",
+        "catalog_category": 1,
+        "tags": [
+            1,
+            3
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 4,
+    "fields": {
+        "name": "Соковыжималка \"Яблоко Раздора\"",
+        "is_published": true,
+        "text": "Выжимает все соки из фруктов и вашей электросети! Налоговые счета выглядят превосходно!",
+        "catalog_category": 1,
+        "tags": [
+            2,
+            3,
+            5
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 5,
+    "fields": {
+        "name": "Данила, The Teacher",
+        "is_published": true,
+        "text": "И код превосходно заревьювит, и совет шикарно даст!",
+        "catalog_category": 2,
+        "tags": [
+            1,
+            2,
+            3,
+            4
+        ]
+    }
+}
+]
