@@ -35,14 +35,14 @@ class Category(core.models.AbstractModel):
         ],
     )
     weight = django.db.models.PositiveSmallIntegerField(
-        'Вес',
+        'вес',
         help_text='Введите вес(число 0-100)',
         default=100,
     )
 
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
 
     def __str__(self):
         return self.name
@@ -69,8 +69,8 @@ class Tag(core.models.AbstractModel):
     )
 
     class Meta:
-        verbose_name = 'Тег'
-        verbose_name_plural = 'Теги'
+        verbose_name = 'тег'
+        verbose_name_plural = 'теги'
 
     def __str__(self):
         return self.name
