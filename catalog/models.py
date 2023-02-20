@@ -20,7 +20,7 @@ class Category(core.models.AbstractModel):
         max_length=150,
         validators=[
             catalog.validators.ValidateSameWriting(CategoriesUniqueNames)
-        ]
+        ],
     )
     slug = django.db.models.CharField(
         'символьный код для url',
@@ -53,9 +53,7 @@ class Tag(core.models.AbstractModel):
         verbose_name='название',
         help_text='Добавьте название товара',
         max_length=150,
-        validators=[
-            catalog.validators.ValidateSameWriting(TagsUniqueNames)
-        ]
+        validators=[catalog.validators.ValidateSameWriting(TagsUniqueNames)],
     )
     slug = django.db.models.CharField(
         'символьный код для url',
