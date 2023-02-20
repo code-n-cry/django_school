@@ -68,7 +68,6 @@ class Item(core.models.AbstractModel):
         'описание',
         help_text='Описание(>2 символов, содержит "превосходно, роскошно")',
         validators=[
-            django.core.validators.MinLengthValidator(2),
             catalog.validators.ValidateMustContain('превосходно', 'роскошно'),
         ],
     )

@@ -3,16 +3,14 @@ import django.db.models
 
 class AbstractModel(django.db.models.Model):
     name = django.db.models.TextField(
-        'Название',
+        verbose_name='Название',
         help_text='Добавьте название товара',
         max_length=150,
-        validators=[],
     )
     is_published = django.db.models.BooleanField(
-        'Опубликовать?',
+        verbose_name='Опубликовать?',
         help_text='Выберите статус..',
         default=True,
-        validators=[],
     )
 
     class Meta:

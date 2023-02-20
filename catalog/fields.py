@@ -9,12 +9,12 @@ class ValidatedNameField(django.db.models.TextField):
         verbose_name = ('Название',)
         help_text = ('Добавьте название товара',)
         max_length = (150,)
-        default_validators = [
+        validators = [
             catalog.validators.ValidateSameWriting(protection_table_cls)
         ]
         super().__init__(
             verbose_name,
             help_text,
             max_length,
-            default_validators,
+            validators,
         )

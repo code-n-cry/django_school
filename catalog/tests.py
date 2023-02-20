@@ -238,22 +238,6 @@ class DataBaseTests(TestCase):
                 self.item_count,
             )
 
-        with self.subTest('Too short description'):
-            with self.assertRaises(django.core.exceptions.ValidationError):
-                self.item = catalog.models.Item(
-                    name='Invalid test item',
-                    catalog_category=self.category,
-                    text='.',
-                )
-                self.item.full_clean()
-                self.item.save()
-                self.item.tags.add(self.tag)
-
-            self.assertEqual(
-                catalog.models.Item.objects.count(),
-                self.item_count,
-            )
-
         with self.subTest('No name'):
             with self.assertRaises(django.core.exceptions.ValidationError):
                 self.item = catalog.models.Item(
