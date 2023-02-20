@@ -1,13 +1,22 @@
 import django.core.validators
 import django.db.models
 
+import catalog.fields
 import catalog.validators
 import core.models
 
 
+class TagsUniqueNames(core.models.AbstractProtectionModel):
+    pass
+
+
+class CategoriesUniqueNames(core.models.AbstractProtectionModel):
+    pass
+
+
 class Category(core.models.AbstractModel):
-    slug = django.db.models.TextField(
-        'Символьный код для url',
+    slug = django.db.models.CharField(
+        'символьный код для url',
         help_text='Напишите код для url(только лат. буквы, цифры и `-`, `_`)',
         max_length=200,
         unique=True,
@@ -33,8 +42,8 @@ class Category(core.models.AbstractModel):
 
 
 class Tag(core.models.AbstractModel):
-    slug = django.db.models.TextField(
-        'Символьный код для url',
+    slug = django.db.models.CharField(
+        'символьный код для url',
         help_text='Напишите код для url(только лат. буквы, цифры и `-`, `_`)',
         max_length=200,
         unique=True,
@@ -56,7 +65,7 @@ class Tag(core.models.AbstractModel):
 
 class Item(core.models.AbstractModel):
     text = django.db.models.TextField(
-        'Описание',
+        'описание',
         help_text='Описание(>2 символов, содержит "превосходно, роскошно")',
         validators=[
             django.core.validators.MinLengthValidator(2),
@@ -65,19 +74,19 @@ class Item(core.models.AbstractModel):
     )
     catalog_category = django.db.models.ForeignKey(
         Category,
-        verbose_name='Категория',
+        verbose_name='категория',
         on_delete=django.db.models.CASCADE,
         related_name='items',
     )
     tags = django.db.models.ManyToManyField(
         Tag,
-        verbose_name='Тег',
+        verbose_name='тег',
         related_name='items',
     )
 
     class Meta:
-        verbose_name = 'Товар'
-        verbose_name_plural = 'Товары'
+        verbose_name = 'товар'
+        verbose_name_plural = 'товары'
 
     def __str__(self):
         return self.name
