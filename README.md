@@ -95,6 +95,18 @@
 <td>python manage.py migrate</td>
 </tr>
 </table>
+<li>Создание админа(superuser):
+<table>
+<tr>
+<th>Linux/MacOS</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>python3 manage.py createsuperuser</td>
+<td>python manage.py createsuperuser</td>
+</tr>
+</table>
+Далее следовать указаниям консоли
 </li>
 <li>Добавление в миграцию данных catalog
 <table>
