@@ -130,7 +130,7 @@ class ModelTests(TestCase):
     def test_valid_category(self):
         with django.db.transaction.atomic():
             self.category = catalog.models.Category.objects.create(
-                name='Test category 1',
+                name='Testy category 1',
                 slug='url',
             )
             self.category.full_clean()
@@ -148,7 +148,7 @@ class ModelTests(TestCase):
                 msg='Works with incorrect slug',
             ):
                 self.category = catalog.models.Category.objects.create(
-                    name='Test category 2',
+                    name='New category 2',
                     slug='FffF-__инвалидслаг$$$__--FF',
                 )
                 self.category.full_clean()
@@ -170,7 +170,7 @@ class ModelTests(TestCase):
                 msg='Works with a negative weight',
             ):
                 self.category = catalog.models.Category.objects.create(
-                    name='Test category 3',
+                    name='Category for test',
                     slug='test-slug-4',
                     weight=-1,
                 )
@@ -183,9 +183,46 @@ class ModelTests(TestCase):
                 msg='Works with too big numbers',
             ):
                 self.category = catalog.models.Category.objects.create(
-                    name='Test category 4',
+                    name='butterfly',
                     slug='test-slug-4',
                     weight=32768,
+                )
+                self.category.full_clean()
+                self.category.save()
+
+        with django.db.transaction.atomic():
+            with self.assertRaises(
+                django.core.exceptions.ValidationError,
+                msg='Works with not unique name',
+            ):
+                self.category = catalog.models.Category.objects.create(
+                    name='Test category',
+                    slug='slg',
+                )
+                self.category.full_clean()
+                self.category.save()
+
+    def test_category_unique_name(self):
+        with django.db.transaction.atomic():
+            with self.assertRaises(
+                django.core.exceptions.ValidationError,
+                msg='Works with not unique name',
+            ):
+                self.category = catalog.models.Category.objects.create(
+                    name='!!Test,category!!',
+                    slug='slg',
+                )
+                self.category.full_clean()
+                self.category.save()
+
+        with django.db.transaction.atomic():
+            with self.assertRaises(
+                django.core.exceptions.ValidationError,
+                msg='Works with not unique name',
+            ):
+                self.category = catalog.models.Category.objects.create(
+                    name='(!1Test,category1!)',
+                    slug='slg',
                 )
                 self.category.full_clean()
                 self.category.save()
@@ -193,7 +230,7 @@ class ModelTests(TestCase):
     def test_valid_tag(self):
         with django.db.transaction.atomic():
             self.tag = catalog.models.Tag.objects.create(
-                name='Test tag 1',
+                name='New tag',
                 slug='new-test-tag-slug',
             )
             self.tag.full_clean()
@@ -219,7 +256,7 @@ class ModelTests(TestCase):
 
         with django.db.transaction.atomic():
             with self.assertRaises(
-                django.db.utils.IntegrityError,
+                django.core.exceptions.ValidationError,
                 msg='Works with not unique name',
             ):
                 self.tag = catalog.models.Tag.objects.create(
@@ -236,6 +273,31 @@ class ModelTests(TestCase):
             ):
                 self.tag = catalog.models.Tag.objects.create(
                     slug='new-test-tag-slug',
+                )
+                self.tag.full_clean()
+                self.tag.save()
+
+    def test_tag_unique_name(self):
+        with django.db.transaction.atomic():
+            with self.assertRaises(
+                django.core.exceptions.ValidationError,
+                msg='Works with not unique name',
+            ):
+                self.tag = catalog.models.Tag.objects.create(
+                    name='!!Test,tag!!',
+                    slug='slg',
+                )
+                self.tag.full_clean()
+                self.tag.save()
+
+        with django.db.transaction.atomic():
+            with self.assertRaises(
+                django.core.exceptions.ValidationError,
+                msg='Works with not unique name',
+            ):
+                self.tag = catalog.models.Tag.objects.create(
+                    name='(!1Test,tag1!)',
+                    slug='slg',
                 )
                 self.tag.full_clean()
                 self.tag.save()

@@ -10,7 +10,7 @@ class PublishedWithNameBaseModel(django.db.models.Model):
     )
     name = django.db.models.CharField(
         verbose_name='название',
-        help_text='Добавьте название товара',
+        help_text='Добавьте название',
         max_length=150,
         unique=True,
     )
@@ -33,6 +33,16 @@ class SlugBaseModel(PublishedWithNameBaseModel):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        abstract = True
+
+
+class UniqueNameSlugBaseModel(SlugBaseModel):
+    is_cleaned = False
+    unique_name = django.db.models.CharField(
+        max_length=150, unique=True, editable=False
+    )
 
     class Meta:
         abstract = True
