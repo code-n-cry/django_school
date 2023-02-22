@@ -2,13 +2,13 @@
 
 <img src="https://github.com/code-n-cry/django_school/blob/main/image.png">
 
-<h1>Статус пайплайна:</h1>
+<h1>Django_school:</h1>
 
 [![Python linting](https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml/badge.svg)](https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml)
 
 [![Python testing](https://github.com/code-n-cry/django_school/actions/workflows/python-testing.yml/badge.svg)](https://github.com/code-n-cry/django_school/actions/workflows/python-testing.yml)
 
-<h1>Руководство по запуску</h1>
+<h2>Руководство по запуску</h2>
 Для включения в dev-режиме:
 <ul>
 <li>Клонировать репозиторий с помощью git.<br>Для этого в консоль вводим команду:<br><blockquote>git clone https://github.com/code-n-cry/django_school.git</blockquote>Которая <b>скопирует папку с кодом</b> из Github</li>
