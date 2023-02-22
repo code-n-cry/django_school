@@ -17,7 +17,9 @@ class ValidateMustContain:
                 is_wrong = False
                 break
         if is_wrong:
-            raise django.core.exceptions.ValidationError(self.message)
+            raise django.core.exceptions.ValidationError(
+                self.message, params={'value': ', '.join(self.keywords)}
+            )
         return value
 
     def __eq__(self, other):
