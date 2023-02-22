@@ -97,43 +97,38 @@ class ModelTests(TestCase):
             msg='Created without name',
         )
 
-        with self.subTest('No category'):
-            with self.assertRaises(django.core.exceptions.ValidationError):
-                self.item = catalog.models.Item(
-                    text='Превосходно',
-                )
-                self.item.full_clean()
-                self.item.save()
-                self.item.tags.add(self.tag)
-
-            self.assertEqual(
-                catalog.models.Item.objects.count(),
-                self.item_count,
-                msg='Created without category',
+        with self.assertRaises(django.core.exceptions.ValidationError):
+            self.item = catalog.models.Item(
+                text='Превосходно',
             )
+            self.item.full_clean()
+            self.item.save()
+            self.item.tags.add(self.tag)
+        self.assertEqual(
+            catalog.models.Item.objects.count(),
+            self.item_count,
+            msg='Created without category',
+        )
 
-        with self.subTest('No tags'):
-            with self.assertRaises(django.core.exceptions.ValidationError):
-                self.item = catalog.models.Item(
-                    category=self.category,
-                    text='Превосходно',
-                )
-                self.item.full_clean()
-                self.item.save()
-
-            self.assertEqual(
-                catalog.models.Item.objects.count(),
-                self.item_count,
-                msg='Created without tag',
+        with self.assertRaises(django.core.exceptions.ValidationError):
+            self.item = catalog.models.Item(
+                category=self.category,
+                text='Превосходно',
             )
+            self.item.full_clean()
+            self.item.save()
+        self.assertEqual(
+            catalog.models.Item.objects.count(),
+            self.item_count,
+            msg='Created without tag',
+        )
 
     def test_valid_category(self):
         with django.db.transaction.atomic():
             self.category = catalog.models.Category.objects.create(
-                name='Testy category 1',
+                name='Testy category',
                 slug='url',
             )
-            self.category.full_clean()
             self.category.save()
             self.assertEqual(
                 catalog.models.Category.objects.count(),
@@ -233,7 +228,6 @@ class ModelTests(TestCase):
                 name='New tag',
                 slug='new-test-tag-slug',
             )
-            self.tag.full_clean()
             self.tag.save()
             self.assertEqual(
                 catalog.models.Tag.objects.count(),

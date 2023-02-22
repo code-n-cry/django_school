@@ -10,13 +10,15 @@ class ValidateMustContain:
         self.message = 'В тексте дожно быть какое-то из слов: %(value)s'
 
     def __call__(self, value):
-        splitted_value = re.split(r'[,!?.(): -]', value.lower())
-        for word in splitted_value:
+        text = re.findall(r'\b.*?\b', value.lower())
+        is_wrong = True
+        for word in text:
             if word in self.keywords:
-                return
-        raise django.core.exceptions.ValidationError(
-            self.message, params={'value': ', '.join(self.keywords)}
-        )
+                is_wrong = False
+                break
+        if is_wrong:
+            raise django.core.exceptions.ValidationError(self.message)
+        return value
 
     def __eq__(self, other):
         return self.keywords == other.keywords
