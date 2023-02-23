@@ -44,7 +44,5 @@ class ContentReverseMiddleware:
         response = self.get_response(request)
         if ContentReverseMiddleware.should_middleware_work():
             str_response_content = response.content.decode('utf-8')
-            response.content = self.reverse_russian_text(
-                str_response_content
-            )
+            response.content = self.reverse_russian_text(str_response_content)
         return response
