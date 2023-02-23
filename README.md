@@ -1,7 +1,3 @@
-<h1>ER-диаграмма:</h1>
-
-<img src="https://github.com/code-n-cry/django_school/blob/main/image.png">
-
 <h1>Django_school:</h1>
 
 [![Python linting](https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml/badge.svg)](https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml)
@@ -142,3 +138,6 @@
 <td>python3 manage.py loaddata fixture.json --app catalog</td>
 </tr>
 </table>
+<h1>ER-диаграмма:</h1>
+
+<img src="https://github.com/code-n-cry/django_school/blob/main/image.png">
