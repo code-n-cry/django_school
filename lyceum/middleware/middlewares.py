@@ -7,13 +7,19 @@ class ContentReverseMiddleware:
     """Simple middleware that reverses every 10th get response.
     To disable set enviroment variable REVERSE='0'"""
 
+    response_count = 0
+
     def __init__(self, get_response):
         self.get_response = get_response
-        self.response_count = 0
 
     @classmethod
     def should_middleware_work(cls):
-        return settings.REVERSE_RU_EVERY_10
+        if settings.REVERSE_RU_EVERY_10:
+            ContentReverseMiddleware.response_count += 1
+            if ContentReverseMiddleware.response_count % 10 == 0:
+                ContentReverseMiddleware.response_count = 0
+                return True
+        return False
 
     def reverse_russian_text(self, text: str):
         changed_text = []
@@ -37,11 +43,8 @@ class ContentReverseMiddleware:
     def __call__(self, request):
         response = self.get_response(request)
         if ContentReverseMiddleware.should_middleware_work():
-            self.response_count += 1
-            if self.response_count % 10 == 0:
-                self.response_count = 0
-                str_response_content = response.content.decode('utf-8')
-                response.content = self.reverse_russian_text(
-                    str_response_content
-                )
+            str_response_content = response.content.decode('utf-8')
+            response.content = self.reverse_russian_text(
+                str_response_content
+            )
         return response
