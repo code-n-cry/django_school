@@ -1,5 +1,7 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def description(request):
-    return HttpResponse('<body>Об этом проекте говорить ещё нечего (</body>')
+    template = 'about/description.html'
+    context = {'title': 'Описание'}
+    return render(request, template, context)

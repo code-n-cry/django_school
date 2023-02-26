@@ -35,7 +35,6 @@ class Item(core.models.PublishedWithNameBaseModel):
     tags = django.db.models.ManyToManyField(
         Tag,
         verbose_name='тег',
-        related_name='items',
     )
     text = django.db.models.TextField(
         'описание',
@@ -49,3 +48,26 @@ class Item(core.models.PublishedWithNameBaseModel):
         default_related_name = 'items'
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
+
+
+class ItemMainImage(core.models.ImageModel):
+    item = django.db.models.OneToOneField(
+        Item,
+        verbose_name='главное фото',
+        null=True,
+        on_delete=django.db.models.DO_NOTHING,
+    )
+
+    class Meta:
+        default_related_name = 'main_image'
+
+
+class ItemDescriptionsImages(core.models.ImageModel):
+    item = django.db.models.ForeignKey(
+        Item,
+        verbose_name='галерея изображений товара',
+        on_delete=django.db.models.DO_NOTHING,
+    )
+
+    class Meta:
+        default_related_name = 'description_images'

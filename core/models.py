@@ -4,6 +4,8 @@ import string
 import django.core.exceptions
 import django.core.validators
 import django.db.models
+import django.utils.safestring
+import sorl.thumbnail
 
 
 class PublishedWithNameBaseModel(django.db.models.Model):
@@ -111,3 +113,31 @@ class UniqueNameSlugBaseModel(SlugBaseModel):
     def clean(self):
         self.is_cleaned = True
         self.generate_normalized_name()
+
+
+class ImageModel(django.db.models.Model):
+    image = django.db.models.ImageField(
+        'изображение(будет масштабировано до 300x300)',
+        help_text='загрузите картинки для уточнения описания',
+        upload_to='uploaded',
+    )
+
+    class Meta:
+        abstract = True
+
+    def get_image_300x300(self):
+        return sorl.thumbnail.get_thumbnail(
+            self.image, '300x300', crop='center', quality=65
+        )
+
+    def image_tmb(self):
+        if self.image:
+            return django.utils.safestring.mark_safe(
+                f'<img src="{self.image.url}" width="50"'
+            )
+        self.image_tmb.short_description = 'превью'
+        return '(The image)'
+
+    def save(self, *args, **kwargs):
+        self.image = self.get_image_300x300().name
+        super().save(*args, **kwargs)
