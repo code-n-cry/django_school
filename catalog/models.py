@@ -1,3 +1,4 @@
+import ckeditor.fields
 import django.core.exceptions
 import django.core.validators
 import django.db.models
@@ -36,12 +37,13 @@ class Item(core.models.PublishedWithNameBaseModel):
         Tag,
         verbose_name='тег',
     )
-    text = django.db.models.TextField(
+    text = ckeditor.fields.RichTextField(
         'описание',
         help_text='Описание(>2 символов, содержит "превосходно, роскошно")',
         validators=[
             catalog.validators.ValidateMustContain('превосходно', 'роскошно'),
         ],
+        config_name='item_text_editor',
     )
 
     class Meta:

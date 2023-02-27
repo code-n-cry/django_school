@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.forms',
+    'ckeditor',
     'debug_toolbar',
     'django_cleanup.apps.CleanupConfig',
     'sorl.thumbnail',
@@ -154,3 +156,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+CKEDITOR_CONFIGS = {
+    'item_text_editor': {
+        'toolbar': 'full',
+    },
+}
