@@ -59,6 +59,7 @@ class ItemMainImage(core.models.ImageModel):
     )
 
     class Meta:
+        verbose_name = 'главное изображение товара(одна картинка)'
         default_related_name = 'main_image'
 
 
@@ -70,4 +71,6 @@ class ItemDescriptionsImages(core.models.ImageModel):
     )
 
     class Meta:
+        verbose_name = 'галерея фото товара'
+        verbose_name_plural = 'ещё фотографии товара'
         default_related_name = 'description_images'

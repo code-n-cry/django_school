@@ -4,7 +4,7 @@ import string
 import django.core.exceptions
 import django.core.validators
 import django.db.models
-import django.utils.safestring
+import django.utils.html
 import sorl.thumbnail
 
 
@@ -132,12 +132,12 @@ class ImageModel(django.db.models.Model):
 
     def image_tmb(self):
         if self.image:
-            return django.utils.safestring.mark_safe(
-                f'<img src="{self.image.url}" width="50"'
+            return django.utils.html.mark_safe(
+                f'<img src="{self.image.url}" width="50">'
             )
         self.image_tmb.short_description = 'превью'
         return '(The image)'
 
     def save(self, *args, **kwargs):
-        self.image = self.get_image_300x300().name
         super().save(*args, **kwargs)
+        self.image = self.get_image_300x300()
