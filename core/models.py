@@ -119,7 +119,7 @@ class ImageModel(django.db.models.Model):
     image = django.db.models.ImageField(
         'изображение(будет масштабировано до 300x300)',
         help_text='загрузите картинки для уточнения описания',
-        upload_to='uploaded',
+        upload_to='uploaded/',
     )
 
     class Meta:
@@ -133,10 +133,10 @@ class ImageModel(django.db.models.Model):
     def image_tmb(self):
         if self.image:
             return django.utils.html.mark_safe(
-                f'<img src="{self.image.url}" width="50">'
+                f'<img src="{self.get_image_300x300().url}">'
             )
         self.image_tmb.short_description = 'превью'
-        return '(The image)'
+        return '(Фото товара)'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

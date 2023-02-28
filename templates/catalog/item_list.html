@@ -1,34 +1,40 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Каталог</title>
+{% endblock %}
 {% block content %}
 <div class="container">
-    {% load static %}
-    <div class="d-flex justify-content-center">
-        <div class="text-wrap p-3" id="logo_header">
-            <h2>Список <s>товаров</s> енотов</h2>
-        </div>
+  <div class="d-flex justify-content-center">
+    <div class="text-wrap p-3" id="catalog_header">
+      <h2>Список <s>товаров</s> енотов</h2>
     </div>
-    <div class="d-flex justify-content-around">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{% static 'img/card_raccoon_0.jpg' %}" alt="Милый енот">
-            <div class="card-body">
-              <h5 class="card-title">Милый енот</h5>
-              <p class="card-text">Реально милый енот</p>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{% static 'img/card_raccoon_1.jpg' %}" alt="Милый енот">
-            <div class="card-body">
-              <h5 class="card-title">Рок-енот</h5>
-              <p class="card-text">Жанр "кьют-рок" создал именно он</p>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{% static 'img/card_raccoon_2.jpg' %}" alt="Милый енот">
-            <div class="card-body">
-              <h5 class="card-title">Хэллоуинский енот</h5>
-              <p class="card-text">Сладость или гадость?</p>
-            </div>
-        </div>
+  </div>
+  <div class="d-flex justify-content-around">
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{% static 'img/card_raccoon_0.jpg' %}" alt="Изображение милого енота">
+      <div class="card-body">
+        <h5 class="card-title">Милый енот</h5>
+        <p class="card-text">Реально милый енот</p>
+        <a href="/catalog/1" class="btn btn-primary">К еноту</a>
+      </div>
     </div>
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{% static 'img/card_raccoon_1.jpg' %}" alt="Изображения енота с электрогитарой">
+      <div class="card-body">
+        <h5 class="card-title">Рок-енот</h5>
+        <p class="card-text">Жанр "кьют-рок" создал именно он</p>
+        <a href="/catalog/2" class="btn btn-primary">К еноту</a>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{% static 'img/card_raccoon_2.jpg' %}" alt="Изображение хэллоуинского енота с тыквой в лапках">
+      <div class="card-body">
+        <h5 class="card-title">Хэллоуинский енот</h5>
+        <p class="card-text">Сладость или гадость?</p>
+        <a href="/catalog/3" class="btn btn-primary">К еноту</a>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

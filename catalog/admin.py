@@ -5,7 +5,7 @@ import catalog.models
 
 class MainImageAdmin(admin.TabularInline):
     model = catalog.models.ItemMainImage
-    fields = [catalog.models.ItemMainImage.image.field.name]
+    readonly_fields = (catalog.models.ItemMainImage.image_tmb,)
 
 
 class ImageGalleryAdmin(admin.TabularInline):

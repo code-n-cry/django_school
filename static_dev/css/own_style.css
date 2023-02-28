@@ -1,4 +1,4 @@
-#logo_header {
+#raccoon_header, #hub_header, #catalog_header, #about_header_img, #item_header {
     font-size: large;
     margin-top: 2em !important;
     border-radius: 17px !important;
