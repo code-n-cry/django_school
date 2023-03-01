@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title%}
-  <title>Главная</title>
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}
+  {% if LANGUAGE_CODE == 'ru' %}
+    <title>Главная</title>
+  {% else %}
+    <title>Main page</title>
+  {% endif %}
 {% endblock %}
 {% block content %}
 <div class="container">

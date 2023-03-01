@@ -1,20 +1,30 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <header>
-    {% load static %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand disabled">
-              <img src="{% static 'img/logo/favicon-32x32.png' %}"  class="d-inline-block align-top" alt="Логотип">
-              RaccoonHub
-            </a>
-            <div class="collapse navbar-collapse navbar-default" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                  {% with request.resolver_match.view_name as view_name %}
-                    <a class="nav-link {% if view_name == 'homepage:index' %}active disabled{% endif %}" aria-current="page" href="{% url 'homepage:index' %}">Главная</a>
-                    <a class="nav-link {% if view_name == 'catalog:item_list' %}active disabled{% endif %}" href="{% url 'catalog:item_list' %}">Список товаров</a>
-                    <a class="nav-link {% if view_name == 'about:description' %}active disabled{% endif %}" href="{% url 'about:description' %}">О проекте</a>
-                  {% endwith %}
-                </div>
-            </div>          
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      {% with request.resolver_match.view_name as view_name %}
+        <a class="navbar-brand {% if view_name == 'homepage:index' %}disabled{% endif %}" href="/">
+      {% endwith %}    
+          <img src="{% static 'img/logo/favicon-32x32.png' %}"  class="d-inline-block align-top" alt="Логотип">
+          RaccoonHub
+        </a>
+      <div class="collapse navbar-collapse navbar-default" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          {% with request.resolver_match.view_name as view_name %}
+            {% if LANGUAGE_CODE == 'ru' %}
+              <a class="nav-link {% if view_name == 'homepage:index' %}active disabled{% endif %}" aria-current="page" href="{% url 'homepage:index' %}">Главная</a>
+              <a class="nav-link {% if view_name == 'catalog:item_list' %}active disabled{% endif %}" href="{% url 'catalog:item_list' %}">Список товаров</a>
+              <a class="nav-link {% if view_name == 'about:description' %}active disabled{% endif %}" href="{% url 'about:description' %}">О проекте</a>
+            {% else %}
+              <a class="nav-link {% if view_name == 'homepage:index' %}active disabled{% endif %}" aria-current="page" href="{% url 'homepage:index' %}">Main page</a>
+              <a class="nav-link {% if view_name == 'catalog:item_list' %}active disabled{% endif %}" href="{% url 'catalog:item_list' %}">Catalog</a>
+              <a class="nav-link {% if view_name == 'about:description' %}active disabled{% endif %}" href="{% url 'about:description' %}">About</a>
+            {% endif %}
+          {% endwith %}
         </div>
-    </nav>
+      </div>          
+    </div>
+  </nav>
 </header>
