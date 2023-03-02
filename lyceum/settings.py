@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from django.utils.translation import gettext_lazy
+
 import environ
+from django.utils.translation import gettext_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -167,6 +168,4 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-LOCALES_PATH = (
-    BASE_DIR / 'locale/',
-)
+LOCALES_PATH = (BASE_DIR / 'locale/',)
