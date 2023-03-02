@@ -1,37 +1,24 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
-{% get_current_language as LANGUAGE_CODE %}
 {% block title %}
-{% if LANGUAGE_CODE == 'ru' %}
-  <title>Страница товара</title>
-{% else %}
-  <title>Item page</title>
-{% endif %}
+<title>{% translate 'Страница товара' %}</title>
 {% endblock %}
 {% block content %}
 <div class="container">
   <div class="d-flex justify-content-center">
     <div class="text-wrap p-3" id="item_header">
-      {% if LANGUAGE_CODE == 'ru' %}
-        <h2>Карточка товара(в будущем)</h2>
-      {% else %}
-        <h2>The item card will be here soon</h2>
-      {% endif %}
+      <h2>{% translate 'Карточка товара(в будущем)' %}</h2>
     </div>
   </div>
   <div class="d-flex justify-content-center">
     <div class="align-self-center p-2">
-        <img src="{% static 'img/rickroll.png' %}" alt="QR-код">
+      <img src="{% static 'img/rickroll.png' %}" alt="QR-код">
     </div>
   </div>
   <div class="d-flex justify-content-center">
     <div class="align-self-center p-2">
-      {% if LANGUAGE_CODE == 'ru' %}
-        <h2 class="text-break">Здесь скоро появится всё о каждом енотике!!! Но сейчас есть только этот QR...</h2>
-      {% else %}
-        <h2 class="text-break">Every detail of raccoon will be here soon!!! But now there is only the QR...</h2>
-      {% endif %}
+      <h2 class="text-break">{% translate 'Здесь скоро появится всё о каждом енотике!!! Но сейчас есть только этот QR...' %}</h2>
     </div>
   </div>
 </div>

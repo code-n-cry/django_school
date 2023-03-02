@@ -1,6 +1,5 @@
 {% load static %}
 {% load i18n %}
-{% get_current_language as LANGUAGE_CODE %}
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -13,15 +12,9 @@
       <div class="collapse navbar-collapse navbar-default" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           {% with request.resolver_match.view_name as view_name %}
-            {% if LANGUAGE_CODE == 'ru' %}
-              <a class="nav-link {% if view_name == 'homepage:index' %}active disabled{% endif %}" aria-current="page" href="{% url 'homepage:index' %}">Главная</a>
-              <a class="nav-link {% if view_name == 'catalog:item_list' %}active disabled{% endif %}" href="{% url 'catalog:item_list' %}">Список товаров</a>
-              <a class="nav-link {% if view_name == 'about:description' %}active disabled{% endif %}" href="{% url 'about:description' %}">О проекте</a>
-            {% else %}
-              <a class="nav-link {% if view_name == 'homepage:index' %}active disabled{% endif %}" aria-current="page" href="{% url 'homepage:index' %}">Main page</a>
-              <a class="nav-link {% if view_name == 'catalog:item_list' %}active disabled{% endif %}" href="{% url 'catalog:item_list' %}">Catalog</a>
-              <a class="nav-link {% if view_name == 'about:description' %}active disabled{% endif %}" href="{% url 'about:description' %}">About</a>
-            {% endif %}
+              <a class="nav-link {% if view_name == 'homepage:index' %}active disabled{% endif %}" aria-current="page" href="{% url 'homepage:index' %}">{% translate 'Главная' %}</a>
+              <a class="nav-link {% if view_name == 'catalog:item_list' %}active disabled{% endif %}" href="{% url 'catalog:item_list' %}">{% translate 'Каталог' %}</a>
+              <a class="nav-link {% if view_name == 'about:description' %}active disabled{% endif %}" href="{% url 'about:description' %}">{% translate 'О проекте' %}</a>
           {% endwith %}
         </div>
       </div>          

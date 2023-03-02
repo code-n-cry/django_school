@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-02 11:31+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\about\description.html:5 .\templates\includes\header.html:17
+msgid "О проекте"
+msgstr "About"
+
+#: .\templates\about\description.html:16
+msgid "Это проект про енотов! Пока что..."
+msgstr "This project is about raccoons! For now, at least..."
+
+#: .\templates\catalog\item_detail.html:5
+msgid "Страница товара"
+msgstr "Item page"
+
+#: .\templates\catalog\item_detail.html:11
+msgid "Карточка товара(в будущем)"
+msgstr "Here woll be the card of item in the future"
+
+#: .\templates\catalog\item_detail.html:21
+msgid ""
+"Здесь скоро появится всё о каждом енотике!!! Но сейчас есть только этот QR..."
+msgstr "As soon as possible here information about each raccoon!!! But now there is only that QR..."
+
+#: .\templates\catalog\item_list.html:5 .\templates\homepage\home.html:5
+#: .\templates\includes\header.html:15
+msgid "Главная"
+msgstr "Home"
+
+#: .\templates\catalog\item_list.html:11
+msgid "Список <s>товаров</s> енотов"
+msgstr "The list of <s>items</s> raccoons"
+
+#: .\templates\catalog\item_list.html:18
+msgid "Милый енот"
+msgstr "Cute raccoon"
+
+#: .\templates\catalog\item_list.html:19
+msgid "Реально милый енот"
+msgstr "Really adorable raccon"
+
+#: .\templates\catalog\item_list.html:20 .\templates\catalog\item_list.html:28
+#: .\templates\catalog\item_list.html:36
+msgid "К еноту"
+msgstr "To the raccoon"
+
+#: .\templates\catalog\item_list.html:26
+msgid "Рок-енот"
+msgstr "Rocky raccoon"
+
+#: .\templates\catalog\item_list.html:27
+msgid "Жанр \"кьют-рок\" создал именно он"
+msgstr "He invented the \"cute-rock\" genre"
+
+#: .\templates\catalog\item_list.html:34
+msgid "Хэллоуинский енот"
+msgstr "Halloween raccoon"
+
+#: .\templates\catalog\item_list.html:35
+msgid "Сладость или гадость?"
+msgstr "Trick or treat?"
+
+#: .\templates\includes\header.html:16
+msgid "Каталог"
+msgstr "Catalog"

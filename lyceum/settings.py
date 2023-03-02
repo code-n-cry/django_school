@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+from django.utils.translation import gettext_lazy
 import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -130,6 +130,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
+LANGUAGES = [
+    ('ru', gettext_lazy('Russian')),
+    ('en', gettext_lazy('English')),
+]
 
 LANGUAGE_CODE = 'ru'
 
@@ -162,3 +166,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'full',
     },
 }
+
+LOCALES_PATH = (
+    BASE_DIR / 'locale/',
+)
