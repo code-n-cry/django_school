@@ -23,6 +23,7 @@ urlpatterns = [
     path('about/', include('about.urls')),
     path('catalog/', include('catalog.urls')),
     path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
 
 if settings.DEBUG:

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-02 11:31+0300\n"
+"POT-Creation-Date: 2023-03-03 16:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\about\description.html:5 .\templates\includes\header.html:17
+#: .\templates\about\description.html:5 .\templates\includes\header.html:19
 msgid "О проекте"
 msgstr "About"
 
@@ -37,10 +37,12 @@ msgstr "Here woll be the card of item in the future"
 #: .\templates\catalog\item_detail.html:21
 msgid ""
 "Здесь скоро появится всё о каждом енотике!!! Но сейчас есть только этот QR..."
-msgstr "As soon as possible here information about each raccoon!!! But now there is only that QR..."
+msgstr ""
+"As soon as possible here information about each raccoon!!! But now there is "
+"only that QR..."
 
 #: .\templates\catalog\item_list.html:5 .\templates\homepage\home.html:5
-#: .\templates\includes\header.html:15
+#: .\templates\includes\header.html:17
 msgid "Главная"
 msgstr "Home"
 
@@ -77,6 +79,6 @@ msgstr "Halloween raccoon"
 msgid "Сладость или гадость?"
 msgstr "Trick or treat?"
 
-#: .\templates\includes\header.html:16
+#: .\templates\includes\header.html:18
 msgid "Каталог"
 msgstr "Catalog"
