@@ -1,21 +1,19 @@
 {% load static %}
-<div class="container">
-  <footer>   
-    <nav class="navbar navbar-expand-lg fixed-bottom navbar-dark bg-dark">
-      <div class="container-fluid">
-        {% with request.resolver_match.view_name as view_name %}
-          <a class="navbar-brand {% if view_name == 'homepage:index' %}disabled{% endif %}" href="/">
-        {% endwith %}
-            <img src="{% static 'img/logo/favicon-32x32.png' %}"  class="d-inline-block align-top" alt="Логотип">
-            {% now "Y" as current_year %}
-            <span id="footer_date">© {{ current_year }} Schukin Egor</span>
-          </a>
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-          <li class="ms-3"><a class="text-muted" href="https://github.com/code-n-cry" target="_blank"><img src="{% static 'favicon/github.svg' %}" alt="Иконка GitHub"></a></li>
-          <li class="ms-3"><a class="text-muted" href="https://t.me/brown_eyed_minion" target="_blank"><img src="{% static 'favicon/telegram.svg' %}" alt="Иконка Telegram"></a></li>
-        </ul>  
-      </div>
-    </nav>
-  </footer>
-</div>
+<footer style="margin-top: 5em;">   
+  <nav class="navbar navbar-expand-lg fixed-bottom navbar-dark bg-dark">
+    <div class="container-fluid">
+      {% with request.resolver_match.view_name as view_name %}
+        <a class="navbar-brand {% if view_name == 'homepage:index' %}disabled{% endif %}" href="/">
+      {% endwith %}
+          <img src="{% static 'img/logo/favicon-32x32.png' %}"  class="d-inline-block align-top" alt="Логотип">
+          {% now "Y" as current_year %}
+          <span id="footer_date">© {{ current_year }} Schukin Egor</span>
+        </a>
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-muted" href="https://github.com/code-n-cry" target="_blank"><img src="{% static 'favicon/github.svg' %}" alt="Иконка GitHub"></a></li>
+        <li class="ms-3"><a class="text-muted" href="https://t.me/brown_eyed_minion" target="_blank"><img src="{% static 'favicon/telegram.svg' %}" alt="Иконка Telegram"></a></li>
+      </ul>  
+    </div>
+  </nav>
+</footer>
 <script src="{% static 'js/check_date_script.js' %}"></script>

@@ -8,18 +8,58 @@
 <div class="container">
   <div class="d-flex justify-content-center">
     <div class="text-wrap p-3" id="item_header">
-      <h2>{% translate 'Карточка товара(в будущем)' %}</h2>
+      <h1>{% translate 'Карточка товара' %}</h1>
     </div>
   </div>
-  <div class="d-flex justify-content-center">
-    <div class="align-self-center p-2">
-      <img src="{% static 'img/rickroll.png' %}" alt="QR-код">
+  <div class="align-self-center p-2">
+    <h3>Название: {{ item.name }}</h3>
+  </div>
+  <div class="align-self-center p-2">
+    <h4>Главное изображение:</h4>
+    <img src="{{ item.main_image.image.url }}" alt="Фото скоро добавят!!">
+  </div>
+  <div class="align-self-center p-2">
+    <p class="text-break">Описание: {{ item.text }}</p>
+  </div>
+  <div class="align-self-center p-2">
+    <h4>Категория: </h4>
+    <span class="badge badge-pill bg-info">{{ item.category.name }}</span>
+  </div>
+  <div class="align-self-center p-2">
+    <h4>Галерея фото товара:</h4>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for img_obj in item.description_images.all %}
+          {% if forloop.first %}
+            <div class="carousel-item active">
+              <img src="{{ img_obj.image.url }}" class="d-block w-100" alt="Фото товара">
+            </div>
+          {% else %}
+            <div class="carousel-item">
+              <img src="{{ img_obj.image.url }}" class="d-block w-100" alt="Фото товара">
+            </div>
+          {% endif %}
+        {% empty %}
+          <div class="align-self-center p-2">
+            <p>Фоток нэт...</p>
+          </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
   </div>
-  <div class="d-flex justify-content-center">
-    <div class="align-self-center p-2">
-      <h2 class="text-break">{% translate 'Здесь скоро появится всё о каждом енотике!!! Но сейчас есть только этот QR...' %}</h2>
-    </div>
+  <div class="align-self-center p-2 md-auto">
+    <h4>Тэги:</h4>
+    {% for tag in item.tags.all %}
+      <span class="badge badge-pill bg-success">{{ tag.name }}</span>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

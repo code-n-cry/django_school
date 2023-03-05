@@ -31,8 +31,8 @@ msgid "Страница товара"
 msgstr "Item page"
 
 #: .\templates\catalog\item_detail.html:11
-msgid "Карточка товара(в будущем)"
-msgstr "Here woll be the card of item in the future"
+msgid "Карточка товара"
+msgstr "Item's card"
 
 #: .\templates\catalog\item_detail.html:21
 msgid ""
@@ -47,8 +47,8 @@ msgid "Главная"
 msgstr "Home"
 
 #: .\templates\catalog\item_list.html:11
-msgid "Список <s>товаров</s> енотов"
-msgstr "The list of <s>items</s> raccoons"
+msgid "Список товаров"
+msgstr "The list of items"
 
 #: .\templates\catalog\item_list.html:18
 msgid "Милый енот"

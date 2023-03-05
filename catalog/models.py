@@ -7,7 +7,44 @@ import catalog.validators
 import core.models
 
 
+class ItemManager(django.db.models.Manager):
+    def published(self):
+        return (
+            self.get_queryset()
+            .filter(is_published=True, category__is_published=True)
+            .select_related('category')
+            .prefetch_related(
+                django.db.models.Prefetch(
+                    'tags', queryset=Tag.objects.published()
+                )
+            )
+            .only('id', 'name', 'text', 'category__name')
+        )
+
+
+class CategoryManager(django.db.models.Manager):
+    def published(self):
+        return (
+            self.get_queryset()
+            .filter(is_published=True)
+            .prefetch_related(
+                django.db.models.Prefetch(
+                    'items', queryset=Item.objects.published()
+                )
+            )
+            .order_by('name')
+            .only('name')
+        )
+
+
+class TagManager(django.db.models.Manager):
+    def published(self):
+        return self.get_queryset().filter(is_published=True).only('name')
+
+
 class Category(core.models.UniqueNameSlugBaseModel):
+    objects = CategoryManager()
+
     weight = django.db.models.PositiveSmallIntegerField(
         'вес',
         help_text='Введите вес(число 0-100)',
@@ -21,6 +58,8 @@ class Category(core.models.UniqueNameSlugBaseModel):
 
 
 class Tag(core.models.UniqueNameSlugBaseModel):
+    objects = TagManager()
+
     class Meta:
         default_related_name = 'tags'
         verbose_name = 'тег'
@@ -28,6 +67,13 @@ class Tag(core.models.UniqueNameSlugBaseModel):
 
 
 class Item(core.models.PublishedWithNameBaseModel):
+    objects = ItemManager()
+
+    is_on_main = django.db.models.BooleanField(
+        verbose_name='публикация на главной странице',
+        help_text='Публиковать товар на главной странице?',
+        default=False,
+    )
     category = django.db.models.ForeignKey(
         Category,
         verbose_name='категория',
@@ -47,6 +93,7 @@ class Item(core.models.PublishedWithNameBaseModel):
     )
 
     class Meta:
+        ordering = ('name',)
         default_related_name = 'items'
         verbose_name = 'товар'
         verbose_name_plural = 'товары'

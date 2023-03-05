@@ -1,0 +1,14 @@
+{% load static %}
+ <div class="col-sm-6 mb-3">
+  <div class="card">
+    <div class="card-body" style="width: 18rem;">
+      <h5 class="card-title text-break">{{ item.name|title }}</h5>
+      <span class="badge badge-pill bg-info">{{ item.category.name }}</span>
+      <p class="card-text">{{ item.text|truncatewords_html:10 }}</p>
+      {% for tag in item.tags.all %}
+        <span class="badge badge-pill bg-success mb-3">{{ tag.name }}</span>
+      {% endfor %}<br>
+      <a href="/catalog/{{ item.id }}/" class="btn btn-dark">К товару</a>
+    </div>
+  </div>
+ </div>
