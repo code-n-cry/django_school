@@ -15,6 +15,9 @@
               <a class="nav-link {% if view_name == 'homepage:index' %}active disabled{% endif %}" aria-current="page" href="{% url 'homepage:index' %}">{% translate 'Главная' %}</a>
               <a class="nav-link {% if view_name == 'catalog:item_list' %}active disabled{% endif %}" href="{% url 'catalog:item_list' %}">{% translate 'Каталог' %}</a>
               <a class="nav-link {% if view_name == 'about:description' %}active disabled{% endif %}" href="{% url 'about:description' %}">{% translate 'О проекте' %}</a>
+              {% if request.user.is_superuser %}
+                <a class="nav-link {% if view_name == 'admin:index' %}active disabled{% endif %}" href="{% url 'admin:index' %}">Админка</a>
+              {% endif %}
           {% endwith %}
         </div>
       </div>          
