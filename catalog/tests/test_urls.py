@@ -43,6 +43,14 @@ class StaticUrlTests(TestCase):
             name='Опубликованный товар',
             category=cls.published_category,
         )
+        cls.published_item_with_unpublished_category = (
+            catalog.models.Item.objects.create(
+                is_published=True,
+                is_on_main=True,
+                name='Опубликованный товар с неопубликованной категорией',
+                category=cls.unpublished_category,
+            )
+        )
         cls.unpublished_item = catalog.models.Item.objects.create(
             is_published=False,
             is_on_main=True,
@@ -58,14 +66,13 @@ class StaticUrlTests(TestCase):
         cls.unpublished_item.clean()
         cls.unpublished_item.save()
 
-        super().setUpClass()
+        cls.published_item_with_unpublished_category.clean()
+        cls.published_item_with_unpublished_category.save()
+        cls.published_item_with_unpublished_category.tags.add(
+            cls.published_tag
+        )
 
-    @classmethod
-    def tearDownClass(cls):
-        catalog.models.Category.objects.all().delete()
-        catalog.models.Item.objects.all().delete()
-        catalog.models.Tag.objects.all().delete()
-        super().tearDownClass()
+        super().setUpClass()
 
     def tearDown(self):
         catalog.models.Category.objects.all().delete()
@@ -73,9 +80,17 @@ class StaticUrlTests(TestCase):
         catalog.models.Tag.objects.all().delete()
         super().tearDown()
 
+    def test_item_and_tag_manager(self):
+        published_items = catalog.models.Item.objects.published()
+        self.assertIn(self.published_tag, published_items[0].tags.all())
+        self.assertNotIn(self.unpublished_tag, published_items[0].tags.all())
+        self.assertNotIn(
+            self.published_item_with_unpublished_category, published_items
+        )
+
     def test_catalog_page_shows_correct_context(self):
         response = Client().get(django.urls.reverse('catalog:item_list'))
-        self.assertIn('categories', response.context)
+        self.assertIn('items', response.context)
 
     def test_existing_item_page_shows_correct_context(self):
         response = Client().get(

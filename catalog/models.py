@@ -22,29 +22,12 @@ class ItemManager(django.db.models.Manager):
         )
 
 
-class CategoryManager(django.db.models.Manager):
-    def published(self):
-        return (
-            self.get_queryset()
-            .filter(is_published=True)
-            .prefetch_related(
-                django.db.models.Prefetch(
-                    'items', queryset=Item.objects.published()
-                )
-            )
-            .order_by('name')
-            .only('name')
-        )
-
-
 class TagManager(django.db.models.Manager):
     def published(self):
         return self.get_queryset().filter(is_published=True).only('name')
 
 
 class Category(core.models.UniqueNameSlugBaseModel):
-    objects = CategoryManager()
-
     weight = django.db.models.PositiveSmallIntegerField(
         'вес',
         help_text='Введите вес(число 0-100)',

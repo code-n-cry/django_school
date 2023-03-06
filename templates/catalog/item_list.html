@@ -11,17 +11,16 @@
         <h1>{% translate 'Список товаров' %}</h1>
     </div>
   </div>
-  {% for category in categories %}
-    {% if category.items.all %}
-      <div class="d-flex justify-content-left">
-        <h3 class="text-wrap p-3">Категория: <b>{{ category.name|title }}</b></h3>
-      </div>
-      <div class="row row-cols-3">
-        {% for item in category.items.all %}
-          {% include "includes/item_card.html" %}
-        {% endfor %}
-      </div>
-    {% endif %}
+  {% regroup items by category.name as groupped_items %}
+  {% for category in groupped_items %}
+    <div class="d-flex justify-content-left">
+      <h3 class="text-wrap p-3">Категория: <b>{{ category.grouper|title }}</b></h3>
+    </div>
+    <div class="row row-cols-3">
+    {% for item in category.list %}
+      {% include "includes/item_card.html" %}
+    {% endfor %}
+    </div>
   {% empty %}
     <div class="text-wrap p-3" id="catalog_header">
       <h3>Опубликованных товаров нет...</h3>
