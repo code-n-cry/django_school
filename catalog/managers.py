@@ -8,6 +8,7 @@ class ItemManager(django.db.models.Manager):
         return (
             self.get_queryset()
             .filter(is_published=True, category__is_published=True)
+            .select_related('main_image')
             .select_related(catalog.models.Item.category.field.name)
             .prefetch_related(
                 django.db.models.Prefetch(
@@ -19,7 +20,9 @@ class ItemManager(django.db.models.Manager):
                 catalog.models.Item.id.field.name,
                 catalog.models.Item.name.field.name,
                 catalog.models.Item.text.field.name,
-                'category__name',
+                f'{catalog.models.Item.category.field.name}__'
+                + f'{catalog.models.Category.name.field.name}',
+                'main_image__image',
             )
             .order_by(catalog.models.Item.name.field.name)
         )

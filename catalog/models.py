@@ -33,6 +33,16 @@ class Tag(core.models.UniqueNameSlugBaseModel):
 class Item(core.models.PublishedWithNameBaseModel):
     objects = catalog.managers.ItemManager()
 
+    created_at = django.db.models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='дата добавления товара',
+        editable=False,
+    )
+    updated_at = django.db.models.DateTimeField(
+        auto_now=True,
+        verbose_name='дата изменения товара',
+        editable=False,
+    )
     is_on_main = django.db.models.BooleanField(
         verbose_name='публикация на главной странице',
         help_text='Публиковать товар на главной странице?',
