@@ -3,28 +3,9 @@ import django.core.exceptions
 import django.core.validators
 import django.db.models
 
+import catalog.managers
 import catalog.validators
 import core.models
-
-
-class ItemManager(django.db.models.Manager):
-    def published(self):
-        return (
-            self.get_queryset()
-            .filter(is_published=True, category__is_published=True)
-            .select_related('category')
-            .prefetch_related(
-                django.db.models.Prefetch(
-                    'tags', queryset=Tag.objects.published()
-                )
-            )
-            .only('id', 'name', 'text', 'category__name')
-        )
-
-
-class TagManager(django.db.models.Manager):
-    def published(self):
-        return self.get_queryset().filter(is_published=True).only('name')
 
 
 class Category(core.models.UniqueNameSlugBaseModel):
@@ -41,7 +22,7 @@ class Category(core.models.UniqueNameSlugBaseModel):
 
 
 class Tag(core.models.UniqueNameSlugBaseModel):
-    objects = TagManager()
+    objects = catalog.managers.TagManager()
 
     class Meta:
         default_related_name = 'tags'
@@ -50,7 +31,7 @@ class Tag(core.models.UniqueNameSlugBaseModel):
 
 
 class Item(core.models.PublishedWithNameBaseModel):
-    objects = ItemManager()
+    objects = catalog.managers.ItemManager()
 
     is_on_main = django.db.models.BooleanField(
         verbose_name='публикация на главной странице',

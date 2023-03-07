@@ -44,8 +44,8 @@
             <div class="carousel-item">
               <img src="{{ img_obj.image.url }}" class="d-block w-100" alt="Фото товара">
             </div>
-            <div class="carousel-caption d-none d-md-block">
-              <a class="btn btn-dark" download="proposed_file_name" href="{{ img_obj.image.url }}">Скачать <b>это</b> фото</a>
+            <div class="carousel-caption d-md-block">
+              <a class="btn btn-dark" download href="{{ img_obj.image.url }}">Скачать <b>это</b> фото</a>
             </div>
           {% endif %}
         {% empty %}

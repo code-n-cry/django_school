@@ -13,18 +13,78 @@ class ModelTests(TestCase):
             name='Test category',
             slug='test-category-slug',
         )
+        self.category.save()
         self.tag = catalog.models.Tag.objects.create(
             is_published=True,
             name='Test tag',
             slug='test-tag-slug',
         )
+        self.tag.save()
         super().setUp()
 
     def tearDown(self):
-        self.category = catalog.models.Category.objects.all().delete()
-        self.item = catalog.models.Item.objects.all().delete()
-        self.tag = catalog.models.Tag.objects.all().delete()
+        catalog.models.Item.objects.all().delete()
+        catalog.models.Category.objects.all().delete()
+        catalog.models.Tag.objects.all().delete()
         super().tearDown()
+
+    def test_item_manager(self):
+        unpublished_category = catalog.models.Category.objects.create(
+            is_published=False,
+            name='Неопубликованная тестовая категория',
+            slug='unpublished_category',
+        )
+        unpublished_tag = catalog.models.Tag.objects.create(
+            is_published=False,
+            name='Неопубликованный тестовый тег',
+            slug='unpublished_tag',
+        )
+        unpublished_category.save()
+        unpublished_tag.save()
+        published_item = catalog.models.Item.objects.create(
+            is_published=True,
+            is_on_main=True,
+            name='Опубликованный товар',
+            category=self.category,
+        )
+        unpublished_item = catalog.models.Item.objects.create(
+            is_published=False,
+            is_on_main=True,
+            name='Неопубликованный товар',
+            category=self.category,
+        )
+        published_item_with_unpublished_category = (
+            catalog.models.Item.objects.create(
+                is_published=True,
+                is_on_main=True,
+                name='Опубликованный товар с неопубликованной категорией',
+                category=unpublished_category,
+            )
+        )
+        published_item.clean()
+        published_item.save()
+        published_item.tags.add(self.tag, unpublished_tag)
+        unpublished_item.clean()
+        unpublished_item.save()
+        published_item_with_unpublished_category.save()
+        published_item_with_unpublished_category.tags.add(self.tag)
+        published_item_with_unpublished_category.clean()
+        published_items = catalog.models.Item.objects.published()
+        self.assertIn(self.tag, published_items[0].tags.all())
+        self.assertNotIn(unpublished_tag, published_items[0].tags.all())
+        self.assertNotIn(
+            published_item_with_unpublished_category, published_items
+        )
+
+    def test_tag_manager(self):
+        unpublished_tag = catalog.models.Tag.objects.create(
+            is_published=False,
+            name='Неопубликованный тестовый тег',
+            slug='unpublished_tag',
+        )
+        published_tags = catalog.models.Tag.objects.published()
+        self.assertIn(self.tag, published_tags)
+        self.assertNotIn(unpublished_tag, published_tags)
 
     def test_item_validator_correct(self):
         item_count = catalog.models.Item.objects.count()

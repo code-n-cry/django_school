@@ -3,7 +3,11 @@
   <div class="card">
     <div class="card-body" style="width: 18rem;">
       <h5 class="card-title text-break">{{ item.name|title }}</h5>
-      <span class="badge badge-pill bg-info">{{ item.category.name }}</span>
+      {% with request.resolver_match.view_name as view_name %}
+        {% if view_name == 'homepage:index' %}
+          <span class="badge badge-pill bg-info">{{ item.category.name }}</span>
+        {% endif %}
+      {% endwith %}
       <p class="card-text">{{ item.text|truncatewords_html:10|safe }}</p>
       {% for tag in item.tags.all %}
         <span class="badge badge-pill bg-success mb-3">{{ tag.name }}</span>

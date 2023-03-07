@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% block title %}
-<title>{% translate 'Главная' %}</title>
+<title>{% translate 'Каталог' %}</title>
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -11,7 +11,7 @@
         <h1>{% translate 'Список товаров' %}</h1>
     </div>
   </div>
-  {% regroup items by category.name as groupped_items %}
+  {% regroup items|dictsort:"name" by category.name as groupped_items %}
   {% for category in groupped_items %}
     <div class="d-flex justify-content-left">
       <h3 class="text-wrap p-3">Категория: <b>{{ category.grouper|title }}</b></h3>

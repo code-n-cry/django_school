@@ -6,7 +6,7 @@
       {% with request.resolver_match.view_name as view_name %}
         <a class="navbar-brand {% if view_name == 'homepage:index' %}disabled{% endif %}" href="/">
       {% endwith %}    
-          <img src="{% static 'img/logo/favicon-32x32.png' %}"  class="d-inline-block align-top" alt="Логотип">
+          <img src="{% static 'favicon/favicon.ico' %}"  class="d-inline-block" alt="Логотип">
           RaccoonHub
         </a>
       <div class="collapse navbar-collapse navbar-default" id="navbarNavAltMarkup">

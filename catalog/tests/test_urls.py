@@ -1,105 +1,150 @@
 from http import HTTPStatus
 
-import django.urls
 from django.test import Client, TestCase
-
-import catalog.models
 
 
 class StaticUrlTests(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.published_category = catalog.models.Category.objects.create(
-            is_published=True,
-            name='Опубликованная тестовая категория',
-            slug='published_category',
-        )
-        cls.unpublished_category = catalog.models.Category.objects.create(
-            is_published=False,
-            name='Неопубликованная тестовая категория',
-            slug='unpublished_category',
-        )
-        cls.published_tag = catalog.models.Tag.objects.create(
-            is_published=True,
-            name='Опубликованный тестовый тег',
-            slug='published_tag',
-        )
-        cls.unpublished_tag = catalog.models.Tag.objects.create(
-            is_published=False,
-            name='Неопубликованный тестовый тег',
-            slug='unpublished_tag',
-        )
+    def test_catalog_endpoint(self):
+        client = Client()
 
-        cls.published_category.save()
-        cls.unpublished_category.save()
+        with self.subTest('Catalog endpoint is accessible'):
+            right_response = Client().get('/catalog/')
+            self.assertEqual(right_response.status_code, HTTPStatus.OK)
+        with self.subTest(
+            'Catalog/<int>/ endpoint not work with literal data'
+        ):
+            urls = [
+                '/catalog/hmmm/',
+                '/catalog/1ab/',
+                '/catalog/ab1/',
+                '/catalog/1ab1/',
+            ]
+            for url in urls:
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
-        cls.published_tag.save()
-        cls.unpublished_tag.save()
+        with self.subTest(
+            'Catalog/<int>/ endpoint not work with negative and float digit'
+        ):
+            urls = [
+                '/catalog/-1/',
+                '/catalog/0.0/',
+                '/catalog/1.0/',
+                '/catalog/0.1/',
+            ]
+            for url in urls:
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
-        cls.published_item = catalog.models.Item.objects.create(
-            is_published=True,
-            is_on_main=True,
-            name='Опубликованный товар',
-            category=cls.published_category,
-        )
-        cls.published_item_with_unpublished_category = (
-            catalog.models.Item.objects.create(
-                is_published=True,
-                is_on_main=True,
-                name='Опубликованный товар с неопубликованной категорией',
-                category=cls.unpublished_category,
-            )
-        )
-        cls.unpublished_item = catalog.models.Item.objects.create(
-            is_published=False,
-            is_on_main=True,
-            name='Неопубликованный товар',
-            category=cls.published_category,
-        )
+        with self.subTest(
+            'Catalog/<int>/ endpoint not work with special characters'
+        ):
+            urls = [
+                '/catalog/1^/',
+                '/catalog/^1/',
+                '/catalog/$1/',
+                '/catalog/1$/',
+            ]
+            for url in urls:
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
-        cls.published_item.clean()
-        cls.published_item.save()
-        cls.published_item.tags.add(cls.published_tag)
-        cls.published_item.tags.add(cls.unpublished_tag)
+    def test_catalog_re_endpoint(self):
+        client = Client()
 
-        cls.unpublished_item.clean()
-        cls.unpublished_item.save()
+        with self.subTest(
+            'Catalog/re/<int>/ endpoint not work with literal data'
+        ):
+            urls = [
+                '/catalog/re/hmmm/',
+                '/catalog/re/1ab/',
+                '/catalog/re/ab1/',
+                '/catalog/re/1ab1/',
+            ]
+            for url in urls:
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
-        cls.published_item_with_unpublished_category.clean()
-        cls.published_item_with_unpublished_category.save()
-        cls.published_item_with_unpublished_category.tags.add(
-            cls.published_tag
-        )
+        with self.subTest(
+            'Catalog/re/<int>/ endpoint not work with non-int, non-positive'
+        ):
+            urls = [
+                '/catalog/re/-1/',
+                '/catalog/re/0.0/',
+                '/catalog/re/1.0/',
+                '/catalog/re/0.1/',
+                '/catalog/re/0/',
+                '/catalog/re/010/',
+                '/catalog/re/01/',
+            ]
+            for url in urls:
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
-        super().setUpClass()
+        with self.subTest(
+            'Catalog/re/<int>/ endpoint not work with special characters'
+        ):
+            urls = [
+                '/catalog/re/1^/',
+                '/catalog/re/^1/',
+                '/catalog/re/$1/',
+                '/catalog/re/1$/',
+            ]
+            for url in urls:
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
-    def tearDown(self):
-        catalog.models.Category.objects.all().delete()
-        catalog.models.Item.objects.all().delete()
-        catalog.models.Tag.objects.all().delete()
-        super().tearDown()
+    def test_catalog_converter_endpoint(self):
+        client = Client()
 
-    def test_item_and_tag_manager(self):
-        published_items = catalog.models.Item.objects.published()
-        self.assertIn(self.published_tag, published_items[0].tags.all())
-        self.assertNotIn(self.unpublished_tag, published_items[0].tags.all())
-        self.assertNotIn(
-            self.published_item_with_unpublished_category, published_items
-        )
+        with self.subTest(
+            'Catalog/converter/<int>/ endpoint not work with literal data'
+        ):
+            urls = [
+                '/catalog/converter/hmmm/',
+                '/catalog/converter/1ab/',
+                '/catalog/converter/ab1/',
+                '/catalog/converter/1ab1/',
+            ]
+            for url in urls:
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
-    def test_catalog_page_shows_correct_context(self):
-        response = Client().get(django.urls.reverse('catalog:item_list'))
-        self.assertIn('items', response.context)
+        with self.subTest(
+            'Catalog/converter/<int>/ endpoint not work with non-int,'
+            'non-positive'
+        ):
+            urls = [
+                '/catalog/converter/-1/',
+                '/catalog/converter/0.0/',
+                '/catalog/converter/1.0/',
+                '/catalog/converter/0.1/',
+                '/catalog/converter/0/',
+                '/catalog/converter/010/',
+                '/catalog/converter/01/',
+            ]
+            for url in urls:
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
 
-    def test_existing_item_page_shows_correct_context(self):
-        response = Client().get(
-            django.urls.reverse('catalog:item_detail', kwargs={'number': 1}),
-        )
-        self.assertIn('item', response.context)
-
-    def test_non_existent_item_page_not_found(self):
-        response = Client().get(
-            django.urls.reverse('catalog:item_detail', kwargs={'number': 0}),
-        )
-        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
+        with self.subTest(
+            'Catalog/<int>/ endpoint not work with special characters'
+        ):
+            urls = [
+                '/catalog/converter/1^/',
+                '/catalog/converter/^1/',
+                '/catalog/converter/$1/',
+                '/catalog/converter/1$/',
+            ]
+            for url in urls:
+                self.assertEqual(
+                    client.get(url).status_code, HTTPStatus.NOT_FOUND, msg=url
+                )
