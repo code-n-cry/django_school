@@ -7,94 +7,69 @@ import catalog.models
 
 
 class ModelTests(TestCase):
-    def setUp(self):
-        self.category = catalog.models.Category.objects.create(
-            is_published=True,
-            name='Test category',
-            slug='test-category-slug',
-        )
-        self.category.save()
-        self.tag = catalog.models.Tag.objects.create(
-            is_published=True,
-            name='Test tag',
-            slug='test-tag-slug',
-        )
-        self.tag.save()
-        super().setUp()
-
-    def tearDown(self):
-        catalog.models.Item.objects.all().delete()
-        catalog.models.Category.objects.all().delete()
-        catalog.models.Tag.objects.all().delete()
-        super().tearDown()
+    fixtures = ['fixture.json']
 
     def test_item_manager(self):
-        unpublished_category = catalog.models.Category.objects.create(
-            is_published=False,
-            name='Неопубликованная тестовая категория',
-            slug='unpublished_category',
-        )
-        unpublished_tag = catalog.models.Tag.objects.create(
-            is_published=False,
-            name='Неопубликованный тестовый тег',
-            slug='unpublished_tag',
-        )
-        unpublished_category.save()
-        unpublished_tag.save()
+        published_category = catalog.models.Category.objects.get(pk=1)
+        published_tag = catalog.models.Tag.objects.get(pk=1)
+        unpublished_category = catalog.models.Category.objects.filter(
+            is_published=False
+        ).get()
+        unpublished_tag = catalog.models.Tag.objects.filter(
+            is_published=False
+        ).get()
         published_item = catalog.models.Item.objects.create(
             is_published=True,
-            is_on_main=True,
             name='Опубликованный товар',
-            category=self.category,
+            category=published_category,
         )
         unpublished_item = catalog.models.Item.objects.create(
             is_published=False,
-            is_on_main=True,
             name='Неопубликованный товар',
-            category=self.category,
+            category=published_category,
         )
         published_item_with_unpublished_category = (
             catalog.models.Item.objects.create(
                 is_published=True,
-                is_on_main=True,
                 name='Опубликованный товар с неопубликованной категорией',
                 category=unpublished_category,
             )
         )
         published_item.clean()
         published_item.save()
-        published_item.tags.add(self.tag, unpublished_tag)
+        published_item.tags.add(published_tag, unpublished_tag)
         unpublished_item.clean()
         unpublished_item.save()
         published_item_with_unpublished_category.save()
-        published_item_with_unpublished_category.tags.add(self.tag)
+        published_item_with_unpublished_category.tags.add(published_tag)
         published_item_with_unpublished_category.clean()
         published_items = catalog.models.Item.objects.published()
-        self.assertIn(self.tag, published_items[0].tags.all())
+        self.assertIn(published_tag, published_items[0].tags.all())
         self.assertNotIn(unpublished_tag, published_items[0].tags.all())
         self.assertNotIn(
             published_item_with_unpublished_category, published_items
         )
 
     def test_tag_manager(self):
-        unpublished_tag = catalog.models.Tag.objects.create(
-            is_published=False,
-            name='Неопубликованный тестовый тег',
-            slug='unpublished_tag',
-        )
+        published_tag = catalog.models.Tag.objects.get(pk=1)
+        unpublished_tag = catalog.models.Tag.objects.filter(
+            is_published=False
+        ).get()
         published_tags = catalog.models.Tag.objects.published()
-        self.assertIn(self.tag, published_tags)
+        self.assertIn(published_tag, published_tags)
         self.assertNotIn(unpublished_tag, published_tags)
 
     def test_item_validator_correct(self):
         item_count = catalog.models.Item.objects.count()
+        published_category = catalog.models.Category.objects.get(pk=1)
+        published_tag = catalog.models.Tag.objects.get(pk=1)
         self.item = catalog.models.Item(
             name='Test item',
-            category=self.category,
+            category=published_category,
             text='Превосходно!Волшебно, замечательно,роскошно!',
         )
         self.item.save()
-        self.item.tags.add(self.tag)
+        self.item.tags.add(published_tag)
         self.assertEqual(
             catalog.models.Item.objects.count(),
             item_count + 1,
@@ -106,12 +81,10 @@ class ModelTests(TestCase):
         with self.assertRaises(django.core.exceptions.ValidationError):
             self.item = catalog.models.Item(
                 name='Test item',
-                category=self.category,
                 text='bitcoinпревосходноbitcoin',
             )
             self.item.full_clean()
             self.item.save()
-            self.item.tags.add(self.tag)
         self.assertEqual(
             catalog.models.Item.objects.count(),
             item_count,
@@ -121,12 +94,10 @@ class ModelTests(TestCase):
         with self.assertRaises(django.core.exceptions.ValidationError):
             self.item = catalog.models.Item(
                 name='Test item',
-                category=self.category,
                 text='Аы',
             )
             self.item.full_clean()
             self.item.save()
-            self.item.tags.add(self.tag)
         self.assertEqual(
             catalog.models.Item.objects.count(),
             item_count,
@@ -135,17 +106,19 @@ class ModelTests(TestCase):
 
     def test_item_creation_without_name(self):
         item_count = catalog.models.Item.objects.count()
+        published_category = catalog.models.Category.objects.get(pk=1)
+        published_tag = catalog.models.Tag.objects.get(pk=1)
         with self.assertRaises(
             django.core.exceptions.ValidationError,
             msg='Works without a name',
         ):
             self.item = catalog.models.Item(
-                category=self.category,
+                category=published_category,
                 text='Превосходно',
             )
             self.item.full_clean()
             self.item.save()
-            self.item.tags.add(self.tag)
+            self.item.tags.add(published_tag)
         self.assertEqual(
             catalog.models.Item.objects.count(),
             item_count,
@@ -154,13 +127,14 @@ class ModelTests(TestCase):
 
     def test_item_creation_without_category(self):
         item_count = catalog.models.Item.objects.count()
+        published_tag = catalog.models.Tag.objects.get(pk=1)
         with self.assertRaises(django.core.exceptions.ValidationError):
             self.item = catalog.models.Item(
                 text='Превосходно',
             )
             self.item.full_clean()
             self.item.save()
-            self.item.tags.add(self.tag)
+            self.item.tags.add(published_tag)
         self.assertEqual(
             catalog.models.Item.objects.count(),
             item_count,
@@ -169,9 +143,10 @@ class ModelTests(TestCase):
 
     def test_item_creation_without_tag(self):
         item_count = catalog.models.Item.objects.count()
+        published_category = catalog.models.Category.objects.get(pk=1)
         with self.assertRaises(django.core.exceptions.ValidationError):
             self.item = catalog.models.Item(
-                category=self.category,
+                category=published_category,
                 text='Превосходно',
             )
             self.item.full_clean()
@@ -185,11 +160,11 @@ class ModelTests(TestCase):
     def test_valid_category_creation(self):
         category_count = catalog.models.Category.objects.count()
         with django.db.transaction.atomic():
-            self.category = catalog.models.Category.objects.create(
+            category = catalog.models.Category.objects.create(
                 name='New test category',
                 slug='url',
             )
-            self.category.save()
+            category.save()
             self.assertEqual(
                 catalog.models.Category.objects.count(),
                 category_count + 1,
@@ -203,12 +178,11 @@ class ModelTests(TestCase):
                 django.core.exceptions.ValidationError,
                 msg='Works with incorrect slug',
             ):
-                self.category = catalog.models.Category.objects.create(
+                category = catalog.models.Category.objects.create(
                     name='New test category',
                     slug='FffF-__инвалидслаг$$$__--FF',
                 )
-                self.category.full_clean()
-                self.category.save()
+                category.save()
         self.assertEqual(
             catalog.models.Category.objects.count(),
             category_count,
@@ -222,11 +196,8 @@ class ModelTests(TestCase):
                 django.core.exceptions.ValidationError,
                 msg='Works without a name,',
             ):
-                self.category = catalog.models.Category.objects.create(
-                    slug='url'
-                )
-                self.category.full_clean()
-                self.category.save()
+                category = catalog.models.Category.objects.create(slug='url')
+                category.save()
 
         self.assertEqual(
             catalog.models.Category.objects.count(),
@@ -241,13 +212,12 @@ class ModelTests(TestCase):
                 django.db.utils.IntegrityError,
                 msg='Works with a negative weight',
             ):
-                self.category = catalog.models.Category.objects.create(
+                category = catalog.models.Category.objects.create(
                     name='New category',
                     slug='url',
                     weight=-1,
                 )
-                self.category.full_clean()
-                self.category.save()
+                category.save()
         self.assertEqual(
             catalog.models.Category.objects.count(),
             category_count,
@@ -261,13 +231,12 @@ class ModelTests(TestCase):
                 django.core.exceptions.ValidationError,
                 msg='Works with too big numbers',
             ):
-                self.category = catalog.models.Category.objects.create(
+                category = catalog.models.Category.objects.create(
                     name='New category',
                     slug='url',
                     weight=32768,
                 )
-                self.category.full_clean()
-                self.category.save()
+                category.save()
         self.assertEqual(
             catalog.models.Category.objects.count(),
             category_count,
@@ -281,12 +250,11 @@ class ModelTests(TestCase):
                 django.core.exceptions.ValidationError,
                 msg='Works with not unique name',
             ):
-                self.category = catalog.models.Category.objects.create(
-                    name='!!Test,category!!',
+                category = catalog.models.Category.objects.create(
+                    name='!!люди!!',
                     slug='new-test-tag-slug',
                 )
-                self.category.full_clean()
-                self.category.save()
+                category.save()
 
         self.assertEqual(
             catalog.models.Category.objects.count(),
@@ -297,11 +265,11 @@ class ModelTests(TestCase):
     def test_valid_tag(self):
         tag_count = catalog.models.Tag.objects.count()
         with django.db.transaction.atomic():
-            self.tag = catalog.models.Tag.objects.create(
+            tag = catalog.models.Tag.objects.create(
                 name='New test tag',
                 slug='new-test-tag-slug',
             )
-            self.tag.save()
+            tag.save()
 
         self.assertEqual(
             catalog.models.Tag.objects.count(),
@@ -316,12 +284,11 @@ class ModelTests(TestCase):
                 django.core.exceptions.ValidationError,
                 msg='Works with invalid slug',
             ):
-                self.tag = catalog.models.Tag.objects.create(
+                tag = catalog.models.Tag.objects.create(
                     name='New test tag',
                     slug='$.!.()())))((((я хочу спать))))',
                 )
-                self.tag.full_clean()
-                self.tag.save()
+                tag.save()
 
         self.assertEqual(
             catalog.models.Tag.objects.count(),
@@ -331,37 +298,15 @@ class ModelTests(TestCase):
 
     def test_tag_with_not_unique_name(self):
         tag_count = catalog.models.Tag.objects.count()
-        with django.db.transaction.atomic():
-            with self.assertRaises(
-                django.core.exceptions.ValidationError,
-                msg='Works with not unique name',
-            ):
-                self.tag = catalog.models.Tag.objects.create(
-                    name='Test tag',
-                    slug='slg',
-                )
-                self.tag.full_clean()
-                self.tag.save()
-
-        self.assertEqual(
-            catalog.models.Tag.objects.count(),
-            tag_count,
+        with self.assertRaises(
+            django.core.exceptions.ValidationError,
             msg='Works with not unique name',
-        )
-
-        self.tearDown()
-
-        with django.db.transaction.atomic():
-            with self.assertRaises(
-                django.core.exceptions.ValidationError,
-                msg='Works with not unique name',
-            ):
-                self.tag = catalog.models.Tag.objects.create(
-                    name='(!1Test,tag1!)',
-                    slug='slg',
-                )
-                self.tag.full_clean()
-                self.tag.save()
+        ):
+            tag = catalog.models.Tag.objects.create(
+                name='(!Кpaсивoe)!',
+                slug='beautiful',
+            )
+            tag.save()
 
         self.assertEqual(
             catalog.models.Tag.objects.count(),
@@ -376,11 +321,11 @@ class ModelTests(TestCase):
                 django.core.exceptions.ValidationError,
                 msg='Works without a name',
             ):
-                self.tag = catalog.models.Tag.objects.create(
+                tag = catalog.models.Tag.objects.create(
                     slug='new-test-tag-slug',
                 )
-                self.tag.full_clean()
-                self.tag.save()
+                tag.full_clean()
+                tag.save()
 
         self.assertEqual(
             catalog.models.Tag.objects.count(),

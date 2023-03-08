@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'debug_toolbar',
     'django_cleanup.apps.CleanupConfig',
+    'django_dump_load_utf8',
     'sorl.thumbnail',
     'about.apps.AboutConfig',
     'catalog.apps.CatalogConfig',
