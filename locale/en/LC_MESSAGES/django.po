@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 16:49+0300\n"
+"POT-Creation-Date: 2023-03-09 20:16+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\about\description.html:5 .\templates\includes\header.html:19
+#: .\templates\about\description.html:5 .\templates\includes\header.html:28
 msgid "О проекте"
 msgstr "About"
 
 #: .\templates\about\description.html:16
 msgid "Это проект про енотов! Пока что..."
 msgstr "This project is about raccoons! For now, at least..."
+
+#: .\templates\catalog\extra_item_list.html:16
+#: .\templates\homepage\home.html:22
+msgid "Пустота"
+msgstr "Emptyness"
 
 #: .\templates\catalog\item_detail.html:5
 msgid "Страница товара"
@@ -34,51 +39,80 @@ msgstr "Item page"
 msgid "Карточка товара"
 msgstr "Item's card"
 
-#: .\templates\catalog\item_detail.html:21
-msgid ""
-"Здесь скоро появится всё о каждом енотике!!! Но сейчас есть только этот QR..."
-msgstr ""
-"As soon as possible here information about each raccoon!!! But now there is "
-"only that QR..."
+#: .\templates\catalog\item_detail.html:15
+msgid "Название"
+msgstr "Name"
 
-#: .\templates\catalog\item_list.html:5 .\templates\homepage\home.html:5
-#: .\templates\includes\header.html:17
-msgid "Главная"
-msgstr "Home"
+#: .\templates\catalog\item_detail.html:19
+msgid "Главное изображение"
+msgstr "Main image"
+
+#: .\templates\catalog\item_detail.html:23
+msgid "Скачать"
+msgstr "Download"
+
+#: .\templates\catalog\item_detail.html:27
+msgid "Описание"
+msgstr "Description"
+
+#: .\templates\catalog\item_detail.html:31
+#: .\templates\catalog\item_list.html:17
+msgid "Категория"
+msgstr "Category"
+
+#: .\templates\catalog\item_detail.html:35
+msgid "Галерея фото товара"
+msgstr "Photo gallery"
+
+#: .\templates\catalog\item_detail.html:42
+msgid "Скачать картинку выше"
+msgstr "Download the upper image"
+
+#: .\templates\catalog\item_detail.html:48
+msgid "Фоток нэт"
+msgstr "No photos available"
+
+#: .\templates\catalog\item_detail.html:54
+msgid "Тэги"
+msgstr "Tags"
+
+#: .\templates\catalog\item_list.html:5 .\templates\includes\header.html:18
+#: .\templates\includes\header.html:27
+msgid "Каталог"
+msgstr "Catalog"
 
 #: .\templates\catalog\item_list.html:11
 msgid "Список товаров"
 msgstr "The list of items"
 
-#: .\templates\catalog\item_list.html:18
-msgid "Милый енот"
-msgstr "Cute raccoon"
-
-#: .\templates\catalog\item_list.html:19
-msgid "Реально милый енот"
-msgstr "Really adorable raccon"
-
-#: .\templates\catalog\item_list.html:20 .\templates\catalog\item_list.html:28
-#: .\templates\catalog\item_list.html:36
-msgid "К еноту"
-msgstr "To the raccoon"
-
 #: .\templates\catalog\item_list.html:26
-msgid "Рок-енот"
-msgstr "Rocky raccoon"
+msgid "Опубликованных товаров нет"
+msgstr "There are no published items now"
 
-#: .\templates\catalog\item_list.html:27
-msgid "Жанр \"кьют-рок\" создал именно он"
-msgstr "He invented the \"cute-rock\" genre"
+#: .\templates\homepage\home.html:5 .\templates\includes\header.html:15
+msgid "Главная"
+msgstr "Home"
 
-#: .\templates\catalog\item_list.html:34
-msgid "Хэллоуинский енот"
-msgstr "Halloween raccoon"
+#: .\templates\includes\header.html:21
+msgid "Новинки"
+msgstr "Novelties"
 
-#: .\templates\catalog\item_list.html:35
-msgid "Сладость или гадость?"
-msgstr "Trick or treat?"
+#: .\templates\includes\header.html:22
+msgid "Все товары"
+msgstr "All items"
 
-#: .\templates\includes\header.html:18
-msgid "Каталог"
-msgstr "Catalog"
+#: .\templates\includes\header.html:23
+msgid "Изменены в пятницу"
+msgstr "Edited at friday"
+
+#: .\templates\includes\header.html:24
+msgid "Непроверенные"
+msgstr "Unchecked"
+
+#: .\templates\includes\header.html:30
+msgid "Админка"
+msgstr "Admin page"
+
+#: .\templates\includes\item_card.html:21
+msgid "К товару"
+msgstr "To the item"

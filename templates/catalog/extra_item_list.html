@@ -13,7 +13,7 @@
       {% for item in items %}
         {% include "includes/item_card.html" %}
       {% empty %}
-        <h3>Пустота...</h3>
+        <h3>{% translate 'Пустота' %}...</h3>
       {% endfor %}
     </div>
   </div>

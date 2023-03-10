@@ -9,14 +9,24 @@
           <img src="{% static 'favicon/favicon.ico' %}"  class="d-inline-block" alt="Логотип">
           RaccoonHub
         </a>
-      <div class="collapse navbar-collapse navbar-default" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
           {% with request.resolver_match.view_name as view_name %}
-              <a class="nav-link {% if view_name == 'homepage:index' %}active disabled{% endif %}" aria-current="page" href="{% url 'homepage:index' %}">{% translate 'Главная' %}</a>
-              <a class="nav-link {% if view_name == 'catalog:item_list' %}active disabled{% endif %}" href="{% url 'catalog:item_list' %}">{% translate 'Каталог' %}</a>
-              <a class="nav-link {% if view_name == 'about:description' %}active disabled{% endif %}" href="{% url 'about:description' %}">{% translate 'О проекте' %}</a>
+              <li class="nav-item"><a class="nav-link {% if view_name == 'homepage:index' %}active disabled{% endif %}" aria-current="page" href="{% url 'homepage:index' %}">{% translate 'Главная' %}</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {% translate 'Каталог' %}
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><a class="dropdown-item {% if view_name == 'catalog:added_last_week' %}active disabled{% endif %}" href="{% url 'catalog:added_last_week' %}">{% translate 'Новинки' %}</a></li>
+                  <li><a class="dropdown-item {% if view_name == 'catalog:item_list' %}active disabled{% endif %}" href="{% url 'catalog:item_list' %}">{% translate 'Все товары' %}</a></li>
+                  <li><a class="dropdown-item {% if view_name == 'catalog:edited_at_friday' %}active disabled{% endif %}" href="{% url 'catalog:edited_at_friday' %}">{% translate 'Изменены в пятницу' %}</a></li>
+                  <li><a class="dropdown-item {% if view_name == 'catalog:have_never_changed' %}active disabled{% endif %}" href="{% url 'catalog:have_never_changed' %}">{% translate 'Непроверенные' %}</a></li>
+                </ul>
+              </li>
+              <li class="nav-item"><a class="nav-link {% if view_name == 'about:description' %}active disabled{% endif %}" href="{% url 'about:description' %}">{% translate 'О проекте' %}</a></li>
               {% if request.user.is_superuser %}
-                <a class="nav-link {% if view_name == 'admin:index' %}active disabled{% endif %}" href="{% url 'admin:index' %}">Админка</a>
+              <li class="nav-item"><a class="nav-link {% if view_name == 'admin:index' %}active disabled{% endif %}" href="{% url 'admin:index' %}">{% translate 'Админка' %}</a></li>
               {% endif %}
           {% endwith %}
         </div>

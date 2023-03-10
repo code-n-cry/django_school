@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
  <div class="col-sm-6 mb-3">
   <div class="card mb-3">
     <div class="row g-0">
@@ -17,7 +18,7 @@
           {% for tag in item.tags.all %}
             <span class="badge badge-pill bg-success mb-3">{{ tag.name }}</span>
           {% endfor %}<br>
-          <a href="/catalog/{{ item.id }}/" class="btn btn-dark">К товару</a>
+          <a href="/catalog/{{ item.id }}/" class="btn btn-dark">{% translate "К товару" %}</a>
         </div>
       </div>
     </div>
