@@ -24,7 +24,7 @@ env = environ.Env(
     SECRET_KEY=(str, 'some-fake-key'),
     ALLOWED_HOSTS=(list, ['*']),
     REVERSE_RU_EVERY_10=(bool, False),
-    EMAIL=(str, 'example@mail.ru'),
+    EMAIL=(str, 'example@mail.com'),
 )
 environ.Env.read_env(BASE_DIR / '.env')
 
@@ -164,7 +164,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL = env('email')
+EMAIL = env('EMAIL')
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
