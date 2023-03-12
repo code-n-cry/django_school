@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-09 20:16+0300\n"
+"POT-Creation-Date: 2023-03-12 20:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\about\description.html:5 .\templates\includes\header.html:28
+#: .\templates\about\description.html:5 .\templates\includes\header.html:27
 msgid "О проекте"
 msgstr "About"
 
 #: .\templates\about\description.html:16
 msgid "Это проект про енотов! Пока что..."
 msgstr "This project is about raccoons! For now, at least..."
+
+#: .\templates\about\feedback_success.html:5
+msgid "Спасибо"
+msgstr "Thanks"
+
+#: .\templates\about\feedback_success.html:16
+msgid "Спасибо за ваше мнение! Мы его <b>обязательно</b> учтём"
+msgstr "Thank you for your opinion! We will <b>definitely</b> take it into account"
 
 #: .\templates\catalog\extra_item_list.html:16
 #: .\templates\homepage\home.html:22
@@ -77,7 +85,6 @@ msgid "Тэги"
 msgstr "Tags"
 
 #: .\templates\catalog\item_list.html:5 .\templates\includes\header.html:18
-#: .\templates\includes\header.html:27
 msgid "Каталог"
 msgstr "Catalog"
 
@@ -88,6 +95,15 @@ msgstr "The list of items"
 #: .\templates\catalog\item_list.html:26
 msgid "Опубликованных товаров нет"
 msgstr "There are no published items now"
+
+#: .\templates\feedback\feedback_form.html:5
+#: .\templates\includes\footer.html:15
+msgid "Обратная связь"
+msgstr "Feedback page"
+
+#: .\templates\feedback\feedback_form.html:9
+msgid "Форма обратной связи"
+msgstr "Feedback form"
 
 #: .\templates\homepage\home.html:5 .\templates\includes\header.html:15
 msgid "Главная"
@@ -109,7 +125,7 @@ msgstr "Edited at friday"
 msgid "Непроверенные"
 msgstr "Unchecked"
 
-#: .\templates\includes\header.html:30
+#: .\templates\includes\header.html:29
 msgid "Админка"
 msgstr "Admin page"
 
