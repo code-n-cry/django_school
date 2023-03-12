@@ -24,6 +24,7 @@ env = environ.Env(
     SECRET_KEY=(str, 'some-fake-key'),
     ALLOWED_HOSTS=(list, ['*']),
     REVERSE_RU_EVERY_10=(bool, False),
+    EMAIL=(str, 'example@mail.ru'),
 )
 environ.Env.read_env(BASE_DIR / '.env')
 
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'catalog.apps.CatalogConfig',
     'core.apps.CoreConfig',
+    'feedback.apps.FeedbackConfig',
     'homepage.apps.HomepageConfig',
 ]
 
@@ -161,6 +163,12 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL = env('email')
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+
+EMAIL_FILE_PATH = BASE_DIR / 'send_mail'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
