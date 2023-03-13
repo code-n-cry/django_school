@@ -1,22 +1,59 @@
-import django.forms
+from django.forms import ModelForm
+from django.forms.widgets import ClearableFileInput
 
-import feedback.models
+from feedback import models
 
 
-class FeedbackForm(django.forms.ModelForm):
+class FeedbackFileForm(ModelForm):
     class Meta:
-        model = feedback.models.Feedback
-        fields = (
-            feedback.models.Feedback.text.field.name,
-            feedback.models.Feedback.email.field.name,
-        )
+        model = models.Files
+        fields = (models.Files.uploaded_file.field.name,)
         labels = {
-            feedback.models.Feedback.text.field.name: 'Содержание обращения',
-            feedback.models.Feedback.email.field.name: 'E-Mail',
+            models.Files.uploaded_file.field.name: ''.join(
+                'Файлы для подробного описания(если хотите)'
+            ),
         }
         help_texts = {
-            feedback.models.Feedback.text.field.name: 'Опишите проблему',
-            feedback.models.Feedback.email.field.name: 'Ваша почта',
+            models.Files.uploaded_file.field.name: 'Прикрепите файлы',
+        }
+        widgets = {
+            models.Files.uploaded_file.field.name: ClearableFileInput(
+                attrs={'multiple': True},
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
+
+
+class FeedbackDataForm(ModelForm):
+    class Meta:
+        model = models.Data
+        fields = (models.Data.text.field.name,)
+        labels = {
+            models.Data.text.field.name: 'Содержание обращения',
+        }
+        help_texts = {
+            models.Data.text.field.name: 'Опишите проблему',
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
+
+
+class FeedbackForm(ModelForm):
+    class Meta:
+        model = models.Feedback
+        fields = (models.Feedback.email.field.name,)
+        labels = {
+            models.Feedback.email.field.name: 'E-Mail',
+        }
+        help_texts = {
+            models.Feedback.email.field.name: 'Ваша почта',
         }
 
     def __init__(self, *args, **kwargs):

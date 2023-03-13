@@ -5,7 +5,7 @@ from django.test import Client, TestCase
 
 
 class ViewTests(TestCase):
-    fixtures = ['fixture.json']
+    fixtures = ['catalog_fixture.json']
 
     def test_catalog_page_shows_correct_context(self):
         response = Client().get(django.urls.reverse('catalog:item_list'))

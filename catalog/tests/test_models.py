@@ -7,7 +7,7 @@ import catalog.models
 
 
 class ModelTests(TestCase):
-    fixtures = ['fixture.json']
+    fixtures = ['catalog_fixture.json']
 
     def test_item_manager(self):
         published_category = catalog.models.Category.objects.get(pk=1)

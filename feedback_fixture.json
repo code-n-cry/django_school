@@ -1,0 +1,27 @@
+[
+{
+    "model": "feedback.data",
+    "pk": 6,
+    "fields": {
+        "text": "Хотим больше енотов!"
+    }
+},
+{
+    "model": "feedback.files",
+    "pk": 6,
+    "fields": {
+        "uploaded_file": "uploads/4/cat.jpg",
+        "data": 6
+    }
+},
+{
+    "model": "feedback.feedback",
+    "pk": 4,
+    "fields": {
+        "email": "e.v.schukin@yandex.ru",
+        "data": 6,
+        "created_at": "2023-03-13T18:59:10.958Z",
+        "status": 0
+    }
+}
+]
