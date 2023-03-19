@@ -8,15 +8,15 @@ class FilesAdmin(admin.TabularInline):
     fields = [models.Files.uploaded_file.field.name]
 
 
-@admin.register(models.Data)
+@admin.register(models.PersonalData)
 class FeedbackDataAdmin(admin.ModelAdmin):
-    readonly_fields = (models.Data.text.field.name,)
-    inlines = (FilesAdmin,)
+    readonly_fields = (models.PersonalData.email.field.name,)
 
 
 @admin.register(models.Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
     readonly_fields = (
-        models.Feedback.email.field.name,
-        models.Feedback.data.field.name,
+        models.Feedback.text.field.name,
+        models.Feedback.personal_data.field.name,
     )
+    inlines = (FilesAdmin,)

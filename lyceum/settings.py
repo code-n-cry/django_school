@@ -25,6 +25,7 @@ env = environ.Env(
     ALLOWED_HOSTS=(list, ['*']),
     REVERSE_RU_EVERY_10=(bool, False),
     EMAIL=(str, 'example@mail.com'),
+    USER_ACTIVE_DEFAULT=(bool, False),
 )
 environ.Env.read_env(BASE_DIR / '.env')
 
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'feedback.apps.FeedbackConfig',
     'homepage.apps.HomepageConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +136,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/auth/login/'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 LANGUAGES = [
@@ -180,3 +187,5 @@ CKEDITOR_CONFIGS = {
 }
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale/'),)
+
+USER_ACTIVE_DEFAULT = env('USER_ACTIVE_DEFAULT')

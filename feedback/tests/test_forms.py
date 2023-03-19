@@ -9,7 +9,7 @@ import feedback.models
 class FormTest(TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data_form = feedback.forms.FeedbackDataForm()
+        cls.personal_data_form = feedback.forms.FeedbackPersonalDataForm()
         cls.file_form = feedback.forms.FeedbackFileForm()
         cls.form = feedback.forms.FeedbackForm()
         cls.test_feedback_text = 'Test feedback text'
@@ -28,7 +28,7 @@ class FormTest(TestCase):
             follow=True,
         )
         self.assertTrue(
-            feedback.models.Feedback.objects.filter(
+            feedback.models.PersonalData.objects.filter(
                 email=self.test_email,
             ).exists()
         )
@@ -48,7 +48,7 @@ class FormTest(TestCase):
             follow=True,
         )
         self.assertTrue(
-            feedback.models.Feedback.objects.filter(
+            feedback.models.PersonalData.objects.filter(
                 email=self.test_email,
             ).exists()
         )
@@ -87,8 +87,8 @@ class FormTest(TestCase):
         )
 
     def test_labels(self):
-        email_label = self.form.fields['email'].label
-        text_label = self.data_form['text'].label
+        email_label = self.personal_data_form.fields['email'].label
+        text_label = self.form['text'].label
         file_label = self.file_form['uploaded_file'].label
         self.assertEqual(email_label, 'E-Mail')
         self.assertEqual(text_label, 'Содержание обращения')
@@ -97,8 +97,8 @@ class FormTest(TestCase):
         )
 
     def test_help_texts(self):
-        email_help_text = self.form.fields['email'].help_text
-        text_help_text = self.data_form['text'].help_text
+        email_help_text = self.personal_data_form.fields['email'].help_text
+        text_help_text = self.form['text'].help_text
         file_help_text = self.file_form['uploaded_file'].help_text
         self.assertEqual(email_help_text, 'Ваша почта')
         self.assertEqual(text_help_text, 'Опишите проблему')

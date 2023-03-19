@@ -1,10 +1,10 @@
-from django.forms import ModelForm
 from django.forms.widgets import ClearableFileInput
 
+from core.forms import BootstrapForm
 from feedback import models
 
 
-class FeedbackFileForm(ModelForm):
+class FeedbackFileForm(BootstrapForm):
     class Meta:
         model = models.Files
         fields = (models.Files.uploaded_file.field.name,)
@@ -22,41 +22,26 @@ class FeedbackFileForm(ModelForm):
             ),
         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].widget.attrs.update({'class': 'form-control'})
 
-
-class FeedbackDataForm(ModelForm):
+class FeedbackPersonalDataForm(BootstrapForm):
     class Meta:
-        model = models.Data
-        fields = (models.Data.text.field.name,)
+        model = models.PersonalData
+        fields = (models.PersonalData.email.field.name,)
         labels = {
-            models.Data.text.field.name: 'Содержание обращения',
+            models.PersonalData.email.field.name: 'E-Mail',
         }
         help_texts = {
-            models.Data.text.field.name: 'Опишите проблему',
+            models.PersonalData.email.field.name: 'Ваша почта',
         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].widget.attrs.update({'class': 'form-control'})
 
-
-class FeedbackForm(ModelForm):
+class FeedbackForm(BootstrapForm):
     class Meta:
         model = models.Feedback
-        fields = (models.Feedback.email.field.name,)
+        fields = (models.Feedback.text.field.name,)
         labels = {
-            models.Feedback.email.field.name: 'E-Mail',
+            models.Feedback.text.field.name: 'Содержание обращения',
         }
         help_texts = {
-            models.Feedback.email.field.name: 'Ваша почта',
+            models.Feedback.text.field.name: 'Опишите проблему',
         }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].widget.attrs.update({'class': 'form-control'})

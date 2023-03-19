@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+<title>Информация о пользователе</title>
+{% endblock title %}
+{% block content %}
+<div class="container">
+    <h2 align="center">{% translate "Информация о пользователе" %}
+    {% for field in user %}
+        <p class="text-center"><b>{{ field }}</b></p>
+    {% endfor %}
+</div>
+{% endblock content %}
+

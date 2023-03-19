@@ -29,7 +29,15 @@
           <li class="nav-item"><a class="nav-link {% if view_name == 'admin:index' %}active disabled{% endif %}" href="{% url 'admin:index' %}">{% translate 'Админка' %}</a></li>
           {% endif %}
         </ul>
-        {% endwith %}
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          {% if not request.user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link btn btn-outline-light me-2 {% if view_name == 'auth:login' %}active disabled{% endif %}" href="{% url 'auth:login' %}">{% translate 'Вход' %}</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-warning {% if view_name == 'auth:signup' %}active disabled{% endif %}" href="{% url 'auth:signup' %}">{% translate 'Регистрация' %}</a></li>
+          {% else %}
+          <li class="nav-item"><a class="nav-link {% if view_name == 'auth:logout' %}active disabled{% endif %}" href="{% url 'auth:logout' %}">{{ request.user.get_username }}</a></li>
+          {% endif %}
+          {% endwith %}
+        </ul>
         </div>
       </div>          
     </div>

@@ -23,8 +23,11 @@ urlpatterns = [
     path('about/', include('about.urls')),
     path('catalog/', include('catalog.urls')),
     path('feedback/', include('feedback.urls')),
+    path('users/', include('users.urls.users')),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
+    path('auth/', include('users.urls.auth')),
+    path('auth/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
@@ -34,3 +37,4 @@ if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     )
+    settings.USER_ACTIVE_DEFAULT = True
