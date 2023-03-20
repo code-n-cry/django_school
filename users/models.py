@@ -39,6 +39,7 @@ class Profile(models.Model):
             return sorl.thumbnail.get_thumbnail(
                 self.avatar, '300x300', crop='center', quality=65
             )
+        return False
 
     def avatar_tmb(self):
         if self.avatar:
