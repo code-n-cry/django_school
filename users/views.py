@@ -5,7 +5,7 @@ import django.urls
 import django.utils.timezone
 from django.conf import settings
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 import users.forms
 import users.models
@@ -66,3 +66,10 @@ def user_list(request):
     template = 'users/user_list.html'
     context = {'usernames': usernames}
     return render(request, template, context)
+
+
+'''def user_detail(request, user_id):
+    return get_object_or_404(
+        users.models.User.objects.filter(pk=user_id)
+        .
+    )'''

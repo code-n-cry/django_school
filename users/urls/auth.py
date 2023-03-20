@@ -1,5 +1,6 @@
 import django.contrib.auth.views
 import django.urls
+from django.conf import settings
 
 import users.forms
 
@@ -38,6 +39,9 @@ urlpatterns = [
         'password_reset/',
         django.contrib.auth.views.PasswordResetView.as_view(
             template_name='users/password_reset_form.html',
+            success_url=django.urls.reverse_lazy('password_reset_done'),
+            email_template_name='users/password_reset_email.html',
+            from_email=settings.EMAIL,
         ),
         name='password_reset',
     ),
@@ -48,15 +52,15 @@ urlpatterns = [
         ),
         name='password_reset_done',
     ),
-    django.urls.re_path(
-        'reset/$',
+    django.urls.path(
+        'reset/<str:uidb64>/<str:token>/',
         django.contrib.auth.views.PasswordResetConfirmView.as_view(
             template_name='users/password_reset_confirm.html',
         ),
         name='password_reset_confirm',
     ),
     django.urls.path(
-        'password_reset/complete/',
+        'reset/done/',
         django.contrib.auth.views.PasswordResetCompleteView.as_view(
             template_name='users/password_reset_complete.html',
         ),

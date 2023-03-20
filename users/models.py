@@ -3,8 +3,6 @@ import sorl
 from django.contrib.auth.models import User
 from django.db import models
 
-import core.models
-
 
 def avatar_image_path(instance, filename):
     return f'/uploads/{instance.user.id}/{filename}'
@@ -47,7 +45,7 @@ class Profile(models.Model):
                 f'<img src="{self.get_image_300x300().url}">'
             )
         self.image_tmb.short_description = 'превью'
-        return '(Аватарка)'
+        return 'Аватарки нет.'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
