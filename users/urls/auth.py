@@ -70,4 +70,7 @@ urlpatterns = [
     django.urls.path(
         'activate/<str:username>', users.views.activate, name='activate'
     ),
+    django.urls.path(
+        'unauthorized/', users.views.unauthorized, name='unauthorized'
+    ),
 ]

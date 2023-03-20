@@ -2,14 +2,18 @@
 {% load static %}
 {% load i18n %}
 {% block title %}
-<title>Список пользователей</title>
+<title>{% translate "Список пользователей" %}</title>
 {% endblock title %}
 {% block content %}
 <div class="container">
-    <h2 align="center">{% translate "Список активных пользователей" %}
-    {% for name in usernames %}
-        <p class="text-center">{{ name.username }}</p>
-    {% endfor %}
+    <h2 align="center">{% translate "Список активных пользователей" %}</h2>
+    <div class="d-flex justify-content-center">
+        <ul>
+        {% for name in usernames %}
+            <li>{{ name.username }}</li>
+        {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock content %}
 

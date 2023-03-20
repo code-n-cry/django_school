@@ -35,18 +35,19 @@ class Profile(models.Model):
         default_related_name = 'profile'
 
     def get_avatar_300x300(self):
-        return sorl.thumbnail.get_thumbnail(
-            self.image, '300x300', crop='center', quality=65
-        )
-
-    def image_tmb(self):
-        if self.image:
-            return django.utils.html.mark_safe(
-                f'<img src="{self.get_image_300x300().url}">'
+        if self.avatar:
+            return sorl.thumbnail.get_thumbnail(
+                self.avatar, '300x300', crop='center', quality=65
             )
-        self.image_tmb.short_description = 'превью'
-        return 'Аватарки нет.'
+
+    def avatar_tmb(self):
+        if self.avatar:
+            return django.utils.html.mark_safe(
+                f'<img src="{self.get_avatar_300x300().url}">'
+            )
+        self.avatar_tmb.short_description = 'превью'
+        return 'Аватарки нэ будет.'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.image = self.get_image_300x300()
+        self.avatar = self.get_avatar_300x300()

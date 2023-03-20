@@ -4,6 +4,23 @@ from core.forms import BootstrapForm
 from users.models import Profile, User
 
 
+class NameEmailForm(BootstrapForm):
+    class Meta:
+        model = User
+        fields = (
+            User.username.field.name,
+            User.email.field.name,
+        )
+        labels = {
+            User.username.field.name: 'Юзернейм',
+            User.email.field.name: 'E-mail',
+        }
+        help_texts = {
+            User.username.field.name: 'Введите желаемое имя',
+            User.email.field.name: 'Введите вашу почту',
+        }
+
+
 class SignUpForm(BootstrapForm):
     repeat_password = django.forms.CharField(
         label='Повторите пароль',
@@ -53,11 +70,13 @@ class SignUpForm(BootstrapForm):
 
     def save(self, commit=True):
         cleaned_data = super().clean()
-        return User.objects.create_user(
+        user = User.objects.create_user(
             cleaned_data['username'],
             cleaned_data['email'],
             cleaned_data['password'],
         )
+        users_profile = Profile.objects.create(user=user)
+        return user, users_profile
 
 
 class ProfileInfoForm(BootstrapForm):
@@ -67,3 +86,17 @@ class ProfileInfoForm(BootstrapForm):
             Profile.avatar.field.name,
             Profile.birthday.field.name,
         )
+        labels = {
+            Profile.avatar.field.name: 'Аватарка',
+            Profile.birthday.field.name: 'День рождения',
+        }
+        help_texts = {
+            Profile.avatar.field.name: 'Загрузите аватарку(если хотите)',
+            Profile.birthday.field.name: 'Укажите день рождения(если хотите)',
+        }
+        widgets = {
+            Profile.avatar.field.name: django.forms.ClearableFileInput(),
+            Profile.birthday.field.name: django.forms.DateInput(
+                attrs={'type': 'date'}
+            ),
+        }

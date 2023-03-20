@@ -2,14 +2,19 @@
 {% load static %}
 {% load i18n %}
 {% block title %}
-<title>Информация о пользователе</title>
+<title>{% translate "Информация о пользователе" %}</title>
 {% endblock title %}
 {% block content %}
 <div class="container">
-    <h2 align="center">{% translate "Информация о пользователе" %}
-    {% for field in user %}
-        <p class="text-center"><b>{{ field }}</b></p>
-    {% endfor %}
+  <h2 align="center">{% translate "Информация о пользователе" %}</h2>
+  <div class="d-flex flex-column mb-3">
+    <div class="p-2 text-center"><b>Email</b>: {{ user.email }}</div>
+    <div class="p-2 text-center"><b>{% translate "Имя" %}</b>: {% if user.first_name %}{{ users.first_name }}{% else %}<i>не указано</i>{% endif %}</div>
+    <div class="p-2 text-center"><b>{% translate "Фамилия" %}</b>: {% if user.last_name %}{{ users.last_name }}{% else %}<i>не указано</i>{% endif %}</div>
+    <div class="p-2 text-center"><b>{% translate "День рождения" %}</b>: {% if user.profile__birthday %}{{ users.profile__birthday }}{% else %}<i>не указано</i>{% endif %}</div>
+    <div class="p-2 text-center"><b>{% translate "Аватар" %}</b>: {% if user.profile__avatar %}{{ users.profile__avatar }}{% else %}<i>не указано</i>{% endif %}</div>
+    <div class="p-2 text-center"><b>{% translate "Выпито кофе" %}</b>: {{ user.profile__coffee_count }}</div>
+  </div>
 </div>
 {% endblock content %}
 
