@@ -29,7 +29,7 @@ urlpatterns = [
         name='password_change',
     ),
     django.urls.path(
-        'password_change/done',
+        'password_change/done/',
         django.contrib.auth.views.PasswordChangeDoneView.as_view(
             template_name='users/password_change_done.html',
         ),

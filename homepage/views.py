@@ -1,6 +1,5 @@
 from http import HTTPStatus
 
-from django.http import HttpResponse
 from django.shortcuts import render
 
 import catalog.models
@@ -14,6 +13,8 @@ def home(request):
 
 
 def coffee(request):
-    return HttpResponse(
-        'Я чайник', content_type='text/plain', status=HTTPStatus.IM_A_TEAPOT
-    )
+    template = 'homepage/coffee.html'
+    if request.user.is_authenticated:
+        request.user.profile.coffee_count += 1
+        request.user.profile.save()
+    return render(request, template, status=HTTPStatus.IM_A_TEAPOT)

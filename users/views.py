@@ -5,6 +5,7 @@ import django.urls
 import django.utils.timezone
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 import users.forms
@@ -18,12 +19,14 @@ def activate(request, username):
             django.utils.timezone.now() - datetime.timedelta(hours=12),
             django.utils.timezone.now(),
         ],
-    )
+    ).first()
     if not user:
         messages.error(
             request, 'Прошло больше 12 часов, ссылка уже не работает:('
         )
         return redirect('homepage:index')
+    user.is_active = True
+    user.save()
     messages.success(request, 'Вы активированы!')
     return redirect('homepage:index')
 
@@ -52,7 +55,7 @@ def signup(request):
         messages.success(request, 'Вы зарегистрированы!')
         return redirect('auth:login')
     context = {
-        'form': form,
+        'signup_form': form,
     }
     return render(request, template, context)
 
@@ -70,12 +73,10 @@ def user_list(request):
 
 def user_detail(request, user_id):
     template = 'users/user_detail.html'
-    usr = users.models.User.objects.filter(pk=user_id)
-    print(usr[0].profile)
     user = get_object_or_404(
         users.models.User.objects.filter(pk=user_id)
         .select_related(users.models.User.profile.related.related_name)
-        .values(
+        .only(
             users.models.User.email.field.name,
             users.models.User.first_name.field.name,
             users.models.User.last_name.field.name,
@@ -109,17 +110,22 @@ def unauthorized(request):
     return render(request, template, context)
 
 
+@login_required
 def profile(request):
     template = 'users/profile.html'
-    if request.user.is_authenticated:
-        data_form = users.forms.NameEmailForm(
-            request.POST or None,
-            initial={
-                'email': request.user.email,
-                'username': request.user.get_username(),
-            },
-        )
-        profile_form = users.forms.ProfileInfoForm(request.POST or None)
-        context = {'data_form': data_form, 'profile_form': profile_form}
-        return render(request, template, context)
-    return redirect('auth:unauthorized')
+    data_form = users.forms.NameEmailForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=request.user,
+    )
+    profile_form = users.forms.ProfileInfoForm(
+        request.POST or None,
+        instance=request.user.profile,
+    )
+    if all((data_form.is_valid(), profile_form.is_valid())):
+        if request.FILES:
+            request.user.profile.avatar = request.FILES['avatar']
+        profile_form.save()
+        data_form.save()
+    context = {'data_form': data_form, 'profile_form': profile_form}
+    return render(request, template, context)

@@ -22,10 +22,18 @@ class ItemManager(django.db.models.Manager):
                 catalog.models.Item.id.field.name,
                 catalog.models.Item.name.field.name,
                 catalog.models.Item.text.field.name,
-                f'{catalog.models.Item.category.field.name}__'
-                + f'{catalog.models.Category.name.field.name}',
-                f'{catalog.models.Item.main_image.related.related_name}__'
-                f'{catalog.models.ItemMainImage.image.field.name}',
+                '__'.join(
+                    [
+                        catalog.models.Item.category.field.name,
+                        catalog.models.Category.name.field.name,
+                    ]
+                ),
+                '__'.join(
+                    [
+                        catalog.models.Item.main_image.related.related_name,
+                        catalog.models.ItemMainImage.image.field.name,
+                    ]
+                ),
             )
             .order_by(catalog.models.Item.name.field.name)
         )

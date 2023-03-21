@@ -75,8 +75,3 @@ class StaticUrlTests(TestCase):
         with self.subTest('Coffee endpoint returns 418 status'):
             response = Client().get('/coffee/')
             self.assertEqual(response.status_code, HTTPStatus.IM_A_TEAPOT)
-
-    def test_coffee_endpoint_content(self):
-        with self.subTest('Coffee endpoint returns "Я чайник"'):
-            response = Client().get('/coffee/')
-            self.assertEqual(response.content.decode('utf-8'), 'Я чайник')

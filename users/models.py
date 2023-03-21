@@ -3,9 +3,11 @@ import sorl
 from django.contrib.auth.models import User
 from django.db import models
 
+import users.managers
+
 
 def avatar_image_path(instance, filename):
-    return f'/uploads/{instance.user.id}/{filename}'
+    return f'uploads/{instance.user.id}/{filename}'
 
 
 class Profile(models.Model):
@@ -35,11 +37,9 @@ class Profile(models.Model):
         default_related_name = 'profile'
 
     def get_avatar_300x300(self):
-        if self.avatar:
-            return sorl.thumbnail.get_thumbnail(
-                self.avatar, '300x300', crop='center', quality=65
-            )
-        return False
+        return sorl.thumbnail.get_thumbnail(
+            self.avatar, '300x300', crop='center', quality=65
+        )
 
     def avatar_tmb(self):
         if self.avatar:
@@ -51,4 +51,12 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        self.avatar = self.get_avatar_300x300()
+        if self.avatar:
+            self.avatar = self.get_avatar_300x300()
+
+
+class ProxyUser(User):
+    objects = users.managers.ActiveUserManager()
+
+    class Meta:
+        proxy = True

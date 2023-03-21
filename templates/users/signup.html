@@ -11,7 +11,7 @@
       <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-          {% for field in form %}
+          {% for field in signup_form %}
           {{ field.label_tag }}
           {{ field }}
           <div>

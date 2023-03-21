@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+<title>{% translate 'Кофе' %}</title>
+{% endblock %}
+{% block content %}
+<div class="container">
+  <h2 class="text-center">{% translate "Поздравляем! Только что вы сварили кофе" %}</h2>
+  <div class="d-flex justify-content-center">
+    <img src="{% static 'img/coffee_raccoon.jpg' %}" alt="{% translate 'Енот, окунувший морду в чашку кофе' %}">
+  </div>
+</div>
+{% endblock %}

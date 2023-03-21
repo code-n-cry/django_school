@@ -2,20 +2,24 @@
 {% load static %}
 {% load i18n %}
 {% block title %}
-<title>{% translate "Информация о пользователе" %}</title>
+<title>{% translate "Ваш профиль" %}</title>
 {% endblock title %}
 {% block content %}
 <div class="container">
-  <h2 align="center">{% translate "Информация о пользователе" %}</h2>
+  <h2 align="center">{% translate "Ваш профиль" %}</h2>
   <div class="d-flex justify-content-left">
     <form method="post" enctype='multipart/form-data'>
       {% csrf_token %}
       {{ data_form.as_p }}
+      {% if request.user.profile.avatar %}
+      {{ request.user.profile.avatar_tmb }}
+      {% endif %}
       {{ profile_form.as_p}}
-      <button type="submit" class="btn btn-primary">Изменить</button>
-      <a class="btn btn-success" href="{% url 'homepage:coffee' %}">Выпить кофе</a>
+      <button type="submit" class="btn btn-primary">{% translate 'Сохранить' %}</button>
+      <a class="btn btn-success" href="{% url 'homepage:coffee' %}">{% translate 'Выпить кофе' %}</a>
+      <a class="btn btn-warning" href="{% url 'auth:password_change' %}">{% translate 'Сменить пароль' %}</a>
+      <a class="btn btn-danger" href="{% url 'auth:logout' %}">{% translate 'Выйти' %}</a>
     </form>
   </div>
 </div>
 {% endblock content %}
-
