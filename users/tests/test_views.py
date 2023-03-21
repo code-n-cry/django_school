@@ -184,6 +184,7 @@ class ViewTest(TestCase):
             .is_active
         )
 
+    @override_settings(USER_ACTIVE_DEFAULT=True)
     def test_login_with_username(self):
         client = Client()
         client.post(
@@ -202,6 +203,7 @@ class ViewTest(TestCase):
         )
         self.assertTrue(response.context['user'].is_active)
 
+    @override_settings(USER_ACTIVE_DEFAULT=True)
     def test_login_with_email(self):
         client = Client()
         client.post(
