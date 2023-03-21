@@ -59,7 +59,7 @@ class SignUpForm(BootstrapForm):
             ProxyUser.password.field.name: 'Введите пароль',
         }
         widgets = {
-            ProxyUser.password.field.name: django.forms.widgets.PasswordInput(),
+            'password': django.forms.widgets.PasswordInput(),
         }
 
     def clean(self):

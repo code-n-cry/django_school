@@ -4,7 +4,6 @@ import django.db.utils
 import django.urls
 import mock
 import pytz
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.utils import timezone
 

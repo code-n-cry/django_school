@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-12 20:35+0300\n"
+"POT-Creation-Date: 2023-03-21 23:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,10 +32,11 @@ msgstr "Thanks"
 
 #: .\templates\about\feedback_success.html:16
 msgid "Спасибо за ваше мнение! Мы его <b>обязательно</b> учтём"
-msgstr "Thank you for your opinion! We will <b>definitely</b> take it into account"
+msgstr ""
+"Thank you for your opinion! We will <b>definitely</b> take it into account"
 
 #: .\templates\catalog\extra_item_list.html:16
-#: .\templates\homepage\home.html:22
+#: .\templates\homepage\home.html:27
 msgid "Пустота"
 msgstr "Emptyness"
 
@@ -105,6 +106,18 @@ msgstr "Feedback page"
 msgid "Форма обратной связи"
 msgstr "Feedback form"
 
+#: .\templates\homepage\coffee.html:5
+msgid "Кофе"
+msgstr "Coffee"
+
+#: .\templates\homepage\coffee.html:9
+msgid "Поздравляем! Только что вы сварили кофе"
+msgstr "Congratulations! You've just made a cup of coffee"
+
+#: .\templates\homepage\coffee.html:11
+msgid "Енот, окунувший морду в чашку кофе"
+msgstr "Raccoon dipped his muzzle into the coffee cup"
+
 #: .\templates\homepage\home.html:5 .\templates\includes\header.html:15
 msgid "Главная"
 msgstr "Home"
@@ -129,6 +142,167 @@ msgstr "Unchecked"
 msgid "Админка"
 msgstr "Admin page"
 
+#: .\templates\includes\header.html:34 .\templates\users\login.html:5
+#: .\templates\users\login.html:9 .\templates\users\login.html:34
+msgid "Вход"
+msgstr "Login"
+
+#: .\templates\includes\header.html:35 .\templates\users\signup.html:5
+#: .\templates\users\signup.html:9
+msgid "Регистрация"
+msgstr "Register"
+
 #: .\templates\includes\item_card.html:21
 msgid "К товару"
 msgstr "To the item"
+
+#: .\templates\users\logged_out.html:5 .\templates\users\logged_out.html:9
+msgid "Выход"
+msgstr "Quit"
+
+#: .\templates\users\logged_out.html:10
+msgid "Вы вышли из аккаунта"
+msgstr "You've quit your account"
+
+#: .\templates\users\login.html:35
+msgid "Забыли пароль"
+msgstr "Forgot your password"
+
+#: .\templates\users\password_change_done.html:5
+#: .\templates\users\password_change_form.html:5
+msgid "Смена пароля"
+msgstr "Change of password"
+
+#: .\templates\users\password_change_done.html:9
+msgid "Пароль умер! Да здравствует новый пароль!"
+msgstr "The Password is dead. Long live the Password!"
+
+#: .\templates\users\password_change_form.html:9
+msgid "Меняем пароль"
+msgstr "Changing your password"
+
+#: .\templates\users\password_change_form.html:29
+msgid "Сменить"
+msgstr "Change"
+
+#: .\templates\users\password_reset_complete.html:5
+#: .\templates\users\password_reset_confirm.html:5
+#: .\templates\users\password_reset_done.html:5
+#: .\templates\users\password_reset_form.html:5
+msgid "Восстановление пароля"
+msgstr "Password's recovery"
+
+#: .\templates\users\password_reset_complete.html:9
+msgid "Пароль восстановлен"
+msgstr "Password has been recovered"
+
+#: .\templates\users\password_reset_confirm.html:9
+msgid "Восстанавливаем Ваш пароль"
+msgstr "Recovering your password"
+
+#: .\templates\users\password_reset_confirm.html:29
+msgid "Я задал пароль"
+msgstr "I created the password"
+
+#: .\templates\users\password_reset_done.html:9
+msgid "Отправили ссылку для восстановления"
+msgstr "We've sent you recovery link"
+
+#: .\templates\users\password_reset_email.html:3
+#, python-format
+msgid ""
+"\n"
+"Вы получили это письмо, потому что пытались сменить пароль аккаунта\n"
+"на сайте %(site.name)s\n"
+msgstr ""
+"\n"
+"You've received this e-mail because you've tried to change your account's password\n"
+"on %(site.name)s site\n"
+
+
+#: .\templates\users\password_reset_email.html:7
+msgid "Пожалуйста, перейдите на страницу ниже и создайте новый пароль"
+msgstr "Visit the page below and create new password, please"
+
+#: .\templates\users\password_reset_email.html:11
+msgid "Ваше имя на сайте"
+msgstr "Your username"
+
+#: .\templates\users\password_reset_email.html:12
+#, python-format
+msgid "The %(site.name)s team"
+msgstr ""
+
+#: .\templates\users\password_reset_form.html:9
+msgid "Восстановить пароль"
+msgstr "Reset password"
+
+#: .\templates\users\password_reset_form.html:28
+msgid "Отправить"
+msgstr "Send"
+
+#: .\templates\users\profile.html:5 .\templates\users\profile.html:9
+msgid "Ваш профиль"
+msgstr "Your profile"
+
+#: .\templates\users\profile.html:18
+msgid "Сохранить"
+msgstr "Save"
+
+#: .\templates\users\profile.html:19
+msgid "Выпить кофе"
+msgstr "Drink some coffee"
+
+#: .\templates\users\profile.html:20
+msgid "Сменить пароль"
+msgstr "Change password"
+
+#: .\templates\users\profile.html:21
+msgid "Выйти"
+msgstr "Quit"
+
+#: .\templates\users\signup.html:29
+msgid "Зарегистрироваться"
+msgstr "Register"
+
+#: .\templates\users\unauthorized.html:5
+msgid "Вы не авторизованы"
+msgstr "You're unauthorized"
+
+#: .\templates\users\unauthorized.html:9
+msgid "Для доступа к профилю необходима авторизация"
+msgstr "You need to login to access your profile"
+
+#: .\templates\users\user_detail.html:5 .\templates\users\user_detail.html:9
+msgid "Информация о пользователе"
+msgstr "User's info"
+
+#: .\templates\users\user_detail.html:12
+msgid "Имя"
+msgstr "First name"
+
+#: .\templates\users\user_detail.html:13
+msgid "Фамилия"
+msgstr "Surname"
+
+#: .\templates\users\user_detail.html:14
+msgid "День рождения"
+msgstr "Birthday date"
+
+#: .\templates\users\user_detail.html:15
+msgid "Аватар"
+msgstr "Avatar"
+
+#: .\templates\users\user_detail.html:16
+msgid "Выпито кофе"
+msgstr "Cups of coffee you've drunk"
+
+#: .\templates\users\user_list.html:5
+#, fuzzy
+#| msgid "Список товаров"
+msgid "Список пользователей"
+msgstr "The list of items"
+
+#: .\templates\users\user_list.html:9
+msgid "Список активных пользователей"
+msgstr "Active users list"
