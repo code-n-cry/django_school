@@ -62,9 +62,12 @@ def signup(request):
 
 def user_list(request):
     usernames = (
-        users.models.User.objects.filter(is_active=True)
-        .values(users.models.User.username.field.name)
-        .order_by(users.models.User.username.field.name)
+        users.models.ProxyUser.objects.all()
+        .values(
+            users.models.ProxyUser.id.field.name,
+            users.models.ProxyUser.username.field.name,
+        )
+        .order_by(users.models.ProxyUser.username.field.name)
     )
     template = 'users/user_list.html'
     context = {'usernames': usernames}
@@ -73,33 +76,7 @@ def user_list(request):
 
 def user_detail(request, user_id):
     template = 'users/user_detail.html'
-    user = get_object_or_404(
-        users.models.User.objects.filter(pk=user_id)
-        .select_related(users.models.User.profile.related.related_name)
-        .only(
-            users.models.User.email.field.name,
-            users.models.User.first_name.field.name,
-            users.models.User.last_name.field.name,
-            '__'.join(
-                [
-                    users.models.User.profile.related.related_name,
-                    users.models.Profile.birthday.field.name,
-                ]
-            ),
-            '__'.join(
-                [
-                    users.models.User.profile.related.related_name,
-                    users.models.Profile.avatar.field.name,
-                ]
-            ),
-            '__'.join(
-                [
-                    users.models.User.profile.related.related_name,
-                    users.models.Profile.coffee_count.field.name,
-                ]
-            ),
-        )
-    )
+    user = get_object_or_404(users.models.ProxyUser.objects.filter(pk=user_id))
     context = {'user': user}
     return render(request, template, context)
 

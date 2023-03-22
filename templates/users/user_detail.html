@@ -6,7 +6,7 @@
 {% endblock title %}
 {% block content %}
 <div class="container">
-  <h2 align="center">{% translate "Информация о пользователе" %}</h2>
+  <h2 align="center">{% translate "Информация о пользователе" %} <b>{{ user.username }}</b></h2>
   <div class="d-flex flex-column mb-3">
     <div class="p-2 text-center"><b>Email</b>: {{ user.email }}</div>
     <div class="p-2 text-center"><b>{% translate "Имя" %}</b>: {% if user.first_name %}{{ users.first_name }}{% else %}<i>не указано</i>{% endif %}</div>

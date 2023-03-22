@@ -10,10 +10,12 @@
     <div class="d-flex justify-content-center">
         <ul>
         {% for name in usernames %}
-            <li>{{ name.username }}</li>
+            <li style="padding-bottom: 0.4em!important;">
+                {{ name.username }}
+                <a href="/users/detail/{{ name.id }}/" class="btn btn-dark">{% translate "Детально о пользователе" %}</a>
+            </li>
         {% endfor %}
         </ul>
     </div>
 </div>
 {% endblock content %}
-

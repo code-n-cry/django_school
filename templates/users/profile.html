@@ -10,12 +10,25 @@
   <div class="d-flex justify-content-left">
     <form method="post" enctype='multipart/form-data'>
       {% csrf_token %}
-      {{ data_form.as_p }}
+      {% for field in data_form %}
+      {{ field.label_tag }}
+      {{ field }}
+      <div>
+        {% for error in field.errors %}
+          <div class="alert alert-danger">
+            {{ error | escape }}
+          </div>
+        {% endfor %}
+        {% if field.help_text %}
+          <p class="help">{{ field.help_text | safe }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
       {% if request.user.profile.avatar %}
       {{ request.user.profile.avatar_tmb }}
       {% endif %}
       {{ profile_form.as_p}}
-      <button type="submit" class="btn btn-primary">{% translate 'Сохранить' %}</button>
+      <button type="submit" class="btn btn-dark">{% translate 'Сохранить' %}</button>
       <a class="btn btn-success" href="{% url 'homepage:coffee' %}">{% translate 'Выпить кофе' %}</a>
       <a class="btn btn-warning" href="{% url 'auth:password_change' %}">{% translate 'Сменить пароль' %}</a>
       <a class="btn btn-danger" href="{% url 'auth:logout' %}">{% translate 'Выйти' %}</a>

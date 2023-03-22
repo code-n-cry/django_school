@@ -1,6 +1,7 @@
 import django.forms
 import django.utils.html
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db.models import Q
 
 from core.forms import BootstrapForm
@@ -23,15 +24,17 @@ class NameEmailForm(BootstrapForm):
             ProxyUser.email.field.name: 'Измените почту',
         }
 
-    def clean(self):
-        is_email_unique = ProxyUser.objects.filter(
-            ~Q(pk=self.instance.id), email=self.cleaned_data['email']
-        ).exists()
-        if is_email_unique:
-            self.add_error(
-                ProxyUser.email.field.name,
-                'Пользователь с такой почтой уже зарегистрирован!',
-            )
+    def clean_email(self):
+        if self.cleaned_data['email']:
+            is_email_unique = ProxyUser.objects.filter(
+                ~Q(pk=self.instance.id), email=self.cleaned_data['email']
+            ).exists()
+            if is_email_unique:
+                raise ValidationError(
+                    'Пользователь с такой почтой уже зарегистрирован!'
+                )
+        else:
+            raise ValidationError('Введите новый email или оставьте старый!')
 
 
 class SignUpForm(BootstrapForm):
@@ -71,7 +74,7 @@ class SignUpForm(BootstrapForm):
         if password != confirmed_password:
             self.add_error('repeat_password', 'Пароли не совпадают!')
         if not self.cleaned_data['email']:
-            self.add_error(ProxyUser.email.field.name, 'Укажите email!')
+            return self.add_error(ProxyUser.email.field.name, 'Укажите email!')
         if is_email_unique:
             self.add_error(
                 ProxyUser.email.field.name,

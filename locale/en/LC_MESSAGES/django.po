@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-21 23:07+0300\n"
+"POT-Creation-Date: 2023-03-22 08:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr ""
 "Thank you for your opinion! We will <b>definitely</b> take it into account"
 
 #: .\templates\catalog\extra_item_list.html:16
-#: .\templates\homepage\home.html:27
+#: .\templates\homepage\home.html:30
 msgid "Пустота"
 msgstr "Emptyness"
 
@@ -121,6 +121,10 @@ msgstr "Raccoon dipped his muzzle into the coffee cup"
 #: .\templates\homepage\home.html:5 .\templates\includes\header.html:15
 msgid "Главная"
 msgstr "Home"
+
+# \templates\users\user_list.html:5
+msgid "Список пользователей"
+msgstr "The list of users"
 
 #: .\templates\includes\header.html:21
 msgid "Новинки"
@@ -216,9 +220,9 @@ msgid ""
 "на сайте %(site.name)s\n"
 msgstr ""
 "\n"
-"You've received this e-mail because you've tried to change your account's password\n"
+"You've received this e-mail because you've tried to change your account's "
+"password\n"
 "on %(site.name)s site\n"
-
 
 #: .\templates\users\password_reset_email.html:7
 msgid "Пожалуйста, перейдите на страницу ниже и создайте новый пароль"
@@ -296,12 +300,6 @@ msgstr "Avatar"
 #: .\templates\users\user_detail.html:16
 msgid "Выпито кофе"
 msgstr "Cups of coffee you've drunk"
-
-#: .\templates\users\user_list.html:5
-#, fuzzy
-#| msgid "Список товаров"
-msgid "Список пользователей"
-msgstr "The list of items"
 
 #: .\templates\users\user_list.html:9
 msgid "Список активных пользователей"
