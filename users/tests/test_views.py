@@ -37,7 +37,7 @@ class ViewTest(TestCase):
         response = Client().get(
             django.urls.reverse('auth:signup'),
         )
-        self.assertIn('signup_form', response.context)
+        self.assertIn('form', response.context)
 
     def test_profile_context(self):
         client = Client()
@@ -49,7 +49,7 @@ class ViewTest(TestCase):
         response = client.get(
             django.urls.reverse('users:profile'),
         )
-        self.assertIn('data_form', response.context)
+        self.assertIn('form', response.context)
         self.assertIn('profile_form', response.context)
 
     def test_no_user_no_profile(self):

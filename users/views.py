@@ -55,7 +55,7 @@ def signup(request):
         messages.success(request, 'Вы зарегистрированы!')
         return redirect('auth:login')
     context = {
-        'signup_form': form,
+        'form': form,
     }
     return render(request, template, context)
 
@@ -104,5 +104,5 @@ def profile(request):
             request.user.profile.avatar = request.FILES['avatar']
         profile_form.save()
         data_form.save()
-    context = {'data_form': data_form, 'profile_form': profile_form}
+    context = {'form': data_form, 'profile_form': profile_form}
     return render(request, template, context)
