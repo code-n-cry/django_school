@@ -20,12 +20,13 @@ from django.utils.translation import gettext_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
+    interpolate=True,
     DEBUG=(bool, True),
     SECRET_KEY=(str, 'some-fake-key'),
     ALLOWED_HOSTS=(list, ['*']),
     REVERSE_RU_EVERY_10=(bool, False),
     EMAIL=(str, 'example@mail.com'),
-    USER_ACTIVE_DEFAULT=(bool, False),
+    USER_ACTIVE_DEFAULT=(bool, True),
 )
 environ.Env.read_env(BASE_DIR / '.env')
 
