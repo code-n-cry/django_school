@@ -80,6 +80,7 @@ class SignUpForm(BootstrapForm):
                 ProxyUser.email.field.name,
                 'Пользователь с такой почтой уже зарегистрирован!',
             )
+        return self.cleaned_data
 
     def save(self, commit=True):
         cleaned_data = super().clean()
