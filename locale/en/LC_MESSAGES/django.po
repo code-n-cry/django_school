@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 08:29+0300\n"
+"POT-Creation-Date: 2023-03-23 02:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,11 +118,26 @@ msgstr "Congratulations! You've just made a cup of coffee"
 msgid "Енот, окунувший морду в чашку кофе"
 msgstr "Raccoon dipped his muzzle into the coffee cup"
 
+#: .\templates\homepage\coffee.html:13
+msgid "Вы выпили"
+msgstr "You've already drank"
+
+#: .\templates\homepage\coffee.html:13
+msgid "чашек кофе"
+msgstr "cups of coffee"
+
+#: .\templates\homepage\coffee.html:14
+#| msgid "Ваш профиль"
+msgid "Назад в профиль"
+msgstr "Your profile"
+
 #: .\templates\homepage\home.html:5 .\templates\includes\header.html:15
 msgid "Главная"
 msgstr "Home"
 
 # \templates\users\user_list.html:5
+#: .\templates\homepage\home.html:23 .\templates\includes\header.html:37
+#: .\templates\users\user_list.html:5
 msgid "Список пользователей"
 msgstr "The list of users"
 
@@ -147,7 +162,7 @@ msgid "Админка"
 msgstr "Admin page"
 
 #: .\templates\includes\header.html:34 .\templates\users\login.html:5
-#: .\templates\users\login.html:9 .\templates\users\login.html:34
+#: .\templates\users\login.html:9 .\templates\users\login.html:18
 msgid "Вход"
 msgstr "Login"
 
@@ -156,19 +171,20 @@ msgstr "Login"
 msgid "Регистрация"
 msgstr "Register"
 
+#: .\templates\includes\header.html:39 .\templates\users\logged_out.html:5
+#: .\templates\users\logged_out.html:9
+msgid "Выход"
+msgstr "Quit"
+
 #: .\templates\includes\item_card.html:21
 msgid "К товару"
 msgstr "To the item"
-
-#: .\templates\users\logged_out.html:5 .\templates\users\logged_out.html:9
-msgid "Выход"
-msgstr "Quit"
 
 #: .\templates\users\logged_out.html:10
 msgid "Вы вышли из аккаунта"
 msgstr "You've quit your account"
 
-#: .\templates\users\login.html:35
+#: .\templates\users\login.html:19
 msgid "Забыли пароль"
 msgstr "Forgot your password"
 
@@ -185,7 +201,7 @@ msgstr "The Password is dead. Long live the Password!"
 msgid "Меняем пароль"
 msgstr "Changing your password"
 
-#: .\templates\users\password_change_form.html:29
+#: .\templates\users\password_change_form.html:13
 msgid "Сменить"
 msgstr "Change"
 
@@ -204,7 +220,7 @@ msgstr "Password has been recovered"
 msgid "Восстанавливаем Ваш пароль"
 msgstr "Recovering your password"
 
-#: .\templates\users\password_reset_confirm.html:29
+#: .\templates\users\password_reset_confirm.html:13
 msgid "Я задал пароль"
 msgstr "I created the password"
 
@@ -241,7 +257,7 @@ msgstr ""
 msgid "Восстановить пароль"
 msgstr "Reset password"
 
-#: .\templates\users\password_reset_form.html:28
+#: .\templates\users\password_reset_form.html:13
 msgid "Отправить"
 msgstr "Send"
 
@@ -249,23 +265,23 @@ msgstr "Send"
 msgid "Ваш профиль"
 msgstr "Your profile"
 
-#: .\templates\users\profile.html:18
+#: .\templates\users\profile.html:13
 msgid "Сохранить"
 msgstr "Save"
 
-#: .\templates\users\profile.html:19
+#: .\templates\users\profile.html:14
 msgid "Выпить кофе"
 msgstr "Drink some coffee"
 
-#: .\templates\users\profile.html:20
+#: .\templates\users\profile.html:15
 msgid "Сменить пароль"
 msgstr "Change password"
 
-#: .\templates\users\profile.html:21
+#: .\templates\users\profile.html:16
 msgid "Выйти"
 msgstr "Quit"
 
-#: .\templates\users\signup.html:29
+#: .\templates\users\signup.html:13
 msgid "Зарегистрироваться"
 msgstr "Register"
 

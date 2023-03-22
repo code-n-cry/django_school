@@ -11,6 +11,8 @@ urlpatterns = [
         'login/',
         django.contrib.auth.views.LoginView.as_view(
             template_name='users/login.html',
+            form_class=users.forms.BootstrapLoginForm,
+            redirect_authenticated_user=True,
         ),
         name='login',
     ),
@@ -25,6 +27,7 @@ urlpatterns = [
         'password_change/',
         django.contrib.auth.views.PasswordChangeView.as_view(
             template_name='users/password_change_form.html',
+            form_class=users.forms.BootstrapChangePasswordForm,
         ),
         name='password_change',
     ),
@@ -39,6 +42,7 @@ urlpatterns = [
         'password_reset/',
         django.contrib.auth.views.PasswordResetView.as_view(
             template_name='users/password_reset_form.html',
+            form_class=users.forms.BootstrapResetPasswordForm,
             success_url=django.urls.reverse_lazy('password_reset_done'),
             email_template_name='users/password_reset_email.html',
             from_email=settings.EMAIL,
@@ -55,6 +59,7 @@ urlpatterns = [
     django.urls.path(
         'reset/<str:uidb64>/<str:token>/',
         django.contrib.auth.views.PasswordResetConfirmView.as_view(
+            form_class=users.forms.BootstrapSetPassword,
             template_name='users/password_reset_confirm.html',
         ),
         name='password_reset_confirm',

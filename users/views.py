@@ -51,6 +51,9 @@ def activate(request, username):
 def signup(request):
     form = users.forms.SignUpForm(request.POST or None)
     template = 'users/signup.html'
+    if request.user.is_authenticated:
+        messages.info(request, 'Вы уже авторизованы!')
+        return redirect('homepage:index')
     if form.is_valid():
         email_text = ''.join(
             [
@@ -80,14 +83,7 @@ def signup(request):
 
 
 def user_list(request):
-    usernames = (
-        users.models.ProxyUser.objects.all()
-        .values(
-            users.models.ProxyUser.id.field.name,
-            users.models.ProxyUser.username.field.name,
-        )
-        .order_by(users.models.ProxyUser.username.field.name)
-    )
+    usernames = users.models.ProxyUser.objects.active()
     template = 'users/user_list.html'
     context = {'usernames': usernames}
     return render(request, template, context)
@@ -95,7 +91,9 @@ def user_list(request):
 
 def user_detail(request, user_id):
     template = 'users/user_detail.html'
-    user = get_object_or_404(users.models.ProxyUser.objects.filter(pk=user_id))
+    user = get_object_or_404(
+        users.models.ProxyUser.objects.active().filter(pk=user_id)
+    )
     context = {'user': user}
     return render(request, template, context)
 

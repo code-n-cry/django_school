@@ -7,8 +7,13 @@
 {% block content %}
 <div class="container">
   <h2 class="text-center">{% translate "Поздравляем! Только что вы сварили кофе" %}</h2>
-  <div class="d-flex justify-content-center">
-    <img src="{% static 'img/coffee_raccoon.jpg' %}" alt="{% translate 'Енот, окунувший морду в чашку кофе' %}">
+  <div class="d-flex flex-column justify-content-center">
+    <img class="p-2" src="{% static 'img/coffee_raccoon.jpg' %}" alt="{% translate 'Енот, окунувший морду в чашку кофе' %}">
+    {% if request.user.is_authenticated %}
+      <p class="p-2">{% translate 'Вы выпили' %} {{ request.user.profile.coffee_count }} {% translate 'чашек кофе' %}</p>
+      <a class="btn btn-dark p-2" href="{% url 'users:profile' %}">{% translate 'Назад в профиль' %}</a>
+    {% endif %}
   </div>
+
 </div>
 {% endblock %}

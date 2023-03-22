@@ -1,3 +1,4 @@
+import django.contrib.auth.forms
 import django.forms
 import django.utils.html
 from django.conf import settings
@@ -6,6 +7,36 @@ from django.db.models import Q
 
 from core.forms import BootstrapForm
 from users.models import Profile, ProxyUser
+
+
+class BootstrapLoginForm(django.contrib.auth.forms.AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
+
+
+class BootstrapResetPasswordForm(django.contrib.auth.forms.PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
+
+
+class BootstrapChangePasswordForm(
+    django.contrib.auth.forms.PasswordChangeForm
+):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
+
+
+class BootstrapSetPassword(django.contrib.auth.forms.SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
 
 
 class NameEmailForm(BootstrapForm):
@@ -33,7 +64,9 @@ class NameEmailForm(BootstrapForm):
                 raise ValidationError(
                     'Пользователь с такой почтой уже зарегистрирован!'
                 )
-            return self.cleaned_data['email']
+            return ProxyUser.objects.normalize_email(
+                self.cleaned_data['email']
+            )
         raise ValidationError('Введите новый email или оставьте старый!')
 
 
@@ -86,7 +119,7 @@ class SignUpForm(BootstrapForm):
         cleaned_data = super().clean()
         user = ProxyUser.objects.create_user(
             cleaned_data['username'],
-            cleaned_data['email'],
+            ProxyUser.objects.normalize_email(cleaned_data['email']),
             cleaned_data['password'],
             is_active=settings.USER_ACTIVE_DEFAULT,
         )

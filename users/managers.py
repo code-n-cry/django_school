@@ -32,24 +32,24 @@ class ActiveUserManager(django.contrib.auth.models.UserManager):
                 users.models.ProxyUser.profile.related.related_name
             )
             .only(
-                users.models.ProxyUser.pk.field.name,
+                users.models.ProxyUser.id.field.name,
                 users.models.ProxyUser.username.field.name,
                 users.models.ProxyUser.email.field.name,
                 '__'.join(
                     [
-                        users.models.ProxyUser.profile.field.name,
+                        users.models.ProxyUser.profile.related.related_name,
                         users.models.Profile.birthday.field.name,
                     ]
                 ),
                 '__'.join(
                     [
-                        users.models.ProxyUser.profile.field.name,
+                        users.models.ProxyUser.profile.related.related_name,
                         users.models.Profile.avatar.field.name,
                     ]
                 ),
                 '__'.join(
                     [
-                        users.models.ProxyUser.profile.field.name,
+                        users.models.ProxyUser.profile.related.related_name,
                         users.models.Profile.coffee_count.field.name,
                     ]
                 ),
