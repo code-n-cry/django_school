@@ -29,7 +29,6 @@ class EmailBackend(ModelBackend):
                 )
                 user.profile.save()
                 if user.profile.failed_logins >= settings.MAX_LOGIN_AMOUNT:
-                    print('here')
                     user.is_active = False
                     user.save()
                     email_text = ''.join(
@@ -37,7 +36,7 @@ class EmailBackend(ModelBackend):
                             'Совершено много неудачных попыток входа в Ваш'
                             'аккаунт! Для безопасности он был отключён.\n',
                             'Ваша ссылка для восстановления:'
-                            'http://127.0.0.1:8000',
+                            'http://127.0.0.0:8000',
                             django.urls.reverse(
                                 'auth:recover',
                                 kwargs={'username': user.get_username()},
