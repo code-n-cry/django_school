@@ -23,10 +23,10 @@ def feedback(request):
             fail_silently=False,
         )
         files = request.FILES.getlist('uploaded_file')
-        personal_data = personal_data_form.save()
-        feedback = form.save(commit=False)
-        feedback.personal_data = personal_data
-        feedback.save()
+        personal_data = personal_data_form.save(commit=False)
+        feedback = form.save()
+        personal_data.feedback = feedback
+        personal_data.save()
         for uploaded_file in files:
             models.Files.objects.create(
                 data=feedback,

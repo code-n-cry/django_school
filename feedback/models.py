@@ -7,27 +7,7 @@ def upload_directory_path(instance, filename):
     return f'uploads/{instance.data.pk}/{filename}'
 
 
-class PersonalData(django.db.models.Model):
-    email = django.db.models.EmailField(
-        verbose_name='электронная почта',
-        help_text='E-mail отправителя',
-        max_length=254,
-    )
-
-    class Meta:
-        verbose_name = 'персональные данные автора'
-        verbose_name_plural = 'персональные данные авторов'
-        default_related_name = 'personal_data'
-
-    def __str__(self):
-        return f'Персональные данные автора отзыва №{self.feedback.pk}'
-
-
 class Feedback(django.db.models.Model):
-    personal_data = django.db.models.ForeignKey(
-        PersonalData,
-        on_delete=django.db.models.CASCADE,
-    )
     text = django.db.models.TextField(
         verbose_name='содержание',
         help_text='Содержание отзыва',
@@ -50,6 +30,26 @@ class Feedback(django.db.models.Model):
 
     def __str__(self):
         return f'Отзыв №{self.pk}'
+
+
+class PersonalData(django.db.models.Model):
+    feedback = django.db.models.ForeignKey(
+        Feedback,
+        on_delete=django.db.models.CASCADE,
+    )
+    email = django.db.models.EmailField(
+        verbose_name='электронная почта',
+        help_text='E-mail отправителя',
+        max_length=254,
+    )
+
+    class Meta:
+        verbose_name = 'персональные данные автора'
+        verbose_name_plural = 'персональные данные авторов'
+        default_related_name = 'personal_data'
+
+    def __str__(self):
+        return f'Персональные данные автора отзыва №{self.feedback.pk}'
 
 
 class Files(django.db.models.Model):
