@@ -33,8 +33,8 @@ class NameEmailForm(BootstrapForm):
                 raise ValidationError(
                     'Пользователь с такой почтой уже зарегистрирован!'
                 )
-        else:
-            raise ValidationError('Введите новый email или оставьте старый!')
+            return self.cleaned_data['email']
+        raise ValidationError('Введите новый email или оставьте старый!')
 
 
 class SignUpForm(BootstrapForm):
