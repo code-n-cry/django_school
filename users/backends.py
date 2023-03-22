@@ -36,7 +36,8 @@ class EmailBackend(ModelBackend):
                         [
                             'Совершено много неудачных попыток входа в Ваш'
                             'аккаунт! Для безопасности он был отключён.\n',
-                            'Ваша ссылка для восстановления: http://127.0.0.1:8000',
+                            'Ваша ссылка для восстановления:'
+                            'http://127.0.0.1:8000',
                             django.urls.reverse(
                                 'auth:recover',
                                 kwargs={'username': user.get_username()},
