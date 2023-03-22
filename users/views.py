@@ -12,7 +12,7 @@ import users.forms
 import users.models
 
 
-def activate(request, username):
+def activate_new(request, username):
     user = users.models.User.objects.filter(
         username=username,
         date_joined__range=[
@@ -31,15 +31,32 @@ def activate(request, username):
     return redirect('homepage:index')
 
 
+def activate(request, username):
+    user = users.models.User.objects.filter(
+        username=username,
+        profile__last_failed_login_date__range=[
+            django.utils.timezone.now() - datetime.timedelta(weeks=1),
+            django.utils.timezone.now(),
+        ],
+    ).first()
+    if not user:
+        messages.error(request, 'Прошла неделя, ссылка уже не работает:(')
+        return redirect('homepage:index')
+    user.is_active = True
+    user.save()
+    messages.success(request, 'Аккаунт восстановлен')
+    return redirect('auth:login')
+
+
 def signup(request):
     form = users.forms.SignUpForm(request.POST or None)
     template = 'users/signup.html'
     if form.is_valid():
         email_text = ''.join(
             [
-                'Ваша ссылка для активации: ',
+                'Ваша ссылка для активации: http://127.0.0.1:8000',
                 django.urls.reverse(
-                    'auth:activate',
+                    'auth:activate_new',
                     kwargs={'username': form.cleaned_data['username']},
                 ),
             ]

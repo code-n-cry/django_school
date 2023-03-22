@@ -74,6 +74,28 @@ class ViewTest(TestCase):
             users.models.ProxyUser.objects.count(), users_count + 1
         )
 
+    def test_signup_normalizing_email(self):
+        users_count = users.models.ProxyUser.objects.count()
+        data = {
+            'username': self.test_username,
+            'email': self.test_email.upper(),
+            'password': self.test_password,
+            'repeat_password': self.test_password,
+        }
+        Client().post(
+            django.urls.reverse('auth:signup'),
+            data=data,
+            follow=True,
+        )
+        self.assertTrue(
+            users.models.ProxyUser.objects.filter(
+                email=self.test_email,
+            ).exists()
+        )
+        self.assertEqual(
+            users.models.ProxyUser.objects.count(), users_count + 1
+        )
+
     def test_signup_no_username(self):
         users_count = users.models.ProxyUser.objects.count()
         invalid_signup_data = {
@@ -153,7 +175,7 @@ class ViewTest(TestCase):
         )
         client.get(
             django.urls.reverse(
-                'auth:activate', kwargs={'username': self.test_username}
+                'auth:activate_new', kwargs={'username': self.test_username}
             )
         )
         self.assertTrue(
@@ -175,7 +197,7 @@ class ViewTest(TestCase):
         mock_now.return_value = utc.localize(timezone.datetime(2024, 4, 1))
         client.get(
             django.urls.reverse(
-                'auth:activate', kwargs={'username': self.test_username}
+                'auth:activate_new', kwargs={'username': self.test_username}
             )
         )
         self.assertFalse(
@@ -219,3 +241,81 @@ class ViewTest(TestCase):
             follow=True,
         )
         self.assertTrue(response.context['user'].is_active)
+
+    @override_settings(MAX_LOGIN_AMOUNT=1)
+    def test_login_block(self):
+        client = Client()
+        client.post(
+            django.urls.reverse('auth:signup'),
+            data=self.correct_signup_data,
+            follow=True,
+        )
+        credentials = {
+            'username': self.test_email,
+            'password': self.test_password + 'wrong',
+        }
+        response = client.post(
+            django.urls.reverse('auth:login'),
+            data=credentials,
+            follow=True,
+        )
+        self.assertFalse(response.context['user'].is_active)
+
+    @override_settings(MAX_LOGIN_AMOUNT=1)
+    def test_login_block_recovery(self):
+        client = Client()
+        client.post(
+            django.urls.reverse('auth:signup'),
+            data=self.correct_signup_data,
+            follow=True,
+        )
+        credentials = {
+            'username': self.test_email,
+            'password': self.test_password + 'wrong',
+        }
+        response = client.post(
+            django.urls.reverse('auth:login'),
+            data=credentials,
+            follow=True,
+        )
+        self.assertFalse(response.context['user'].is_active)
+        response = client.get(
+            django.urls.reverse(
+                'auth:recover', kwargs={'username': self.test_username}
+            )
+        )
+        self.assertTrue(
+            users.models.ProxyUser.objects.filter(username=self.test_username)
+            .first()
+            .is_active
+        )
+
+    @override_settings(MAX_LOGIN_AMOUNT=1)
+    @mock.patch('django.utils.timezone.now')
+    def test_login_block_recovery_doesn_work_within_week(self, mock_now):
+        client = Client()
+        client.post(
+            django.urls.reverse('auth:signup'),
+            data=self.correct_signup_data,
+            follow=True,
+        )
+        utc = pytz.UTC
+        mock_now.return_value = utc.localize(timezone.datetime(2023, 3, 20))
+        credentials = {
+            'username': self.test_email,
+            'password': self.test_password + 'wrong',
+        }
+        client.login(
+            **credentials,
+        )
+        mock_now.return_value = utc.localize(timezone.datetime(2023, 3, 31))
+        client.get(
+            django.urls.reverse(
+                'auth:recover', kwargs={'username': self.test_username}
+            )
+        )
+        self.assertFalse(
+            users.models.ProxyUser.objects.filter(username=self.test_username)
+            .first()
+            .is_active
+        )

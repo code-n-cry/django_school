@@ -136,6 +136,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+MAX_LOGIN_AMOUNT = 3
+
 AUTHENTICATION_BACKENDS = ('users.backends.EmailBackend',)
 
 LOGIN_URL = '/auth/login/'

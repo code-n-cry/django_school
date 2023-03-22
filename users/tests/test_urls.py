@@ -9,8 +9,14 @@ class StaticUrlTest(TestCase):
         response = Client().get(reverse('auth:signup'))
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
-    def test_activate_endpoint(self):
+    def test_recover_endpoint(self):
         response = Client().get(
-            reverse('auth:activate', kwargs={'username': '1'})
+            reverse('auth:recover', kwargs={'username': '1'})
+        )
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+
+    def test_activate_new_endpoint(self):
+        response = Client().get(
+            reverse('auth:activate_new', kwargs={'username': '1'})
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)

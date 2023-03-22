@@ -68,7 +68,14 @@ urlpatterns = [
     ),
     django.urls.path('signup/', users.views.signup, name='signup'),
     django.urls.path(
-        'activate/<str:username>', users.views.activate, name='activate'
+        'activate/new/<str:username>',
+        users.views.activate_new,
+        name='activate_new',
+    ),
+    django.urls.path(
+        'activate/<str:username>',
+        users.views.activate,
+        name='recover',
     ),
     django.urls.path(
         'unauthorized/', users.views.unauthorized, name='unauthorized'

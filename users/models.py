@@ -30,6 +30,15 @@ class Profile(models.Model):
         help_text='сколько раз пользователь пытался сварить кофе',
         default=0,
     )
+    failed_logins = models.IntegerField(
+        verbose_name='количество неудачных входов с момента удачного',
+        help_text='сколько раз был провален вход в аккаунт',
+        default=0,
+    )
+    last_failed_login_date = models.DateTimeField(
+        verbose_name='дата последней неудачной попытки входа',
+        null=True,
+    )
 
     class Meta:
         verbose_name = 'Информация о пользователе'
