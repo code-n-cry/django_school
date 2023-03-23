@@ -98,28 +98,41 @@ class SignUpForm(BootstrapForm):
             'password': django.forms.widgets.PasswordInput(),
         }
 
-    def clean(self):
+    def clean_username(self):
+        if 'username' not in self.cleaned_data.keys():
+            return self.add_error(
+                ProxyUser.username.field.name, 'Введите имя пользователя!'
+            )
+        return self.cleaned_data['username']
+
+    def clean_repeat_password(self):
         password = self.cleaned_data['password']
         confirmed_password = self.cleaned_data['repeat_password']
-        is_email_unique = ProxyUser.objects.filter(
-            email=self.cleaned_data['email']
-        ).exists()
         if password != confirmed_password:
-            self.add_error('repeat_password', 'Пароли не совпадают!')
+            return self.add_error('repeat_password', 'Пароли не совпадают!')
+        return confirmed_password
+
+    def clean_email(self):
         if not self.cleaned_data['email']:
             return self.add_error(ProxyUser.email.field.name, 'Укажите email!')
+        normalized_email = ProxyUser.objects.normalize_email(
+            self.cleaned_data['email']
+        )
+        is_email_unique = ProxyUser.objects.filter(
+            email=normalized_email
+        ).exists()
         if is_email_unique:
-            self.add_error(
+            return self.add_error(
                 ProxyUser.email.field.name,
                 'Пользователь с такой почтой уже зарегистрирован!',
             )
-        return self.cleaned_data
+        return normalized_email
 
     def save(self, commit=True):
         cleaned_data = super().clean()
         user = ProxyUser.objects.create_user(
             cleaned_data['username'],
-            ProxyUser.objects.normalize_email(cleaned_data['email']),
+            cleaned_data['email'],
             cleaned_data['password'],
             is_active=settings.USER_ACTIVE_DEFAULT,
         )
