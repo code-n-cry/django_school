@@ -5,13 +5,16 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 
+from users.managers import ActiveUserManager
+
 
 class EmailBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         user_model = get_user_model()
         try:
+            normalized_email = ActiveUserManager.normalize_email(username)
             user = user_model.objects.get(
-                Q(email=username) | Q(username=username)
+                Q(email=normalized_email) | Q(username=username)
             )
         except user_model.DoesNotExist:
             return None
