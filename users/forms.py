@@ -4,6 +4,7 @@ import django.utils.html
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db.models import Q
+from django.utils.translation import gettext_lazy
 
 from core.forms import BootstrapForm
 from users.models import Profile, ProxyUser
@@ -47,12 +48,12 @@ class NameEmailForm(BootstrapForm):
             ProxyUser.email.field.name,
         )
         labels = {
-            ProxyUser.username.field.name: 'Юзернейм',
+            ProxyUser.username.field.name: gettext_lazy('Юзернейм'),
             ProxyUser.email.field.name: 'E-mail',
         }
         help_texts = {
-            ProxyUser.username.field.name: 'Измените имя',
-            ProxyUser.email.field.name: 'Измените почту',
+            ProxyUser.username.field.name: gettext_lazy('Измените имя'),
+            ProxyUser.email.field.name: gettext_lazy('Измените почту'),
         }
 
     def clean_email(self):
@@ -62,18 +63,22 @@ class NameEmailForm(BootstrapForm):
             ).exists()
             if is_email_unique:
                 raise ValidationError(
-                    'Пользователь с такой почтой уже зарегистрирован!'
+                    gettext_lazy(
+                        'Пользователь с такой почтой уже зарегистрирован!'
+                    )
                 )
             return ProxyUser.objects.normalize_email(
                 self.cleaned_data['email']
             )
-        raise ValidationError('Введите новый email или оставьте старый!')
+        raise ValidationError(
+            gettext_lazy('Введите новый email или оставьте старый!')
+        )
 
 
 class SignUpForm(BootstrapForm):
     repeat_password = django.forms.CharField(
-        label='Повторите пароль',
-        help_text='Повторите введёный выше пароль',
+        label=gettext_lazy('Повторите пароль'),
+        help_text=gettext_lazy('Повторите введёный выше пароль'),
         widget=django.forms.widgets.PasswordInput(),
     )
 
@@ -85,14 +90,16 @@ class SignUpForm(BootstrapForm):
             ProxyUser.password.field.name,
         )
         labels = {
-            ProxyUser.username.field.name: 'Юзернейм',
+            ProxyUser.username.field.name: gettext_lazy('Юзернейм'),
             ProxyUser.email.field.name: 'E-mail',
-            ProxyUser.password.field.name: 'Пароль',
+            ProxyUser.password.field.name: gettext_lazy('Пароль'),
         }
         help_texts = {
-            ProxyUser.username.field.name: 'Введите желаемое имя',
-            ProxyUser.email.field.name: 'Введите вашу почту',
-            ProxyUser.password.field.name: 'Введите пароль',
+            ProxyUser.username.field.name: gettext_lazy(
+                'Введите желаемое имя'
+            ),
+            ProxyUser.email.field.name: gettext_lazy('Введите вашу почту'),
+            ProxyUser.password.field.name: gettext_lazy('Введите пароль'),
         }
         widgets = {
             'password': django.forms.widgets.PasswordInput(),
@@ -101,7 +108,8 @@ class SignUpForm(BootstrapForm):
     def clean_username(self):
         if 'username' not in self.cleaned_data.keys():
             return self.add_error(
-                ProxyUser.username.field.name, 'Введите имя пользователя!'
+                ProxyUser.username.field.name,
+                gettext_lazy('Введите имя пользователя!'),
             )
         return self.cleaned_data['username']
 
@@ -109,12 +117,16 @@ class SignUpForm(BootstrapForm):
         password = self.cleaned_data['password']
         confirmed_password = self.cleaned_data['repeat_password']
         if password != confirmed_password:
-            return self.add_error('repeat_password', 'Пароли не совпадают!')
+            return self.add_error(
+                'repeat_password', gettext_lazy('Пароли не совпадают!')
+            )
         return confirmed_password
 
     def clean_email(self):
         if not self.cleaned_data['email']:
-            return self.add_error(ProxyUser.email.field.name, 'Укажите email!')
+            return self.add_error(
+                ProxyUser.email.field.name, gettext_lazy('Укажите email!')
+            )
         normalized_email = ProxyUser.objects.normalize_email(
             self.cleaned_data['email']
         )
@@ -124,7 +136,9 @@ class SignUpForm(BootstrapForm):
         if is_email_unique:
             return self.add_error(
                 ProxyUser.email.field.name,
-                'Пользователь с такой почтой уже зарегистрирован!',
+                gettext_lazy(
+                    'Пользователь с такой почтой уже зарегистрирован!'
+                ),
             )
         return normalized_email
 
@@ -148,12 +162,16 @@ class ProfileInfoForm(BootstrapForm):
             Profile.birthday.field.name,
         )
         labels = {
-            Profile.avatar.field.name: 'Аватарка',
-            Profile.birthday.field.name: 'День рождения',
+            Profile.avatar.field.name: gettext_lazy('Аватарка'),
+            Profile.birthday.field.name: gettext_lazy('День рождения'),
         }
         help_texts = {
-            Profile.avatar.field.name: 'Загрузите аватарку(если хотите)',
-            Profile.birthday.field.name: 'Укажите день рождения(если хотите)',
+            Profile.avatar.field.name: gettext_lazy(
+                'Загрузите аватарку(если хотите)'
+            ),
+            Profile.birthday.field.name: gettext_lazy(
+                'Укажите день рождения(если хотите)'
+            ),
         }
         widgets = {
             Profile.birthday.field.name: django.forms.DateInput(

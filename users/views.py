@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext_lazy
 
 import users.forms
 import users.models
@@ -22,12 +23,13 @@ def activate_new(request, username):
     ).first()
     if not user:
         messages.error(
-            request, 'Прошло больше 12 часов, ссылка уже не работает:('
+            request,
+            gettext_lazy('Прошло больше 12 часов, ссылка уже не работает:('),
         )
         return redirect('homepage:index')
     user.is_active = True
     user.save()
-    messages.success(request, 'Вы активированы!')
+    messages.success(request, gettext_lazy('Вы активированы!'))
     return redirect('homepage:index')
 
 
@@ -40,7 +42,9 @@ def activate(request, username):
         ],
     ).first()
     if not user:
-        messages.error(request, 'Прошла неделя, ссылка уже не работает:(')
+        messages.error(
+            request, gettext_lazy('Прошла неделя, ссылка уже не работает:(')
+        )
         return redirect('homepage:index')
     user.is_active = True
     user.save()
@@ -52,7 +56,7 @@ def signup(request):
     form = users.forms.SignUpForm(request.POST or None)
     template = 'users/signup.html'
     if request.user.is_authenticated:
-        messages.info(request, 'Вы уже авторизованы!')
+        messages.info(request, gettext_lazy('Вы уже авторизованы!'))
         return redirect('homepage:index')
     if form.is_valid():
         email_text = ''.join(
@@ -67,14 +71,14 @@ def signup(request):
             ]
         )
         django.core.mail.send_mail(
-            'Активация'.encode('utf-8'),
+            gettext_lazy('Активация'),
             email_text,
             settings.EMAIL,
             [form.cleaned_data['email']],
             fail_silently=False,
         )
         form.save()
-        messages.success(request, 'Вы зарегистрированы!')
+        messages.success(request, gettext_lazy('Вы зарегистрированы!'))
         return redirect('auth:login')
     context = {
         'form': form,

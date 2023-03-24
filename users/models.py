@@ -2,6 +2,7 @@ import django.utils.html
 import sorl
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import gettext_lazy
 
 import users.managers
 
@@ -56,7 +57,7 @@ class Profile(models.Model):
                 f'<img src="{self.get_avatar_300x300().url}">'
             )
         self.avatar_tmb.short_description = 'превью'
-        return 'Аватарки нэ будет.'
+        return gettext_lazy('Аватарки нэ будет.')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

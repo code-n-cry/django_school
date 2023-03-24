@@ -4,6 +4,7 @@ import random
 import django.db.models
 import django.shortcuts
 import django.utils
+from django.utils.translation import gettext_lazy
 
 import catalog.models
 
@@ -32,8 +33,8 @@ def have_never_changed(request):
             catalog.models.Item.updated_at.field.name
         )
     )
-    title = 'Непроверенное'
-    header = 'Товары, ни разу не менявшиеся с момента добавления'
+    title = gettext_lazy('Непроверенное')
+    header = gettext_lazy('Товары, ни разу не менявшиеся с момента добавления')
     context = {'items': items, 'title': title, 'header': header}
     return django.shortcuts.render(request, template, context)
 
@@ -59,8 +60,8 @@ def added_last_week(request):
             )
             .order_by('?')
         )
-    title = 'Новинки'
-    header = 'Пять товаров, добавленных на этой неделе'
+    title = gettext_lazy('Новинки')
+    header = gettext_lazy('Пять товаров, добавленных на этой неделе')
     context = {'items': items, 'title': title, 'header': header}
     return django.shortcuts.render(request, template, context)
 
@@ -76,7 +77,7 @@ def edited_at_any_friday(request):
             updated_at__week_day=6,
             id__in=list(ids)[-1:-6],
         )
-    title = 'Пятница'
-    header = 'Последние пять товаров, изменённых в любую пятницу'
+    title = gettext_lazy('Пятница')
+    header = gettext_lazy('Последние пять товаров, изменённых в любую пятницу')
     context = {'items': items, 'title': title, 'header': header}
     return django.shortcuts.render(request, template, context)

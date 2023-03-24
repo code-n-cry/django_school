@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
+from django.utils.translation import gettext_lazy
 
 from users.managers import ActiveUserManager
 
@@ -34,20 +35,21 @@ class EmailBackend(ModelBackend):
                 if user.profile.failed_logins >= settings.MAX_LOGIN_AMOUNT:
                     user.is_active = False
                     user.save()
-                    email_text = ''.join(
-                        [
-                            'Совершено много неудачных попыток входа в Ваш'
-                            'аккаунт! Для безопасности он был отключён.\n',
-                            'Ваша ссылка для восстановления:'
-                            'http://127.0.0.0:8000',
-                            django.urls.reverse(
-                                'auth:recover',
-                                kwargs={'username': user.get_username()},
-                            ),
-                        ]
+                    email_text = gettext_lazy(
+                        ''.join(
+                            [
+                                'Совершено много неудачных попыток входа в Ваш'
+                                'аккаунт! Для безопасности он был отключён.\n',
+                                'Ваша ссылка для восстановления:'
+                                'http://127.0.0.0:8000',
+                            ]
+                        )
+                    ) + django.urls.reverse(
+                        'auth:recover',
+                        kwargs={'username': user.get_username()},
                     )
                     django.core.mail.send_mail(
-                        'Восстановление'.encode('utf-8'),
+                        gettext_lazy('Восстановление'),
                         email_text,
                         settings.EMAIL,
                         [user.email],

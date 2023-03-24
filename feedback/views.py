@@ -1,6 +1,7 @@
 import django.core.mail
 import django.shortcuts
 from django.conf import settings
+from django.utils.translation import gettext_lazy
 
 from feedback import forms, models
 
@@ -16,7 +17,7 @@ def feedback(request):
         (form.is_valid(), personal_data_form.is_valid(), file_form.is_valid())
     ):
         django.core.mail.send_mail(
-            'Обращение'.encode('utf-8'),
+            gettext_lazy('Обращение'),
             form.cleaned_data['text'],
             settings.EMAIL,
             [personal_data_form.cleaned_data['email']],
