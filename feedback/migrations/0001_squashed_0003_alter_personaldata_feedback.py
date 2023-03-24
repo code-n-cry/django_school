@@ -7,11 +7,6 @@ import feedback.models
 
 
 class Migration(migrations.Migration):
-    replaces = [
-        ('feedback', '0001_squashed_0004_alter_feedback_personal_data'),
-        ('feedback', '0002_auto_20230322_1003'),
-        ('feedback', '0003_alter_personaldata_feedback'),
-    ]
 
     initial = True
 

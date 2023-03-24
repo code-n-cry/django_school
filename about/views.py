@@ -1,11 +1,9 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def description(request):
-    template = 'about/description.html'
-    return render(request, template)
+class DescriptionView(TemplateView):
+    template_name = 'about/description.html'
 
 
-def thanks_for_feedback(request):
-    template = 'about/feedback_success.html'
-    return render(request, template)
+class ThanksForFeedbackView(TemplateView):
+    template_name = 'about/feedback_success.html'

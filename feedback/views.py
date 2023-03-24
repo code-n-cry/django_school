@@ -2,7 +2,6 @@ import django.core.mail
 import django.shortcuts
 from django.conf import settings
 from django.utils.translation import gettext_lazy
-
 from feedback import forms, models
 
 
@@ -10,7 +9,9 @@ def feedback(request):
     file_form = forms.FeedbackFileForm(
         request.POST or None, request.FILES or None
     )
-    personal_data_form = forms.FeedbackPersonalDataForm(request.POST or None)
+    personal_data_form = forms.FeedbackPersonalDataForm(
+        request.POST or None,
+    )
     form = forms.FeedbackForm(request.POST or None)
     template = 'feedback/feedback_form.html'
     if all(
