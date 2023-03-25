@@ -242,6 +242,25 @@ class ViewTest(TestCase):
         )
         self.assertTrue(response.context['user'].is_active)
 
+    def test_login_with_not_normalized_email(self):
+        client = Client()
+        client.post(
+            django.urls.reverse('auth:signup'),
+            data=self.correct_signup_data,
+            follow=True,
+        )
+        email = 'test+tag@email.com'
+        credentials = {
+            'username': email,
+            'password': self.test_password,
+        }
+        response = client.post(
+            django.urls.reverse('auth:login'),
+            data=credentials,
+            follow=True,
+        )
+        self.assertTrue(response.context['user'].is_active)
+
     @override_settings(MAX_LOGIN_AMOUNT=1)
     def test_login_block(self):
         client = Client()

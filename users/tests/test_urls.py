@@ -20,3 +20,11 @@ class StaticUrlTest(TestCase):
             reverse('auth:activate_new', kwargs={'username': '1'})
         )
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
+
+    def test_user_list_endpoint(self):
+        response = Client().get(reverse('users:user_list'))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_profile_endpoint(self):
+        response = Client().get(reverse('users:profile'))
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
