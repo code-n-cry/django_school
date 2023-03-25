@@ -3,6 +3,7 @@ import django.urls
 from django.conf import settings
 
 import users.forms
+import users.views
 
 app_name = 'auth'
 
@@ -71,18 +72,22 @@ urlpatterns = [
         ),
         name='password_reset_complete',
     ),
-    django.urls.path('signup/', users.views.signup, name='signup'),
+    django.urls.path(
+        'signup/', users.views.SignUpView.as_view(), name='signup'
+    ),
     django.urls.path(
         'activate/new/<str:username>',
-        users.views.activate_new,
+        users.views.ActivateNewView.as_view(),
         name='activate_new',
     ),
     django.urls.path(
         'activate/<str:username>',
-        users.views.activate,
+        users.views.ActivateView.as_view(),
         name='recover',
     ),
     django.urls.path(
-        'unauthorized/', users.views.unauthorized, name='unauthorized'
+        'unauthorized/',
+        users.views.UnauthorizedView.as_view(),
+        name='unauthorized',
     ),
 ]

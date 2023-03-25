@@ -1,11 +1,12 @@
 from http import HTTPStatus
 
+from django.db import transaction
 from django.db.models import F
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from users.models import Profile
+
 import catalog.models
-from django.db import transaction
+from users.models import Profile
 
 
 class HomeView(TemplateView):
@@ -24,6 +25,8 @@ class CoffeeView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            Profile.objects.filter(pk=request.user.profile.id).update(coffee_count=F('coffee_count') + 1)
+            Profile.objects.filter(pk=request.user.profile.id).update(
+                coffee_count=F('coffee_count') + 1
+            )
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context, status=HTTPStatus.IM_A_TEAPOT)

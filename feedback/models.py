@@ -35,7 +35,6 @@ class Feedback(django.db.models.Model):
 class PersonalData(django.db.models.Model):
     feedback = django.db.models.ForeignKey(
         Feedback,
-        null=True,
         on_delete=django.db.models.CASCADE,
     )
     email = django.db.models.EmailField(

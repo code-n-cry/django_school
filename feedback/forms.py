@@ -1,9 +1,10 @@
 from django.forms.widgets import ClearableFileInput
 from django.utils.translation import gettext_lazy
-from users.managers import ActiveUserManager
-from users.models import ProxyUser
+
 from core.forms import BootstrapForm
 from feedback import models
+from users.managers import ActiveUserManager
+from users.models import ProxyUser
 
 
 class FeedbackFileForm(BootstrapForm):
@@ -37,7 +38,6 @@ class FeedbackPersonalDataForm(BootstrapForm):
         help_texts = {
             models.PersonalData.email.field.name: gettext_lazy('Ваша почта'),
         }
-
 
 
 class FeedbackForm(BootstrapForm):
