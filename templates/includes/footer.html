@@ -8,11 +8,11 @@
       {% endwith %}
           <img src="{% static 'img/logo/favicon-32x32.png' %}"  class="d-inline-block align-top" alt="Логотип">
           {% now "Y" as current_year %}
-          <span id="footer_date">© {{ current_year }} Schukin Egor</span>
+            <span id="footer_date">© {{ current_year }} Schukin Egor</span>
         </a>
       <ul class="navbar-nav nav col-md-4 justify-content-end list-unstyled d-flex">
         {% with request.resolver_match.view_name as view_name %}
-        <li class="nav-item"><a class="nav-link {% if view_name == 'feedback:feedback' %}active disabled{% endif %}" href="{% url 'feedback:feedback' %}">{% translate 'Обратная связь' %}</a>
+          <li class="nav-item"><a class="nav-link {% if view_name == 'feedback:feedback' %}active disabled{% endif %}" href="{% url 'feedback:feedback' %}">{% translate 'Обратная связь' %}</a>
         {% endwith %}
         <li class="ms-3"><a class="text-muted" href="https://github.com/code-n-cry" target="_blank"><img src="{% static 'favicon/github.svg' %}" alt="Иконка GitHub"></a></li>
         <li class="ms-3"><a class="text-muted" href="https://t.me/brown_eyed_minion" target="_blank"><img src="{% static 'favicon/telegram.svg' %}" alt="Иконка Telegram"></a></li>

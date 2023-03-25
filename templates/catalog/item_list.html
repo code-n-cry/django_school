@@ -2,29 +2,29 @@
 {% load static %}
 {% load i18n %}
 {% block title %}
-<title>{% translate 'Каталог' %}</title>
+  <title>{% translate 'Каталог' %}</title>
 {% endblock %}
 {% block content %}
-<div class="container">
-  <div class="d-flex justify-content-center">
-    <div class="text-wrap p-3" id="catalog_header">
-        <h1>{% translate 'Список товаров' %}</h1>
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <div class="text-wrap p-3" id="catalog_header">
+          <h1>{% translate 'Список товаров' %}</h1>
+      </div>
     </div>
+    {% regroup items|dictsort:"category.name" by category.name as groupped_items %}
+      {% for category in groupped_items %}
+        <div class="d-flex justify-content-left">
+          <h3 class="text-wrap p-3">{% translate 'Категория' %}: <b>{{ category.grouper|title }}</b></h3>
+        </div>
+        <div class="row row-cols-3">
+        {% for item in category.list %}
+          {% include "includes/item_card.html" %}
+        {% endfor %}
+        </div>
+      {% empty %}
+        <div class="text-wrap p-3" id="catalog_header">
+          <h3>{% translate 'Опубликованных товаров нет' %}...</h3>
+        </div>
+      {% endfor %}
   </div>
-  {% regroup items|dictsort:"category.name" by category.name as groupped_items %}
-  {% for category in groupped_items %}
-    <div class="d-flex justify-content-left">
-      <h3 class="text-wrap p-3">{% translate 'Категория' %}: <b>{{ category.grouper|title }}</b></h3>
-    </div>
-    <div class="row row-cols-3">
-    {% for item in category.list %}
-      {% include "includes/item_card.html" %}
-    {% endfor %}
-    </div>
-  {% empty %}
-    <div class="text-wrap p-3" id="catalog_header">
-      <h3>{% translate 'Опубликованных товаров нет' %}...</h3>
-    </div>
-  {% endfor %}
-</div>
 {% endblock %}

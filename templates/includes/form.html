@@ -13,9 +13,9 @@
     {% endif %}
 {% endfor %}
 {% if profile_form %}
-{% if request.user.profile.avatar %}
-{{ request.user.profile.avatar_tmb }}
-{% endif %}
-{{ profile_form.as_p }}
+  {% if request.user.profile.avatar %}
+    {{ request.user.profile.avatar_tmb }}
+  {% endif %}
+  {{ profile_form.as_p }}
 {% endif %}
 </div>

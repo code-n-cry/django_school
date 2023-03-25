@@ -2,19 +2,19 @@
 {% load static %}
 {% load i18n %}
 {% block title %}
-<title>{% translate 'Спасибо' %}!</title>
+  <title>{% translate 'Спасибо' %}!</title>
 {% endblock %}
 {% block content %}
-<div class="container">
-  <div class="d-flex justify-content-center">
-    <div class="align-self-center p-2">
-      <img src="{% static 'img/feedback_success.gif' %}" id="about_header_img" alt="Изображение енота, хлопающего в ладоши">
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <div class="align-self-center p-2">
+        <img src="{% static 'img/feedback_success.gif' %}" id="about_header_img" alt="Изображение енота, хлопающего в ладоши">
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="align-self-center p-2">
+        <h2>{% translate 'Спасибо за ваше мнение! Мы его <b>обязательно</b> учтём' %}</h2>
+      </div>
     </div>
   </div>
-  <div class="d-flex justify-content-center">
-    <div class="align-self-center p-2">
-      <h2>{% translate 'Спасибо за ваше мнение! Мы его <b>обязательно</b> учтём' %}</h2>
-    </div>
-  </div>
-</div>
 {% endblock %}

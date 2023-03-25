@@ -2,19 +2,19 @@
 {% load static %}
 {% load i18n %}
 {% block title %}
-<title>{% translate "Ваш профиль" %}</title>
+  <title>{% translate "Ваш профиль" %}</title>
 {% endblock title %}
 {% block content %}
-<div class="container">
-  <h2 align="center">{% translate "Ваш профиль" %}</h2>
-  <div class="d-flex justify-content-left">
-    <form method="post" enctype='multipart/form-data'>
-      {% include 'includes/form.html' %}
-      <button type="submit" class="btn btn-dark">{% translate 'Сохранить' %}</button>
-      <a class="btn btn-success" href="{% url 'homepage:coffee' %}">{% translate 'Выпить кофе' %}</a>
-      <a class="btn btn-warning" href="{% url 'auth:password_change' %}">{% translate 'Сменить пароль' %}</a>
-      <a class="btn btn-danger" href="{% url 'auth:logout' %}">{% translate 'Выйти' %}</a>
-    </form>
+  <div class="container">
+    <h2 align="center">{% translate "Ваш профиль" %}</h2>
+    <div class="d-flex justify-content-left">
+      <form method="post" enctype='multipart/form-data'>
+        {% include 'includes/form.html' %}
+        <button type="submit" class="btn btn-dark">{% translate 'Сохранить' %}</button>
+        <a class="btn btn-success" href="{% url 'homepage:coffee' %}">{% translate 'Выпить кофе' %}</a>
+        <a class="btn btn-warning" href="{% url 'auth:password_change' %}">{% translate 'Сменить пароль' %}</a>
+        <a class="btn btn-danger" href="{% url 'auth:logout' %}">{% translate 'Выйти' %}</a>
+      </form>
+    </div>
   </div>
-</div>
 {% endblock content %}

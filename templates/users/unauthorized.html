@@ -2,15 +2,15 @@
 {% load static %}
 {% load i18n %}
 {% block title %}
-<title>{% translate "Вы не авторизованы" %}!</title>
+  <title>{% translate "Вы не авторизованы" %}!</title>
 {% endblock title %}
 {% block content %}
-<div class="container">
-  <h2 align="center">{% translate "Для доступа к профилю необходима авторизация" %}</h2>
-  <div class="d-flex flex-row justify-content-center mb-3">
-    <div class="p-2"><a class="btn btn-dark" href="{% url 'auth:login' %}">Вход</a></div>
-    <div class="p-2"><a class="btn btn-warning" href="{% url 'auth:signup' %}">Регистрация</a></div>
+  <div class="container">
+    <h2 align="center">{% translate "Для доступа к профилю необходима авторизация" %}</h2>
+    <div class="d-flex flex-row justify-content-center mb-3">
+      <div class="p-2"><a class="btn btn-dark" href="{% url 'auth:login' %}">Вход</a></div>
+      <div class="p-2"><a class="btn btn-warning" href="{% url 'auth:signup' %}">Регистрация</a></div>
+    </div>
   </div>
-</div>
 {% endblock content %}
 
