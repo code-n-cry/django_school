@@ -1,6 +1,5 @@
 import django.core.mail
 from django.conf import settings
-from django.http import HttpResponseRedirect
 from django.utils.translation import gettext_lazy
 from django.views.generic import TemplateView
 

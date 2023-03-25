@@ -1,8 +1,6 @@
 from http import HTTPStatus
 
-from django.db import transaction
 from django.db.models import F
-from django.shortcuts import render
 from django.views.generic import TemplateView
 
 import catalog.models

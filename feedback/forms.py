@@ -3,8 +3,6 @@ from django.utils.translation import gettext_lazy
 
 from core.forms import BootstrapForm
 from feedback import models
-from users.managers import ActiveUserManager
-from users.models import ProxyUser
 
 
 class FeedbackFileForm(BootstrapForm):
