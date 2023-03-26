@@ -56,8 +56,7 @@ class TimezoneMiddleware:
 
     def __call__(self, request):
         try:
-            # get django_timezone from cookie
-            tzname = request.COOKIES.get("django_timezone")
+            tzname = request.COOKIES.get('django_timezone')
             if tzname:
                 timezone.activate(zoneinfo.ZoneInfo(tzname))
             else:
