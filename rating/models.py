@@ -14,9 +14,24 @@ class Rating(models.Model):
         (5, _('Любовь')),
     ]
 
-    rating = models.PositiveSmallIntegerField(choices=RATING_CHOICES)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField(
+        verbose_name='оценка',
+        choices=RATING_CHOICES,
+        blank=True,
+        null=True,
+    )
+    item = models.ForeignKey(
+        Item,
+        verbose_name='товар',
+        on_delete=models.CASCADE,
+        related_name='item',
+    )
+    user = models.ForeignKey(
+        User,
+        verbose_name='пользователь',
+        on_delete=models.CASCADE,
+        related_name='user',
+    )
 
     class Meta:
         constraints = [
@@ -24,3 +39,6 @@ class Rating(models.Model):
                 name='unique_rating', fields=['item', 'user']
             )
         ]
+        verbose_name = 'оценка'
+        verbose_name_plural = 'оценки'
+        default_related_name = 'rating'
