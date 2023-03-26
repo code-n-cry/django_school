@@ -69,6 +69,7 @@ class SignUpView(FormView):
     model = users.models.ProxyUser
     success_url = django.urls.reverse_lazy('auth:login')
     template_name = 'users/signup.html'
+    http_method_names = ['get', 'head', 'post']
 
     def form_valid(self, form):
         email_text = ''.join(
@@ -133,17 +134,16 @@ class ProfileView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         data_form = users.forms.NameEmailForm(
-            request.POST,
-            request.FILES or None,
+            request.POST, instance=request.user
         )
         profile_form = users.forms.ProfileInfoForm(
-            request.POST,
+            request.POST, request.FILES or None, instance=request.user.profile
         )
         if all((data_form.is_valid(), profile_form.is_valid())):
             if request.FILES:
                 request.user.profile.avatar = request.FILES['avatar']
-            profile_form.save()
             data_form.save()
+            profile_form.save()
         extra_context = {'form': data_form, 'profile_form': profile_form}
         context = self.get_context_data(**kwargs)
         context.update(extra_context)
