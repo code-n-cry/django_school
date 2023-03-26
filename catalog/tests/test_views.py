@@ -13,12 +13,12 @@ class ViewTests(TestCase):
 
     def test_existing_item_page_shows_correct_context(self):
         response = Client().get(
-            django.urls.reverse('catalog:item_detail', kwargs={'number': 1}),
+            django.urls.reverse('catalog:item_detail', kwargs={'pk': 1}),
         )
         self.assertIn('item', response.context)
 
     def test_non_existent_item_page_not_found(self):
         response = Client().get(
-            django.urls.reverse('catalog:item_detail', kwargs={'number': 0}),
+            django.urls.reverse('catalog:item_detail', kwargs={'pk': 0}),
         )
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)

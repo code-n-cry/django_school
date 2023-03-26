@@ -20,6 +20,7 @@ class HomeView(TemplateView):
 
 class CoffeeView(TemplateView):
     template_name = 'homepage/coffee.html'
+    http_method_names = ['get']
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
