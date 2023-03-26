@@ -1,11 +1,30 @@
-from django.http import HttpResponse
+from http import HTTPStatus
+
+from django.db.models import F
+from django.views.generic import TemplateView
+
+import catalog.models
+from users.models import Profile
 
 
-def home(request):
-    return HttpResponse('<body>Главная страница O_o</body>')
+class HomeView(TemplateView):
+    template_name = 'homepage/home.html'
+
+    def get(self, request, *args, **kwargs):
+        items = catalog.models.Item.objects.published().filter(is_on_main=True)
+        extra_context = {'items': items}
+        context = self.get_context_data(**kwargs)
+        context.update(extra_context)
+        return self.render_to_response(context)
 
 
-def coffee(request):
-    response = HttpResponse('Я чайник', content_type='text/plain')
-    response.status_code = 418
-    return response
+class CoffeeView(TemplateView):
+    template_name = 'homepage/coffee.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            Profile.objects.filter(pk=request.user.profile.id).update(
+                coffee_count=F('coffee_count') + 1
+            )
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context, status=HTTPStatus.IM_A_TEAPOT)

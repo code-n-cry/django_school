@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block title %}
+    <title>{% translate "Список пользователей" %}</title>
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <h2 align="center">{% translate "Список активных пользователей" %}</h2>
+        <div class="d-flex justify-content-center">
+            <ul>
+                {% for name in usernames %}
+                    <li>
+                        <a href="/users/detail/{{ name.id }}/">{{ name.username }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock content %}

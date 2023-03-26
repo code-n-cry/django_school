@@ -1,11 +1,10 @@
-
-<h1>Статус пайплайна:</h1>
+<h1>Django_school:</h1>
 
 [![Python linting](https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml/badge.svg)](https://github.com/code-n-cry/django_school/actions/workflows/python-linting.yml)
 
-[![Python testing](https://github.com/code-n-cry/django_school/actions/workflows/django.yml/badge.svg)](https://github.com/code-n-cry/django_school/actions/workflows/django.yml)
+[![Python testing](https://github.com/code-n-cry/django_school/actions/workflows/python-testing.yml/badge.svg)](https://github.com/code-n-cry/django_school/actions/workflows/python-testing.yml)
 
-<h1>Руководство по запуску</h1>
+<h2>Руководство по запуску</h2>
 Для включения в dev-режиме:
 <ul>
 <li>Клонировать репозиторий с помощью git.<br>Для этого в консоль вводим команду:<br><blockquote>git clone https://github.com/code-n-cry/django_school.git</blockquote>Которая <b>скопирует папку с кодом</b> из Github</li>
@@ -76,3 +75,69 @@
 <code>cp .env.example .env</code><br>
 и, при необходимости, отредактируйте.
 </ul>
+<h2>Данные администратора:</h2><br>
+Пользователь: <b>admin</b><br>
+Пароль: <b>admin</b>
+<h2>Запуск БД</h2>
+<ol>
+<li>Начальная миграция
+<table>
+<tr>
+<th>Linux/MacOS</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>python3 manage.py migrate</td>
+<td>python manage.py migrate</td>
+</tr>
+</table>
+<li>Создание админа(superuser):
+<table>
+<tr>
+<th>Linux/MacOS</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>python3 manage.py createsuperuser</td>
+<td>python manage.py createsuperuser</td>
+</tr>
+</table>
+Далее следовать указаниям консоли
+</li>
+<li>Добавление в миграцию данных catalog
+<table>
+<tr>
+<th>Linux/MacOS</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>python3 manage.py makemigrations</td>
+<td>python manage.py makemigrations</td>
+</tr>
+</table>
+</li>
+<li>Добавление моделей catalog в БД
+<table>
+<tr>
+<th>Linux/MacOS</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>python3 manage.py migrate catalog</td>
+<td>python manage.py migrate catalog</td>
+</tr>
+</table>
+<li>Загрузка фикстур(начальных данных) приложения каталог
+<table>
+<tr>
+<th>Linux/MacOS</th>
+<th>Windows</th>
+</tr>
+<tr>
+<td>python manage.py loaddata fixture.json --app catalog</td>
+<td>python3 manage.py loaddata fixture.json --app catalog</td>
+</tr>
+</table>
+<h1>ER-диаграмма:</h1>
+
+<img src="https://github.com/code-n-cry/django_school/blob/main/image.png">

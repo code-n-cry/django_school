@@ -1,5 +1,9 @@
-from django.http import HttpResponse
+from django.views.generic import TemplateView
 
 
-def description(request):
-    return HttpResponse('<body>Об этом проекте говорить ещё нечего (</body>')
+class DescriptionView(TemplateView):
+    template_name = 'about/description.html'
+
+
+class ThanksForFeedbackView(TemplateView):
+    template_name = 'about/feedback_success.html'

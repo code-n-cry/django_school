@@ -13,21 +13,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
-from . import settings
+from django.urls import include, path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
-    path('catalog/', include('catalog.urls')),
     path('about/', include('about.urls')),
+    path('catalog/', include('catalog.urls')),
+    path('feedback/', include('feedback.urls')),
+    path('users/', include('users.urls.users')),
+    path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('auth/', include('users.urls.auth')),
+    path('auth/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
 
     urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
-
-if not settings.REVERSE:
-    settings.MIDDLEWARE.remove('lyceum.middleware.middlewares.SimpleMiddleware')
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    )
