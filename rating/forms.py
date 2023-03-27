@@ -1,4 +1,5 @@
 from core.forms import BootstrapForm
+
 from .models import Rating
 
 

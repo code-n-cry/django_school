@@ -5,7 +5,7 @@ from catalog import converters, views
 app_name = 'catalog'
 register_converter(converters.IntConverter, 'positive')
 urlpatterns = [
-    path("", views.ItemListView.as_view(), name='item_list'),
+    path('', views.ItemListView.as_view(), name='item_list'),
     path('<int:pk>/', views.ItemDetailView.as_view(), name='item_detail'),
     path(
         'friday/',

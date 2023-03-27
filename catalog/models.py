@@ -57,7 +57,7 @@ class Item(core.models.PublishedWithNameBaseModel):
     )
     text = ckeditor.fields.RichTextField(
         'описание',
-        help_text='Описание(>2 символов, содержит 'превосходно, роскошно')',
+        help_text='Описание(>2 символов, содержит "превосходно, роскошно")',
         validators=[
             catalog.validators.ValidateMustContain('превосходно', 'роскошно'),
         ],

@@ -41,9 +41,9 @@ class ItemDetailView(DetailView):
         if len(ratings) == 0:
             rating_average = 0
         else:
-            rating_average = sum(
-                map(lambda x: x.rating or 0, ratings)
-            ) / len(ratings)
+            rating_average = sum(map(lambda x: x.rating or 0, ratings)) / len(
+                ratings
+            )
         context['rating_avg'] = rating_average
 
         context['rating_form'] = self.rating_form_class()

@@ -173,7 +173,7 @@ class Migration(migrations.Migration):
                 (
                     'text',
                     ckeditor.fields.RichTextField(
-                        help_text='Описание(>2 символов, содержит 'превосходно, роскошно')',
+                        help_text='Описание(>2 символов, содержит "превосходно, роскошно")',
                         validators=[
                             catalog.validators.ValidateMustContain(
                                 'превосходно', 'роскошно'
