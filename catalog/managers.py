@@ -22,13 +22,13 @@ class ItemManager(django.db.models.Manager):
                 catalog.models.Item.id.field.name,
                 catalog.models.Item.name.field.name,
                 catalog.models.Item.text.field.name,
-                "__".join(
+                '__'.join(
                     [
                         catalog.models.Item.category.field.name,
                         catalog.models.Category.name.field.name,
                     ]
                 ),
-                "__".join(
+                '__'.join(
                     [
                         catalog.models.Item.main_image.related.related_name,
                         catalog.models.ItemMainImage.image.field.name,

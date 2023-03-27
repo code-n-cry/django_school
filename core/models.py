@@ -133,7 +133,7 @@ class ImageModel(django.db.models.Model):
     def image_tmb(self):
         if self.image:
             return django.utils.html.mark_safe(
-                f'<img src="{self.get_image_300x300().url}">'
+                f'<img src='{self.get_image_300x300().url}'>'
             )
         self.image_tmb.short_description = 'превью'
         return '(Фото товара)'

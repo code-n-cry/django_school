@@ -6,19 +6,19 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("catalog", "0001_squashed_0002_auto_20230310_1656"),
-        ("rating", "0001_initial"),
+        ('catalog', '0001_squashed_0002_auto_20230310_1656'),
+        ('rating', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name="rating",
-            name="item",
+            model_name='rating',
+            name='item',
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
-                related_name="rating",
-                to="catalog.item",
-                verbose_name="товар",
+                related_name='rating',
+                to='catalog.item',
+                verbose_name='товар',
             ),
         ),
     ]

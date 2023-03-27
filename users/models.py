@@ -54,7 +54,7 @@ class Profile(models.Model):
     def avatar_tmb(self):
         if self.avatar:
             return django.utils.html.mark_safe(
-                f'<img src="{self.get_avatar_300x300().url}">'
+                f'<img src='{self.get_avatar_300x300().url}'>'
             )
         self.avatar_tmb.short_description = 'превью'
         return gettext_lazy('Аватарки нэ будет.')
