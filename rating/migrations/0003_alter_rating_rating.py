@@ -4,15 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('rating', '0002_alter_rating_item'),
+        ("rating", "0002_alter_rating_item"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='rating',
-            name='rating',
-            field=models.PositiveSmallIntegerField(choices=[(1, 'Ненависть'), (2, 'Неприязнь'), (3, 'Нейтрально'), (4, 'Обожание'), (5, 'Любовь')], null=True, verbose_name='оценка'),
+            model_name="rating",
+            name="rating",
+            field=models.PositiveSmallIntegerField(
+                choices=[
+                    (1, "Ненависть"),
+                    (2, "Неприязнь"),
+                    (3, "Нейтрально"),
+                    (4, "Обожание"),
+                    (5, "Любовь"),
+                ],
+                null=True,
+                verbose_name="оценка",
+            ),
         ),
     ]

@@ -43,7 +43,6 @@ class ItemDetailView(DetailView):
         ) / len(ratings)
 
         context["rating_form"] = self.rating_form_class()
-
         ratings_map_users = list(map(lambda x: x.user_id, ratings))
         context["user_rating"] = RATING_DONT_EXIST_VALUE
         if self.request.user.is_authenticated:
@@ -73,8 +72,6 @@ class ItemDetailView(DetailView):
                     item=self.object,
                     user=request.user,
                 )
-                self.object = self.get_object()
-            context = self.get_context_data(**kwargs)
         # delete rating button
         if (
             "delete" in request.POST
@@ -83,9 +80,9 @@ class ItemDetailView(DetailView):
         ):
             user_rating.delete()
             catalog.models.Item.objects
-            self.object = self.get_object()
-            context = self.get_context_data(**kwargs)
-        return self.render_to_response(context)
+        return django.shortcuts.redirect(
+            "catalog:item_detail", pk=kwargs.get("pk")
+        )
 
 
 class HaveNeverChangedView(ListView):

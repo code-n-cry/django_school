@@ -13,6 +13,26 @@
     </div>
     <div class="align-self-center p-2">
       <h3>{% translate 'Название' %}: {{ item.name }}</h3>
+      <div>
+        <p>Оценка: {{ rating_avg|floatformat:2 }} (всего оценок: {{ item.rating.all|length }})</p>
+        {% if request.user.is_authenticated %}
+          {% if user_rating != 0 %}
+            <p>Ваша оценка: {{ user_rating.rating }}</p>
+            {% else %}
+            <p>Вы не поставили оценку</p>
+          {% endif %}
+          <div class="mt-2">
+            <form method="POST">
+              {% include "includes/form.html" with form=rating_form %}
+              <button class="btn btn-primary mt-1" type="submit">Отправить</button>
+            </form>
+            <form class="mt-2" method="POST">
+              {% csrf_token %}
+              <button class="btn btn-danger" type="submit" name="delete" value="yes">Удалить</button>
+            </form>
+          </div>
+        {% endif %}
+      </div>
     </div>
     {% if item.main_image.image.url %}
       <div class="align-self-center p-2">
