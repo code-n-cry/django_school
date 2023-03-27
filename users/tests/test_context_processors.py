@@ -33,15 +33,13 @@ class ContextProcessorTest(TestCase):
         super().tearDown()
 
     def test_birthday_today_in_context(self):
-        client = Client()
         test_user = users.models.ProxyUser.objects.create_user(
             username=self.test_username, password=self.test_password
         )
         users.models.Profile.objects.create(
             user=test_user, birthday=self.birthday_today
         )
-        client.login(credentials=self.test_user_data)
-        response = client.get(reverse('homepage:index'))
+        response = Client().get(reverse('homepage:index'))
         self.assertIn('birthday_persons', response.context)
         self.assertEqual(
             response.context['birthday_persons'][0]['username'],
@@ -49,15 +47,13 @@ class ContextProcessorTest(TestCase):
         )
 
     def test_birthday_same_day_in_context(self):
-        client = Client()
         test_user = users.models.ProxyUser.objects.create_user(
             username=self.test_username, password=self.test_password
         )
         users.models.Profile.objects.create(
             user=test_user, birthday=self.birthday_same_day_one_year_ago
         )
-        client.login(credentials=self.test_user_data)
-        response = client.get(reverse('homepage:index'))
+        response = Client().get(reverse('homepage:index'))
         self.assertIn('birthday_persons', response.context)
         self.assertEqual(
             response.context['birthday_persons'][0]['username'],
@@ -65,15 +61,13 @@ class ContextProcessorTest(TestCase):
         )
 
     def test_birthday_not_same_day_not_in_context(self):
-        client = Client()
         test_user = users.models.ProxyUser.objects.create_user(
             username=self.test_username, password=self.test_password
         )
         users.models.Profile.objects.create(
             user=test_user, birthday=self.birthday_not_this_day
         )
-        client.login(credentials=self.test_user_data)
-        response = client.get(reverse('homepage:index'))
+        response = Client().get(reverse('homepage:index'))
         self.assertFalse(
             response.context['birthday_persons'],
         )
