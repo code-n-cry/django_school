@@ -15,6 +15,7 @@ def birthday_persons(request):
             profile__birthday__day=timezone.now().date().day,
             profile__birthday__month=timezone.now().date().month,
         ).values(
+            users.models.ProxyUser.id.field.name,
             users.models.ProxyUser.username.field.name,
             users.models.ProxyUser.email.field.name,
         )

@@ -16,7 +16,20 @@
     <link href="{% static 'css/own_style.css' %}" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     {% include "includes/header.html" %}
-    <main>
+    <main style="margin-top: 4.6rem">
+      {% if birthday_persons %}
+      <div class="container-fluid overflow-hidden bg-warning">
+        <p class="marquee"> 
+          <span>
+          С ДНЁМ РОЖДЕНИЯ!
+          {% for person in birthday_persons %}
+            {{forloop.counter}}.<a class="text-black" href="{% url "users:user_detail" person.id %}">{{ person.username }}({{ person.email }})</a>
+            {% if not forloop.last %}-{% endif %}
+          {% endfor %}
+          </span>
+        </p>
+      </div>
+      {% endif %}
       {% block content %}{% endblock %}
     </main>
     {% include "includes/footer.html" %}
