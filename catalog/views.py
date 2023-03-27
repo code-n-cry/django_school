@@ -19,7 +19,7 @@ class ItemListView(ListView):
     http_method_names = ['get', 'head']
 
 
-RATING_DONT_EXIST_VALUE = 0
+RATING_DOESNT_EXIST_VALUE = 0
 
 
 class ItemDetailView(DetailView):
@@ -48,13 +48,14 @@ class ItemDetailView(DetailView):
 
         context['rating_form'] = self.rating_form_class()
         ratings_map_users = list(map(lambda x: x.user_id, ratings))
-        context['user_rating'] = RATING_DONT_EXIST_VALUE
+        context['user_rating'] = RATING_DOESNT_EXIST_VALUE
+        user_rating = RATING_DOESNT_EXIST_VALUE
         if self.request.user.is_authenticated:
             if self.request.user.pk in ratings_map_users:
                 rating_idx = ratings_map_users.index(self.request.user.pk)
                 user_rating = ratings[rating_idx]
                 if user_rating.rating is None:
-                    user_rating = RATING_DONT_EXIST_VALUE
+                    user_rating = RATING_DOESNT_EXIST_VALUE
                 context['user_rating'] = user_rating
                 context['rating_form'] = self.rating_form_class(
                     instance=user_rating
@@ -67,7 +68,7 @@ class ItemDetailView(DetailView):
         context = self.get_context_data(**kwargs)
         user_rating = context['user_rating']
         if rating_form.is_valid() and request.user.is_authenticated:
-            if user_rating != RATING_DONT_EXIST_VALUE:
+            if user_rating != RATING_DOESNT_EXIST_VALUE:
                 user_rating.rating = rating_form.cleaned_data['rating']
                 user_rating.save()
             else:
@@ -80,10 +81,9 @@ class ItemDetailView(DetailView):
         if (
             'delete' in request.POST
             and request.user.is_authenticated
-            and user_rating != RATING_DONT_EXIST_VALUE
+            and user_rating != RATING_DOESNT_EXIST_VALUE
         ):
             user_rating.delete()
-            catalog.models.Item.objects
         return django.shortcuts.redirect(
             'catalog:item_detail', pk=kwargs.get('pk')
         )

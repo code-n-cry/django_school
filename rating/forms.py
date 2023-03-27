@@ -1,6 +1,5 @@
 from core.forms import BootstrapForm
-
-from .models import Rating
+from rating.models import Rating
 
 
 class RatingForm(BootstrapForm):
