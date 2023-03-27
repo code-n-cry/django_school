@@ -38,9 +38,13 @@ class ItemDetailView(DetailView):
         context = super().get_context_data(**kwargs)
 
         ratings = context["item"].rating.all()
-        context["rating_avg"] = sum(
-            map(lambda x: x.rating or 0, ratings)
-        ) / len(ratings)
+        if len(ratings) == 0:
+            rating_average = 0
+        else:
+            rating_average = sum(
+                map(lambda x: x.rating or 0, ratings)
+            ) / len(ratings)
+        context["rating_avg"] = rating_average
 
         context["rating_form"] = self.rating_form_class()
         ratings_map_users = list(map(lambda x: x.user_id, ratings))
