@@ -5,22 +5,22 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('catalog', '0001_squashed_0003_auto_20230307_2011'),
+        ("catalog", "0001_squashed_0003_auto_20230307_2011"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='item',
-            name='created_at',
+            model_name="item",
+            name="created_at",
             field=models.DateTimeField(
-                auto_now_add=True, verbose_name='дата добавления товара'
+                auto_now_add=True, verbose_name="дата добавления товара"
             ),
         ),
         migrations.AlterField(
-            model_name='item',
-            name='updated_at',
+            model_name="item",
+            name="updated_at",
             field=models.DateTimeField(
-                auto_now=True, verbose_name='дата изменения товара'
+                auto_now=True, verbose_name="дата изменения товара"
             ),
         ),
     ]

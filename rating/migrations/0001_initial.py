@@ -7,67 +7,67 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('catalog', '0001_squashed_0002_auto_20230310_1656'),
+        ("catalog", "0001_squashed_0002_auto_20230310_1656"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Rating',
+            name="Rating",
             fields=[
                 (
-                    'id',
+                    "id",
                     models.BigAutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
-                        verbose_name='ID',
+                        verbose_name="ID",
                     ),
                 ),
                 (
-                    'rating',
+                    "rating",
                     models.PositiveSmallIntegerField(
                         blank=True,
                         choices=[
-                            (1, 'Ненависть'),
-                            (2, 'Неприязнь'),
-                            (3, 'Нейтрально'),
-                            (4, 'Обожание'),
-                            (5, 'Любовь'),
+                            (1, "Ненависть"),
+                            (2, "Неприязнь"),
+                            (3, "Нейтрально"),
+                            (4, "Обожание"),
+                            (5, "Любовь"),
                         ],
                         null=True,
-                        verbose_name='оценка',
+                        verbose_name="оценка",
                     ),
                 ),
                 (
-                    'item',
+                    "item",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name='item',
-                        to='catalog.item',
-                        verbose_name='товар',
+                        related_name="item",
+                        to="catalog.item",
+                        verbose_name="товар",
                     ),
                 ),
                 (
-                    'user',
+                    "user",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name='user',
+                        related_name="user",
                         to=settings.AUTH_USER_MODEL,
-                        verbose_name='пользователь',
+                        verbose_name="пользователь",
                     ),
                 ),
             ],
             options={
-                'verbose_name': 'оценка',
-                'verbose_name_plural': 'оценки',
-                'default_related_name': 'rating',
+                "verbose_name": "оценка",
+                "verbose_name_plural": "оценки",
+                "default_related_name": "rating",
             },
         ),
         migrations.AddConstraint(
-            model_name='rating',
+            model_name="rating",
             constraint=models.UniqueConstraint(
-                fields=('item', 'user'), name='unique_rating'
+                fields=("item", "user"), name="unique_rating"
             ),
         ),
     ]
