@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-24 15:40+0300\n"
+"POT-Creation-Date: 2023-03-27 19:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,29 +24,29 @@ msgstr ""
 msgid "В тексте дожно быть какое-то из слов: %(value)s"
 msgstr "Text must contain at least one of the words: %(value)s"
 
-#: .\catalog\views.py:36
+#: .\catalog\views.py:35 .\catalog\views.py:51
 #, fuzzy
 #| msgid "Непроверенные"
 msgid "Непроверенное"
 msgstr "Unchecked"
 
-#: .\catalog\views.py:37
+#: .\catalog\views.py:37 .\catalog\views.py:53
 msgid "Товары, ни разу не менявшиеся с момента добавления"
 msgstr "Items that have never changed since add"
 
-#: .\catalog\views.py:63 .\templates\includes\header.html:21
+#: .\catalog\views.py:76 .\templates\includes\header.html:24
 msgid "Новинки"
 msgstr "Novelties"
 
-#: .\catalog\views.py:64
+#: .\catalog\views.py:77
 msgid "Пять товаров, добавленных на этой неделе"
 msgstr "Five items added this week"
 
-#: .\catalog\views.py:80
+#: .\catalog\views.py:94
 msgid "Пятница"
 msgstr "Friday"
 
-#: .\catalog\views.py:81
+#: .\catalog\views.py:96
 msgid "Последние пять товаров, изменённых в любую пятницу"
 msgstr "Last five items changed every friday"
 
@@ -54,35 +54,35 @@ msgstr "Last five items changed every friday"
 msgid "Файлы для подробного описания(если хотите)"
 msgstr "Files for detail description(if you want)"
 
-#: .\feedback\forms.py:18
+#: .\feedback\forms.py:19
 msgid "Прикрепите файлы"
 msgstr "Load files"
 
-#: .\feedback\forms.py:35
+#: .\feedback\forms.py:37
 msgid "Ваша почта"
 msgstr "Your email"
 
-#: .\feedback\forms.py:44
+#: .\feedback\forms.py:47
 msgid "Содержание обращения"
 msgstr "Feedback text"
 
-#: .\feedback\forms.py:47
+#: .\feedback\forms.py:51
 msgid "Опишите проблему"
 msgstr "Describe your problem"
 
-#: .\feedback\views.py:20
+#: .\feedback\views.py:40
 msgid "Обращение"
 msgstr "Feedback"
 
-#: .\lyceum\settings.py:151
+#: .\lyceum\settings.py:153
 msgid "Russian"
 msgstr ""
 
-#: .\lyceum\settings.py:152
+#: .\lyceum\settings.py:154
 msgid "English"
 msgstr ""
 
-#: .\templates\about\description.html:5 .\templates\includes\header.html:27
+#: .\templates\about\description.html:5 .\templates\includes\header.html:30
 msgid "О проекте"
 msgstr "About"
 
@@ -98,6 +98,10 @@ msgstr "Thanks"
 msgid "Спасибо за ваше мнение! Мы его <b>обязательно</b> учтём"
 msgstr ""
 "Thank you for your opinion! We will <b>definitely</b> take it into account"
+
+#: .\templates\base.html:25
+msgid "С ДНЁМ РОЖДЕНИЯ!"
+msgstr "HAPPY BIRTHDAY!"
 
 #: .\templates\catalog\extra_item_list.html:16
 #: .\templates\homepage\home.html:30
@@ -149,7 +153,7 @@ msgstr "No photos available"
 msgid "Тэги"
 msgstr "Tags"
 
-#: .\templates\catalog\item_list.html:5 .\templates\includes\header.html:18
+#: .\templates\catalog\item_list.html:5 .\templates\includes\header.html:21
 msgid "Каталог"
 msgstr "Catalog"
 
@@ -194,43 +198,43 @@ msgstr "cups of coffee"
 msgid "Назад в профиль"
 msgstr "Your profile"
 
-#: .\templates\homepage\home.html:5 .\templates\includes\header.html:15
+#: .\templates\homepage\home.html:5 .\templates\includes\header.html:18
 msgid "Главная"
 msgstr "Home"
 
 # \templates\users\user_list.html:5
-#: .\templates\homepage\home.html:23 .\templates\includes\header.html:37
+#: .\templates\homepage\home.html:23 .\templates\includes\header.html:40
 #: .\templates\users\user_list.html:5
 msgid "Список пользователей"
 msgstr "The list of users"
 
-#: .\templates\includes\header.html:22
+#: .\templates\includes\header.html:25
 msgid "Все товары"
 msgstr "All items"
 
-#: .\templates\includes\header.html:23
+#: .\templates\includes\header.html:26
 msgid "Изменены в пятницу"
 msgstr "Edited at friday"
 
-#: .\templates\includes\header.html:24
+#: .\templates\includes\header.html:27
 msgid "Непроверенные"
 msgstr "Unchecked"
 
-#: .\templates\includes\header.html:29
+#: .\templates\includes\header.html:32
 msgid "Админка"
 msgstr "Admin page"
 
-#: .\templates\includes\header.html:34 .\templates\users\login.html:5
+#: .\templates\includes\header.html:37 .\templates\users\login.html:5
 #: .\templates\users\login.html:9 .\templates\users\login.html:18
 msgid "Вход"
 msgstr "Login"
 
-#: .\templates\includes\header.html:35 .\templates\users\signup.html:5
+#: .\templates\includes\header.html:38 .\templates\users\signup.html:5
 #: .\templates\users\signup.html:9
 msgid "Регистрация"
 msgstr "Register"
 
-#: .\templates\includes\header.html:39 .\templates\users\logged_out.html:5
+#: .\templates\includes\header.html:42 .\templates\users\logged_out.html:5
 #: .\templates\users\logged_out.html:9
 msgid "Выход"
 msgstr "Quit"
@@ -371,7 +375,7 @@ msgstr "not specified"
 msgid "Фамилия"
 msgstr "Surname"
 
-#: .\templates\users\user_detail.html:14 .\users\forms.py:160
+#: .\templates\users\user_detail.html:14 .\users\forms.py:166
 msgid "День рождения"
 msgstr "Birthday date"
 
@@ -391,7 +395,7 @@ msgstr "Active users list"
 msgid "Восстановление"
 msgstr "Recovery"
 
-#: .\users\forms.py:51 .\users\forms.py:91
+#: .\users\forms.py:51 .\users\forms.py:93
 msgid "Юзернейм"
 msgstr "Username"
 
@@ -403,65 +407,65 @@ msgstr "Change name"
 msgid "Измените почту"
 msgstr "Change your email"
 
-#: .\users\forms.py:66 .\users\forms.py:135
+#: .\users\forms.py:67 .\users\forms.py:140
 msgid "Пользователь с такой почтой уже зарегистрирован!"
 msgstr "This email is already registered by other user!"
 
-#: .\users\forms.py:72
+#: .\users\forms.py:74
 msgid "Введите новый email или оставьте старый!"
 msgstr "Enter new email or leave one you have now!"
 
-#: .\users\forms.py:78
+#: .\users\forms.py:80
 msgid "Повторите пароль"
 msgstr "Repeat password"
 
-#: .\users\forms.py:79
+#: .\users\forms.py:81
 #, fuzzy
 msgid "Повторите введёный выше пароль"
 msgstr "Repeat password you entered above"
 
-#: .\users\forms.py:93
+#: .\users\forms.py:95
 msgid "Пароль"
 msgstr "Password"
 
-#: .\users\forms.py:96
+#: .\users\forms.py:99
 msgid "Введите желаемое имя"
 msgstr "Enter your name"
 
-#: .\users\forms.py:97
+#: .\users\forms.py:101
 msgid "Введите вашу почту"
 msgstr "Enter your email"
 
-#: .\users\forms.py:98
+#: .\users\forms.py:102
 #, fuzzy
 #| msgid "Сменить пароль"
 msgid "Введите пароль"
 msgstr "Change password"
 
 # \templates\users\user_list.html:5
-#: .\users\forms.py:108
+#: .\users\forms.py:112
 msgid "Введите имя пользователя!"
 msgstr "Enter username!"
 
-#: .\users\forms.py:117
+#: .\users\forms.py:121
 msgid "Пароли не совпадают!"
 msgstr "Passwords don't match!"
 
-#: .\users\forms.py:124
+#: .\users\forms.py:128
 msgid "Укажите email!"
 msgstr "Enter email!"
 
-#: .\users\forms.py:159
+#: .\users\forms.py:165
 #, fuzzy
 #| msgid "Аватар"
 msgid "Аватарка"
 msgstr "Avatar"
 
-#: .\users\forms.py:164
+#: .\users\forms.py:170
 msgid "Загрузите аватарку(если хотите)"
 msgstr "Load a picture if you want"
 
-#: .\users\forms.py:167
+#: .\users\forms.py:173
 msgid "Укажите день рождения(если хотите)"
 msgstr "Enter your birthday if you want"
 
@@ -469,33 +473,25 @@ msgstr "Enter your birthday if you want"
 msgid "Аватарки нэ будет."
 msgstr "No avatar image"
 
-#: .\users\views.py:27
+#: .\users\views.py:34
 msgid "Прошло больше 12 часов, ссылка уже не работает:("
 msgstr "12 hours've passed, this link is useless now :("
 
-#: .\users\views.py:32
+#: .\users\views.py:40
 msgid "Вы активированы!"
 msgstr "You're activated!"
 
-#: .\users\views.py:46
+#: .\users\views.py:58
 msgid "Прошла неделя, ссылка уже не работает:("
 msgstr "Week has passed, this link is useless :("
 
-#: .\users\views.py:59
-msgid "Вы уже авторизованы!"
-msgstr "You're already authorized"
-
-#: .\users\views.py:64
-msgid "Ваша ссылка для активации:"
-msgstr "Your recovery link:"
-
-#: .\users\views.py:74
+#: .\users\views.py:86
 msgid "Активация"
 msgstr "Activation"
 
-#: .\users\views.py:81
-msgid "Вы зарегистрированы!"
-msgstr "You're already registered"
+#: .\users\views.py:96
+msgid "Вы уже авторизованы!"
+msgstr "You're already authorized"
 
 #: .\venv\Lib\site-packages\ckeditor_uploader\forms.py:6
 msgid "Search files"
@@ -2024,3 +2020,9 @@ msgstr ""
 #: .\venv\Lib\site-packages\isort\main.py:158
 msgid "show this help message and exit"
 msgstr ""
+
+#~ msgid "Ваша ссылка для активации:"
+#~ msgstr "Your recovery link:"
+
+#~ msgid "Вы зарегистрированы!"
+#~ msgstr "You're already registered"

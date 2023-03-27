@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -21,7 +22,7 @@
       <div class="container-fluid overflow-hidden bg-warning">
         <p class="marquee"> 
           <span>
-          С ДНЁМ РОЖДЕНИЯ!
+          {% translate 'С ДНЁМ РОЖДЕНИЯ!' %}
           {% for person in birthday_persons %}
             {{forloop.counter}}.<a class="text-black" href="{% url "users:user_detail" person.id %}">{{ person.username }}({{ person.email }})</a>
             {% if not forloop.last %}-{% endif %}
