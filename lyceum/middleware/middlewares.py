@@ -1,6 +1,8 @@
 import re
+import zoneinfo
 
 from django.conf import settings
+from django.utils import timezone
 
 
 class ContentReverseMiddleware:
@@ -46,3 +48,20 @@ class ContentReverseMiddleware:
             str_response_content = response.content.decode('utf-8')
             response.content = self.reverse_russian_text(str_response_content)
         return response
+
+
+class TimezoneMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        try:
+            tzname = request.COOKIES.get('django_timezone')
+            if tzname:
+                timezone.activate(zoneinfo.ZoneInfo(tzname))
+            else:
+                timezone.deactivate()
+        except Exception:
+            timezone.deactivate()
+
+        return self.get_response(request)
