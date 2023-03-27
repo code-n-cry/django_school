@@ -9,7 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
+"POT-Creation-Date: 2023-03-26 19:50+0300\n"
+=======
 "POT-Creation-Date: 2023-03-27 19:30+0300\n"
+>>>>>>> develop
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +38,11 @@ msgstr "Unchecked"
 msgid "Товары, ни разу не менявшиеся с момента добавления"
 msgstr "Items that have never changed since add"
 
+<<<<<<< HEAD
+#: .\catalog\views.py:76 .\templates\includes\header.html:21
+=======
 #: .\catalog\views.py:76 .\templates\includes\header.html:24
+>>>>>>> develop
 msgid "Новинки"
 msgstr "Novelties"
 
@@ -74,6 +82,35 @@ msgstr "Describe your problem"
 msgid "Обращение"
 msgstr "Feedback"
 
+#: .\lyceum\settings.py:152
+msgid "Russian"
+msgstr ""
+
+#: .\lyceum\settings.py:153
+msgid "English"
+msgstr ""
+
+#: .\rating\models.py:10
+msgid "Ненависть"
+msgstr "Hate"
+
+#: .\rating\models.py:11
+msgid "Неприязнь"
+msgstr "Dislike"
+
+#: .\rating\models.py:12
+msgid "Нейтрально"
+msgstr "Neutral"
+
+#: .\rating\models.py:13
+msgid "Обожание"
+msgstr "Adoration"
+
+#: .\rating\models.py:14
+msgid "Любовь"
+msgstr "Love"
+
+#: .\templates\about\description.html:5 .\templates\includes\header.html:27
 #: .\lyceum\settings.py:153
 msgid "Russian"
 msgstr ""
@@ -485,11 +522,19 @@ msgstr "You're activated!"
 msgid "Прошла неделя, ссылка уже не работает:("
 msgstr "Week has passed, this link is useless :("
 
+<<<<<<< HEAD
+#: .\users\views.py:85
+msgid "Активация"
+msgstr "Activation"
+
+#: .\users\views.py:95
+=======
 #: .\users\views.py:86
 msgid "Активация"
 msgstr "Activation"
 
 #: .\users\views.py:96
+>>>>>>> develop
 msgid "Вы уже авторизованы!"
 msgstr "You're already authorized"
 
