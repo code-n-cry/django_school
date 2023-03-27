@@ -9,7 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< HEAD
 "POT-Creation-Date: 2023-03-26 19:50+0300\n"
+=======
+"POT-Creation-Date: 2023-03-27 19:30+0300\n"
+>>>>>>> develop
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +38,11 @@ msgstr "Unchecked"
 msgid "Товары, ни разу не менявшиеся с момента добавления"
 msgstr "Items that have never changed since add"
 
+<<<<<<< HEAD
 #: .\catalog\views.py:76 .\templates\includes\header.html:21
+=======
+#: .\catalog\views.py:76 .\templates\includes\header.html:24
+>>>>>>> develop
 msgid "Новинки"
 msgstr "Novelties"
 
@@ -103,6 +111,15 @@ msgid "Любовь"
 msgstr "Love"
 
 #: .\templates\about\description.html:5 .\templates\includes\header.html:27
+#: .\lyceum\settings.py:153
+msgid "Russian"
+msgstr ""
+
+#: .\lyceum\settings.py:154
+msgid "English"
+msgstr ""
+
+#: .\templates\about\description.html:5 .\templates\includes\header.html:30
 msgid "О проекте"
 msgstr "About"
 
@@ -118,6 +135,10 @@ msgstr "Thanks"
 msgid "Спасибо за ваше мнение! Мы его <b>обязательно</b> учтём"
 msgstr ""
 "Thank you for your opinion! We will <b>definitely</b> take it into account"
+
+#: .\templates\base.html:25
+msgid "С ДНЁМ РОЖДЕНИЯ!"
+msgstr "HAPPY BIRTHDAY!"
 
 #: .\templates\catalog\extra_item_list.html:16
 #: .\templates\homepage\home.html:30
@@ -169,7 +190,7 @@ msgstr "No photos available"
 msgid "Тэги"
 msgstr "Tags"
 
-#: .\templates\catalog\item_list.html:5 .\templates\includes\header.html:18
+#: .\templates\catalog\item_list.html:5 .\templates\includes\header.html:21
 msgid "Каталог"
 msgstr "Catalog"
 
@@ -214,43 +235,43 @@ msgstr "cups of coffee"
 msgid "Назад в профиль"
 msgstr "Your profile"
 
-#: .\templates\homepage\home.html:5 .\templates\includes\header.html:15
+#: .\templates\homepage\home.html:5 .\templates\includes\header.html:18
 msgid "Главная"
 msgstr "Home"
 
 # \templates\users\user_list.html:5
-#: .\templates\homepage\home.html:23 .\templates\includes\header.html:37
+#: .\templates\homepage\home.html:23 .\templates\includes\header.html:40
 #: .\templates\users\user_list.html:5
 msgid "Список пользователей"
 msgstr "The list of users"
 
-#: .\templates\includes\header.html:22
+#: .\templates\includes\header.html:25
 msgid "Все товары"
 msgstr "All items"
 
-#: .\templates\includes\header.html:23
+#: .\templates\includes\header.html:26
 msgid "Изменены в пятницу"
 msgstr "Edited at friday"
 
-#: .\templates\includes\header.html:24
+#: .\templates\includes\header.html:27
 msgid "Непроверенные"
 msgstr "Unchecked"
 
-#: .\templates\includes\header.html:29
+#: .\templates\includes\header.html:32
 msgid "Админка"
 msgstr "Admin page"
 
-#: .\templates\includes\header.html:34 .\templates\users\login.html:5
+#: .\templates\includes\header.html:37 .\templates\users\login.html:5
 #: .\templates\users\login.html:9 .\templates\users\login.html:18
 msgid "Вход"
 msgstr "Login"
 
-#: .\templates\includes\header.html:35 .\templates\users\signup.html:5
+#: .\templates\includes\header.html:38 .\templates\users\signup.html:5
 #: .\templates\users\signup.html:9
 msgid "Регистрация"
 msgstr "Register"
 
-#: .\templates\includes\header.html:39 .\templates\users\logged_out.html:5
+#: .\templates\includes\header.html:42 .\templates\users\logged_out.html:5
 #: .\templates\users\logged_out.html:9
 msgid "Выход"
 msgstr "Quit"
@@ -501,11 +522,19 @@ msgstr "You're activated!"
 msgid "Прошла неделя, ссылка уже не работает:("
 msgstr "Week has passed, this link is useless :("
 
+<<<<<<< HEAD
 #: .\users\views.py:85
 msgid "Активация"
 msgstr "Activation"
 
 #: .\users\views.py:95
+=======
+#: .\users\views.py:86
+msgid "Активация"
+msgstr "Activation"
+
+#: .\users\views.py:96
+>>>>>>> develop
 msgid "Вы уже авторизованы!"
 msgstr "You're already authorized"
 

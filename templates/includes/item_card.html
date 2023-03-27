@@ -1,13 +1,13 @@
 {% load static %}
 {% load i18n %}
- <div class="col-sm-6 mb-3">
+ <div class="col-md-12 col-xl-6">
   <div class="card mb-3">
     <div class="row g-0">
-      <div class="col-md-4">
+      <div class="col-md-6 col-lg-4 col-xl-7 col-xxl-6">
         {{ item.main_image.image_tmb }}
       </div>  
-      <div class="col-md-8">
-        <div class="card-body" style="margin-left: 8em;margin-right: auto;">
+      <div class="col">
+        <div class="card-body">
           <h5 class="card-title text-break">{{ item.name|title }}</h5>
           {% with request.resolver_match.view_name as view_name %}
             {% if view_name == 'homepage:index' %}

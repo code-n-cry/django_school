@@ -16,7 +16,7 @@
         <div class="d-flex justify-content-left">
           <h3 class="text-wrap p-3">{% translate 'Категория' %}: <b>{{ category.grouper|title }}</b></h3>
         </div>
-        <div class="row row-cols-3">
+        <div class="row">
         {% for item in category.list %}
           {% include "includes/item_card.html" %}
         {% endfor %}

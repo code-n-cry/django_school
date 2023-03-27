@@ -311,7 +311,7 @@ class ViewTest(TestCase):
 
     @override_settings(MAX_LOGIN_AMOUNT=1)
     @mock.patch('django.utils.timezone.now')
-    def test_login_block_recovery_doesn_work_within_week(self, mock_now):
+    def test_login_block_recovery_doesnt_work_within_week(self, mock_now):
         client = Client()
         client.post(
             django.urls.reverse('auth:signup'),
