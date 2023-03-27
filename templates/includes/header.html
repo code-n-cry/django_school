@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
       {% with request.resolver_match.view_name as view_name %}
         <a class="navbar-brand {% if view_name == 'homepage:index' %}disabled{% endif %}" href="/">
@@ -9,6 +9,9 @@
           <img src="{% static 'favicon/favicon.ico' %}"  class="d-inline-block" alt="Логотип">
           RaccoonHub
         </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         {% with request.resolver_match.view_name as view_name %}
           <ul class="navbar-nav">
@@ -31,8 +34,8 @@
           </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             {% if not request.user.is_authenticated %}
-              <li class="nav-item"><a class="nav-link btn btn-outline-light me-2 {% if view_name == 'auth:login' %}active disabled{% endif %}" href="{% url 'auth:login' %}">{% translate 'Вход' %}</a></li>
-              <li class="nav-item"><a class="nav-link btn btn-warning {% if view_name == 'auth:signup' %}active disabled{% endif %}" href="{% url 'auth:signup' %}">{% translate 'Регистрация' %}</a></li>
+              <li class="nav-item p-1"><a class="nav-link btn btn-outline-light {% if view_name == 'auth:login' %}active disabled{% endif %}" href="{% url 'auth:login' %}">{% translate 'Вход' %}</a></li>
+              <li class="nav-item p-1"><a class="nav-link btn btn-warning {% if view_name == 'auth:signup' %}active disabled{% endif %}" href="{% url 'auth:signup' %}">{% translate 'Регистрация' %}</a></li>
             {% else %}
               <li class="nav-item"><a class="nav-link {% if view_name == 'users:user_list' %}active disabled{% endif %}" href="{% url 'users:user_list' %}">{% translate 'Список пользователей' %}</a></li>
               <li class="nav-item"><a class="nav-link {% if view_name == 'users:profile' %}active disabled{% endif %}" href="{% url 'users:profile' %}">{{ request.user.get_username }}</a></li>

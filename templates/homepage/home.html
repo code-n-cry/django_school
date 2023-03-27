@@ -22,7 +22,7 @@
     <div class="d-flex justify-content-center">
       <a class="btn btn-success" href="{% url 'users:user_list' %}">{% translate "Список пользователей" %}</a>
     </div>
-    <div class="row row-cols-3" style="margin-top: 2em;">
+    <div class="row" style="margin-top: 2em;">
       {% for item in items %}
         {% include "includes/item_card.html" %}
       {% empty %}

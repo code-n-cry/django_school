@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'feedback.apps.FeedbackConfig',
     'homepage.apps.HomepageConfig',
     'users.apps.UsersConfig',
+    'rating.apps.RatingConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'lyceum.middleware.middlewares.ContentReverseMiddleware',
+    'lyceum.middleware.middlewares.TimezoneMiddleware',
 ]
 
 ROOT_URLCONF = 'lyceum.urls'
@@ -94,6 +96,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'users.context_processors.birthday_persons',
             ],
         },
     },

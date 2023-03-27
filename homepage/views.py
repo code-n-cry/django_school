@@ -1,25 +1,21 @@
 from http import HTTPStatus
 
 from django.db.models import F
-from django.views.generic import TemplateView
+from django.views.generic import ListView, TemplateView
 
 import catalog.models
 from users.models import Profile
 
 
-class HomeView(TemplateView):
+class HomeView(ListView):
     template_name = 'homepage/home.html'
-
-    def get(self, request, *args, **kwargs):
-        items = catalog.models.Item.objects.published().filter(is_on_main=True)
-        extra_context = {'items': items}
-        context = self.get_context_data(**kwargs)
-        context.update(extra_context)
-        return self.render_to_response(context)
+    queryset = catalog.models.Item.objects.published().filter(is_on_main=True)
+    context_object_name = 'items'
 
 
 class CoffeeView(TemplateView):
     template_name = 'homepage/coffee.html'
+    http_method_names = ['get']
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:

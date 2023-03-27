@@ -6,17 +6,19 @@ import django.utils.timezone
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext_lazy
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import DetailView, FormView, ListView, TemplateView
 
 import users.forms
 import users.models
 
 
 class ActivateNewView(View):
+    http_method_names = ['get', 'head']
+
     def get(self, request, username, *args, **kwargs):
         user = users.models.User.objects.filter(
             username=username,
@@ -40,6 +42,8 @@ class ActivateNewView(View):
 
 
 class ActivateView(View):
+    http_method_names = ['get', 'head']
+
     def get(self, request, username, *args, **kwargs):
         user = users.models.User.objects.filter(
             username=username,
@@ -60,79 +64,57 @@ class ActivateView(View):
         return redirect('auth:login')
 
 
-class SignUpView(TemplateView):
-    signup_form_class = users.forms.SignUpForm
+class SignUpView(FormView):
+    form_class = users.forms.SignUpForm
+    model = users.models.ProxyUser
+    success_url = django.urls.reverse_lazy('auth:login')
     template_name = 'users/signup.html'
+    http_method_names = ['get', 'head', 'post']
+
+    def form_valid(self, form):
+        email_text = ''.join(
+            [
+                'Ваша ссылка для активации:',
+                django.urls.reverse(
+                    'auth:activate_new',
+                    kwargs={'username': form.cleaned_data['username']},
+                ),
+            ]
+        )
+        form.save()
+        django.core.mail.send_mail(
+            gettext_lazy('Активация'),
+            email_text,
+            settings.EMAIL,
+            [form.cleaned_data['email']],
+            fail_silently=False,
+        )
+        return super().form_valid(form)
 
     def get(self, request, *args, **kwargs):
-        signup_form = self.signup_form_class()
         if request.user.is_authenticated:
             messages.info(request, gettext_lazy('Вы уже авторизованы!'))
             return redirect('homepage:index')
-        extra_context = {
-            'form': signup_form,
-        }
-        context = self.get_context_data(**kwargs)
-        context.update(extra_context)
-        return self.render_to_response(context)
-
-    def post(self, request, *args, **kwargs):
-        signup_form = self.signup_form_class(request.POST)
-        if signup_form.is_valid():
-            email_text = ''.join(
-                [
-                    'Ваша ссылка для активации:',
-                    request.build_absolute_uri(
-                        django.urls.reverse(
-                            'auth:activate_new',
-                            kwargs={
-                                'username': signup_form.cleaned_data[
-                                    'username'
-                                ]
-                            },
-                        )
-                    ),
-                ]
-            )
-            signup_form.save()
-            django.core.mail.send_mail(
-                gettext_lazy('Активация'),
-                email_text,
-                settings.EMAIL,
-                [signup_form.cleaned_data['email']],
-                fail_silently=False,
-            )
-            messages.success(request, gettext_lazy('Вы зарегистрированы!'))
-            return redirect('auth:login')
-        extra_context = {
-            'form': signup_form,
-        }
-        context = self.get_context_data(**kwargs)
-        context.update(extra_context)
-        return self.render_to_response(context)
+        return self.render_to_response(self.get_context_data(**kwargs))
 
 
-class UserListView(TemplateView):
+class UserListView(ListView):
     template_name = 'users/user_list.html'
-    usernames = users.models.ProxyUser.objects.active()
-    extra_context = {'usernames': usernames}
+    queryset = users.models.ProxyUser.objects.active()
+    context_object_name = 'usernames'
+    http_method_names = ['get', 'head']
 
 
-class UserDetailView(TemplateView):
+class UserDetailView(DetailView):
     template_name = 'users/user_detail.html'
-
-    def get(self, request, user_id, *args, **kwargs):
-        user = get_object_or_404(
-            users.models.ProxyUser.objects.active().filter(pk=user_id)
-        )
-        extra_context = {'user': user}
-        context = self.get_context_data(**kwargs)
-        context.update(extra_context)
-        self.render_to_response(context)
+    queryset = users.models.ProxyUser.objects.active()
+    context_object_name = 'user'
+    http_method_names = ['get', 'head']
 
 
 class UnauthorizedView(TemplateView):
     template_name = 'users/unauthorized.html'
+    http_method_names = ['get', 'head']
 
 
 @method_decorator(login_required, name='dispatch')
@@ -140,6 +122,7 @@ class ProfileView(TemplateView):
     template_name = 'users/profile.html'
     data_form_class = users.forms.NameEmailForm
     profile_form = users.forms.ProfileInfoForm
+    http_method_names = ['get', 'head', 'post']
 
     def get(self, request, *args, **kwargs):
         data_form = self.data_form_class(instance=request.user)
@@ -151,17 +134,16 @@ class ProfileView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         data_form = users.forms.NameEmailForm(
-            request.POST,
-            request.FILES or None,
+            request.POST, instance=request.user
         )
         profile_form = users.forms.ProfileInfoForm(
-            request.POST,
+            request.POST, request.FILES or None, instance=request.user.profile
         )
         if all((data_form.is_valid(), profile_form.is_valid())):
             if request.FILES:
                 request.user.profile.avatar = request.FILES['avatar']
-            profile_form.save()
             data_form.save()
+            profile_form.save()
         extra_context = {'form': data_form, 'profile_form': profile_form}
         context = self.get_context_data(**kwargs)
         context.update(extra_context)
