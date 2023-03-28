@@ -14,6 +14,7 @@ def birthday_persons(request):
         have_birthday_today = active_users_with_birthday.filter(
             profile__birthday__day=timezone.now().date().day,
             profile__birthday__month=timezone.now().date().month,
+            profile__birthday__year__lte=timezone.now().date().year,
         ).values(
             users.models.ProxyUser.id.field.name,
             users.models.ProxyUser.username.field.name,
