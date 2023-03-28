@@ -12,6 +12,7 @@
       </div>
     </div>
     <div class="align-self-center p-2">
+      {% include "includes/messages.html" %}
       <h3>{% translate 'Название' %}: {{ item.name }}</h3>
       <div>
         <p>Оценка: {{ rating_avg|floatformat:2 }} (всего оценок: {{ item.rating.all|length }})</p>
