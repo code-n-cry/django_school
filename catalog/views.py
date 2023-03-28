@@ -4,6 +4,7 @@ import random
 import django.db.models
 import django.shortcuts
 import django.utils
+from django.contrib import messages
 from django.utils.translation import gettext_lazy
 from django.views.generic import DetailView, ListView
 
@@ -71,11 +72,17 @@ class ItemDetailView(DetailView):
             if user_rating != RATING_DOESNT_EXIST_VALUE:
                 user_rating.rating = rating_form.cleaned_data['rating']
                 user_rating.save()
+                messages.success(
+                    request, 'Оценка изменена'
+                )
             else:
                 rating.models.Rating.objects.create(
                     rating=rating_form.cleaned_data['rating'],
                     item=self.object,
                     user=request.user,
+                )
+                messages.success(
+                    request, 'Оценка поставлена'
                 )
         # delete rating button
         if (
@@ -84,6 +91,9 @@ class ItemDetailView(DetailView):
             and user_rating != RATING_DOESNT_EXIST_VALUE
         ):
             user_rating.delete()
+            messages.success(
+                request, 'Оценка удалена'
+            )
         return django.shortcuts.redirect(
             'catalog:item_detail', pk=kwargs.get('pk')
         )
