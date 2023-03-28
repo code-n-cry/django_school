@@ -1,7 +1,4 @@
-from django.utils.translation import gettext_lazy
-from django.views import View
-from django.views.generic import DetailView, FormView, ListView, TemplateView
-
+from django.views.generic import ListView
 
 import rating.models
 
