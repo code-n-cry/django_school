@@ -8,3 +8,7 @@ class RatingByUsers(ListView):
     template_name = 'rating_statistics/by_users.html'
     item_context_name = 'users'
     http_method_names = ['get', 'head']
+
+
+class RatedByUser(ListView):
+    ...

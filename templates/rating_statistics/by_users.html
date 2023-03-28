@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+{% translate 'Статистика по пользователям' %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <h1>{% translate 'Статистика по пользователям' %}</h1>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Юзернейм</th>
+                <th scope="col">Лучший товар</th>
+                <th scope="col">Худший товар</th>
+                <th scope="col">Кол-во оценок</th>
+                <th scope="col">Средняя оценка</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user, values in object_list.items %}
+            <tr>
+                <th scope="row">{{user}}</th>
+                <td><a href="{% url "catalog:item_detail" values.max.item %}">{% translate "Товар" %}</a>({% translate "Оценка" %}: {{values.max.rating}})</td>
+                <td><a href="{% url "catalog:item_detail" values.min.item %}">{% translate "Товар" %}</a>({% translate "Оценка" %}: {{values.min.rating}})</td>
+                <td>{{values.amount}}</td>
+                <td>{{values.average|floatformat:2}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
