@@ -23,8 +23,8 @@ class ViewTest(TestCase):
         cls.correct_signup_data = {
             'username': cls.test_username,
             'email': cls.test_email,
-            'password': cls.test_password,
-            'repeat_password': cls.test_password,
+            'password1': cls.test_password,
+            'password2': cls.test_password,
         }
         super().setUpClass()
 
@@ -79,8 +79,8 @@ class ViewTest(TestCase):
         data = {
             'username': self.test_username,
             'email': self.test_email.upper(),
-            'password': self.test_password,
-            'repeat_password': self.test_password,
+            'password1': self.test_password,
+            'password2': self.test_password,
         }
         Client().post(
             django.urls.reverse('auth:signup'),
@@ -100,8 +100,8 @@ class ViewTest(TestCase):
         users_count = users.models.ProxyUser.objects.count()
         invalid_signup_data = {
             'email': self.test_email,
-            'password': self.test_password,
-            'repeat_password': self.test_password,
+            'password1': self.test_password,
+            'password2': self.test_password,
         }
         Client().post(
             django.urls.reverse('auth:signup'),
@@ -119,8 +119,8 @@ class ViewTest(TestCase):
         users_count = users.models.ProxyUser.objects.count()
         invalid_signup_data = {
             'username': self.test_username,
-            'password': self.test_password,
-            'repeat_password': self.test_password,
+            'password1': self.test_password,
+            'password2': self.test_password,
         }
         Client().post(
             django.urls.reverse('auth:signup'),
@@ -134,8 +134,8 @@ class ViewTest(TestCase):
         invalid_signup_data = {
             'username': self.test_username,
             'email': self.test_email,
-            'password': self.test_password,
-            'repeat_password': self.test_password + 's',
+            'password1': self.test_password,
+            'password2': self.test_password + 's',
         }
         Client().post(
             django.urls.reverse('auth:signup'),
@@ -155,8 +155,8 @@ class ViewTest(TestCase):
         new_signup_data = {
             'username': self.test_username + 's',
             'email': self.test_email,
-            'password': self.test_password,
-            'repeat_password': self.test_password,
+            'password1': self.test_password,
+            'password2': self.test_password,
         }
         client.post(
             django.urls.reverse('auth:signup'),

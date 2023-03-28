@@ -75,9 +75,11 @@ class SignUpView(FormView):
         email_text = ''.join(
             [
                 'Ваша ссылка для активации:',
-                django.urls.reverse(
-                    'auth:activate_new',
-                    kwargs={'username': form.cleaned_data['username']},
+                self.request.build_absolute_uri(
+                    django.urls.reverse(
+                        'auth:activate_new',
+                        kwargs={'username': form.cleaned_data['username']},
+                    )
                 ),
             ]
         )
