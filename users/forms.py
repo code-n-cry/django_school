@@ -75,52 +75,11 @@ class NameEmailForm(BootstrapForm):
         )
 
 
-class SignUpForm(BootstrapForm):
-    repeat_password = django.forms.CharField(
-        label=gettext_lazy('Повторите пароль'),
-        help_text=gettext_lazy('Повторите введёный выше пароль'),
-        widget=django.forms.widgets.PasswordInput(),
-    )
-
-    class Meta:
-        model = ProxyUser
-        fields = (
-            ProxyUser.username.field.name,
-            ProxyUser.email.field.name,
-            ProxyUser.password.field.name,
-        )
-        labels = {
-            ProxyUser.username.field.name: gettext_lazy('Юзернейм'),
-            ProxyUser.email.field.name: 'E-mail',
-            ProxyUser.password.field.name: gettext_lazy('Пароль'),
-        }
-        help_texts = {
-            ProxyUser.username.field.name: gettext_lazy(
-                'Введите желаемое имя'
-            ),
-            ProxyUser.email.field.name: gettext_lazy('Введите вашу почту'),
-            ProxyUser.password.field.name: gettext_lazy('Введите пароль'),
-        }
-        widgets = {
-            'password': django.forms.widgets.PasswordInput(),
-        }
-
-    def clean_username(self):
-        if 'username' not in self.cleaned_data.keys():
-            return self.add_error(
-                ProxyUser.username.field.name,
-                gettext_lazy('Введите имя пользователя!'),
-            )
-        return self.cleaned_data['username']
-
-    def clean_repeat_password(self):
-        password = self.cleaned_data['password']
-        confirmed_password = self.cleaned_data['repeat_password']
-        if password != confirmed_password:
-            return self.add_error(
-                'repeat_password', gettext_lazy('Пароли не совпадают!')
-            )
-        return confirmed_password
+class SignUpForm(django.contrib.auth.forms.UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
 
     def clean_email(self):
         if not self.cleaned_data['email']:
@@ -142,16 +101,31 @@ class SignUpForm(BootstrapForm):
             )
         return normalized_email
 
-    def save(self, commit=True):
+    def save(self, commit: bool = True):
         cleaned_data = super().clean()
         user = ProxyUser.objects.create_user(
             cleaned_data['username'],
             cleaned_data['email'],
-            cleaned_data['password'],
+            cleaned_data['password1'],
             is_active=settings.USER_ACTIVE_DEFAULT,
         )
         users_profile = Profile.objects.create(user=user)
         return user, users_profile
+
+    class Meta(django.contrib.auth.forms.UserCreationForm.Meta):
+        model = ProxyUser
+        fields = (
+            ProxyUser.username.field.name,
+            ProxyUser.email.field.name,
+        )
+        labels = {
+            ProxyUser.username.field.name: gettext_lazy('Юзернейм'),
+            ProxyUser.email.field.name: 'E-mail',
+            ProxyUser.password.field.name: gettext_lazy('Пароль'),
+        }
+        help_texts = {
+            ProxyUser.email.field.name: gettext_lazy('Обязательное поле.'),
+        }
 
 
 class ProfileInfoForm(BootstrapForm):
