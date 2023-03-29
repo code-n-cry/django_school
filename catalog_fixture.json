@@ -78,7 +78,7 @@
     "model": "catalog.tag",
     "pk": 3,
     "fields": {
-        "is_published": true,
+        "is_published": false,
         "name": "Красивое",
         "slug": "beautiful",
         "unique_name": "красивое"

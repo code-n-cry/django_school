@@ -15,4 +15,4 @@ class UrlTest(TestCase):
 
     def test_by_user_unauthorized_redirects(self):
         response = Client().get(django.urls.reverse('statistics:by_user'))
-        self.assertEqual(response.status_code, HTTPStatus.TEMPORARY_REDIRECT)
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
