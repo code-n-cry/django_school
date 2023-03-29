@@ -15,4 +15,9 @@ urlpatterns = [
         rating_statistics.views.RatingByItems.as_view(),
         name='by_items',
     ),
+    django.urls.path(
+        'by_user/',
+        rating_statistics.views.RatingByCurrentUser.as_view(),
+        name='by_user',
+    ),
 ]
