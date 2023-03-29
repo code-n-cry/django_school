@@ -44,6 +44,9 @@ class Rating(models.Model):
         related_name='rating',
     )
 
+    def __str__(self):
+        return f'Оценка товара #{self.item.pk} от юзера {self.user}'
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
