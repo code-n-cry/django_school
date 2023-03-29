@@ -10,5 +10,8 @@ class RatingByUsers(ListView):
     http_method_names = ['get', 'head']
 
 
-class RatedByUser(ListView):
-    ...
+class RatingByItems(ListView):
+    queryset = rating.models.Rating.objects.by_items()
+    template_name = 'rating_statistics/by_items.html'
+    item_context_name = 'items'
+    http_method_names = ['get', 'head']

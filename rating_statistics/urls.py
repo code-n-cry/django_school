@@ -11,8 +11,8 @@ urlpatterns = [
         name='by_users',
     ),
     django.urls.path(
-        'rated/',
-        rating_statistics.views.RatedByUser.as_view(),
-        name='rated',
+        'by_items/',
+        rating_statistics.views.RatingByItems.as_view(),
+        name='by_items',
     ),
 ]
