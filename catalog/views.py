@@ -64,7 +64,7 @@ class ItemDetailView(DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        rating_form = self.rating_form_class(request.POST or None)
+        rating_form = self.rating_form_class(request.POST)
         self.object = self.get_object()
         context = self.get_context_data(**kwargs)
         user_rating = context['user_rating']
