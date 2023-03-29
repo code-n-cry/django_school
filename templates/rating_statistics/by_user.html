@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+  <title>{% translate 'Ваши отзывы' %}</title>
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <h1>{% translate 'Ваши отзывы' %}</h1>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">{% translate 'Товар' %}</th>
+        <th scope="col">{% translate 'Оценка' %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rating in rating_list %}
+        <tr>
+          <th scope="row"><a href="{% url "catalog:item_detail" rating.item__id %}">{{ rating.item__name }}</a></th>
+          <td>{{ rating.rating }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
