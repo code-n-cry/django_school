@@ -19,6 +19,9 @@ class ContextProcessorTest(TestCase):
         cls.birthday_not_this_day = datetime.date(
             now_date.year, now_date.month, not_now_day
         )
+        cls.birthday_not_this_year = datetime.date(
+            now_date.year + 1, now_date.month, now_day
+        )
         cls.test_username = 'test'
         cls.test_password = '1234'
         cls.test_user_data = {
@@ -66,6 +69,18 @@ class ContextProcessorTest(TestCase):
         )
         users.models.Profile.objects.create(
             user=test_user, birthday=self.birthday_not_this_day
+        )
+        response = Client().get(reverse('homepage:index'))
+        self.assertFalse(
+            response.context['birthday_persons'],
+        )
+
+    def test_birthday_future_year_not_in_context(self):
+        test_user = users.models.ProxyUser.objects.create_user(
+            username=self.test_username, password=self.test_password
+        )
+        users.models.Profile.objects.create(
+            user=test_user, birthday=self.birthday_not_this_year
         )
         response = Client().get(reverse('homepage:index'))
         self.assertFalse(
