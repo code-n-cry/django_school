@@ -1,27 +1,78 @@
 [
 {
-    "model": "feedback.data",
-    "pk": 6,
+    "model": "feedback.feedback",
+    "pk": 1,
     "fields": {
-        "text": "Хотим больше енотов!"
+        "text": "hhh",
+        "created_at": "2023-03-24T17:54:37.013Z",
+        "status": 0
     }
 },
 {
-    "model": "feedback.files",
-    "pk": 6,
+    "model": "feedback.feedback",
+    "pk": 2,
     "fields": {
-        "uploaded_file": "uploads/4/cat.jpg",
-        "data": 6
+        "text": "aaaa",
+        "created_at": "2023-03-24T17:55:40.446Z",
+        "status": 0
+    }
+},
+{
+    "model": "feedback.feedback",
+    "pk": 3,
+    "fields": {
+        "text": "op",
+        "created_at": "2023-03-24T18:08:16.827Z",
+        "status": 0
     }
 },
 {
     "model": "feedback.feedback",
     "pk": 4,
     "fields": {
-        "email": "e.v.schukin@yandex.ru",
-        "data": 6,
-        "created_at": "2023-03-13T18:59:10.958Z",
+        "text": "AAAAAAA",
+        "created_at": "2023-03-25T13:02:20.261Z",
         "status": 0
+    }
+},
+{
+    "model": "feedback.personaldata",
+    "pk": 1,
+    "fields": {
+        "feedback": 1,
+        "email": "e-v-schukin@yandex.ru"
+    }
+},
+{
+    "model": "feedback.personaldata",
+    "pk": 2,
+    "fields": {
+        "feedback": 2,
+        "email": "e-v-schukin@yandex.ru"
+    }
+},
+{
+    "model": "feedback.personaldata",
+    "pk": 3,
+    "fields": {
+        "feedback": 3,
+        "email": "e-v-schukin@yandex.ru"
+    }
+},
+{
+    "model": "feedback.personaldata",
+    "pk": 4,
+    "fields": {
+        "feedback": 4,
+        "email": "e.v.schukin@yandex.ru"
+    }
+},
+{
+    "model": "feedback.files",
+    "pk": 1,
+    "fields": {
+        "uploaded_file": "uploads/4/logo.png",
+        "data": 4
     }
 }
 ]
