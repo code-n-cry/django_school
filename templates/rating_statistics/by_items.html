@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block title %}
+<title>{% translate 'Статистика по товарам' %}</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <h1>{% translate 'Статистика по товарам' %}</h1>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Средняя оценка</th>
+                <th scope="col">Кол-во оценок</th>
+                <th scope="col">ПППМаксО</th>
+                <th scope="col">ПППМинО</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item, values in object_list.items %}
+            <tr>
+                <th scope="row">{{item}}</th>
+                <td>{{values.average|floatformat:2}}</td>
+                <td>{{values.amount}}</td>
+                <td>
+                    {% if values.max.user %}
+                        <a href="{% url "users:user_detail" values.max.user %}">{{values.max.user__username}}</a></th>
+                    {% else %}
+                        -
+                    {% endif %}
+                <td>
+                    {% if values.min.user %}
+                        <a href="{% url "users:user_detail" values.min.user %}">{{values.min.user__username}}</a></th>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <p class="text-muted mb-0">*ПППМаксО - пользователь, поставивший последнюю максимальную оценку</p>
+        <p class="text-muted mb-0">*ПППМинО - пользователь, поставивший последнюю минимальную оценку</p>
+    </div>
+</div>
+{% endblock %}

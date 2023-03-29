@@ -38,11 +38,7 @@ msgstr "Unchecked"
 msgid "Товары, ни разу не менявшиеся с момента добавления"
 msgstr "Items that have never changed since add"
 
-<<<<<<< HEAD
 #: .\catalog\views.py:76 .\templates\includes\header.html:21
-=======
-#: .\catalog\views.py:76 .\templates\includes\header.html:24
->>>>>>> develop
 msgid "Новинки"
 msgstr "Novelties"
 

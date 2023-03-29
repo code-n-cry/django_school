@@ -11,4 +11,11 @@ class RatingByUsers(ListView):
 
 
 class RatedByUser(ListView):
-    ...
+    pass
+
+
+class RatedByItem(ListView):
+    queryset = rating.models.Rating.objects.by_items()
+    template_name = 'rating_statistics/by_items.html'
+    item_context_name = 'items'
+    http_method_names = ['get', 'head']

@@ -1,4 +1,5 @@
 import django.db.models
+from django.contrib.auth.models import User
 
 import catalog.models
 import rating.models
@@ -67,6 +68,9 @@ class RatingManager(django.db.models.Manager):
                 .values(
                     rating.models.Rating.rating.field.name,
                     rating.models.Rating.user.field.name,
+                    rating.models.Rating.user.field.name
+                    + '__'
+                    + User.username.field.name,
                 )
                 .first()
             )
@@ -79,6 +83,9 @@ class RatingManager(django.db.models.Manager):
                 .values(
                     rating.models.Rating.rating.field.name,
                     rating.models.Rating.user.field.name,
+                    rating.models.Rating.user.field.name
+                    + '__'
+                    + User.username.field.name,
                 )
                 .first()
             )
